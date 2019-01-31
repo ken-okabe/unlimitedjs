@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "esnext",
+        "jsx": "react",
+        "jsxFactory": "h",
+        "moduleResolution": "node",
+        "lib": [
+            "es2018",
+            "dom"
+        ],
+        "outDir": "./build/",
+        "rootDir": "./src/",
+        "strict": true,
+        "noImplicitAny": false,
+        "allowJs": true,
+        "declaration": false,
+    }
+}

@@ -1,0 +1,51 @@
+= unlimitedzero
+ifndef::stem[:stem: latexmath]
+ifndef::imagesdir[:imagesdir: ./img/]
+ifndef::source-highlighter[:source-highlighter: highlightjs]
+ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
+
+**unlimitedzero
+= https://github.com/jorgebucaran/superfine[superfine] + https://github.com/stken2050/timeline-monad[timeline-monad]**
+
+
+== Zero lines of code
+unlimitedzero is a virtual DOM framework, however, this framework itself does not provide a single line of code.
+
+== Zero assumptions = generic, minimal and independent
+unlimitedzero consists of two independent existing libraries:
+
+* https://github.com/jorgebucaran/superfine[superfine] (the core of https://github.com/jorgebucaran/hyperapp[Hyperapp]) as a generic and minimal library for virtual DOM. The https://github.com/jorgebucaran/superfine/blob/master/src/index.js[code] is **less than 500 lines**.
+
+
+ Minimal view layer for creating declarative web user interfaces
+
+
+* https://github.com/stken2050/timeline-monad[timeline-monad] as a generic and minimal library for Functional Reactive Programming(FRP). The https://github.com/stken2050/timeline-monad/blob/master/build/modules/timeline-monad.js[code] is **less than 40 lines**(comment lines excluded).
+
+ Micro Functional Reactive Programming (FRP) Framework with Monad structure
+
+
+The both libraries are developed independently by different authors(https://github.com/jorgebucaran[Jorge Bucaran @jorgebucaran] and https://github.com/stken2050[Ken OKABE @stken2050]) for a generic purpose of different fields of programming - virtual DOM and FRP, and the both libraries do not rely on each others or any others(zero dependency).
+
+== Zero rules
+They provide minimal APIs that are only necessary to describe the essential concepts of virtual DOM and FRP and do not add any rules for how to use them.
+
+== The simplicity of zero rules open the world of maximum flexibility and unlimited capabilities of functional programming
+
+A __function__ should be just a pure vanilla JavaScript function because the simplicity is the key concept of functional programming.
+
+The principle of functional programming is to build our programs using those small pure functions that can be assembled together as if you were combining small lego pieces. No extra assumptions and rules.
+
+== Functional Reactive Programming(FRP)
+
+State management of Virtual DOM should be not specific to a Vitrual DOM library but generic in JavaScript, and **"state" scheme does not work well.**
+
+We've learned enough. "state" is complicated and hard to use.
+
+It's time to use Functional Reactive Programming(FRP) instead.
+
+== unlimitedzero is available now with stable status
+
+Finally, unlimitedzero already has been available for a while with stable status.
+
+The authors of the both libraries do not intend to change the minimal APIs.

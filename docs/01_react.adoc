@@ -1,0 +1,52 @@
+= React? 
+ifndef::stem[:stem: latexmath]
+ifndef::imagesdir[:imagesdir: ./img/]
+ifndef::source-highlighter[:source-highlighter: highlightjs]
+ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
+
+https://github.com/facebook/react[React] is the most popular virtual DOM library by Facebook. They invented JSX that has changed the programmer's perspective of JavaScript UI. However, the problem of React has been its complication in depth and hard to catch up the frequent API updates.
+
+React v16.8.0 introduces new API called Hooks.
+
+https://reactjs.org/docs/hooks-intro.html[Introducing Hooks]
+
+https://reactjs.org/docs/hooks-intro.html#motivation[Motivation]
+
+> It’s hard to reuse stateful logic between components
+
+> Complex components become hard to understand
+
+> Classes confuse both people and machines
+
+React basically try to discard class that is https://en.wikipedia.org/wiki/Object-oriented_programming[OOP], and migrate to functional programming.
+
+React introduced https://reactjs.org/blog/2015/10/07/react-v0.14.html#stateless-function-components[Stateless Functional Components on v0.14] for immutable components, and now Hooks for mutable ones.
+
+So, is React functional now?
+
+https://reactjs.org/docs/hooks-rules.html[Rules of Hooks]
+
+- Don’t call Hooks inside loops, conditions, or nested functions. Instead, always use Hooks at the top level of your React function. 
+
+- Don’t call Hooks from regular JavaScript functions.
+
+https://reactjs.org/docs/hooks-reference.html[Hooks API Reference]
+
+* Basic Hooks
+
+** useState
+** useEffect
+** useContext
+** Additional Hooks
+
+* useReducer
+** useCallback
+** useMemo
+** useRef
+** useImperativeHandle
+** useLayoutEffect
+** useDebugValue
+
+Strict (unfunctional) rules. Many APIs.
+
+Many of what to do, what not to do, and what to use. With Hooks, React remains to be a very complicated framework and hard to catch up, and hard to use.

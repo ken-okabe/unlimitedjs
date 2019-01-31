@@ -1,0 +1,9 @@
+{
+    "rules": {
+        "semicolon": [
+            true,
+            "always",
+            "ignore-interfaces"
+        ]
+    }
+}

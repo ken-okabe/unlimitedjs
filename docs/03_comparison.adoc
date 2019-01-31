@@ -1,0 +1,108 @@
+= Comparison of codes between React Hooks and unlimitedzero
+ifndef::stem[:stem: latexmath]
+ifndef::imagesdir[:imagesdir: ./img/]
+ifndef::source-highlighter[:source-highlighter: highlightjs]
+ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
+
+== React Hooks
+
+The sample code based on https://reactjs.org/docs/hooks-state.html[Using the State Hook]:
+
+* **JSX Syntax**
+++++
+<p class="codepen" data-height="390" data-theme-id="0" data-default-tab="js,result" data-user="stken2050" data-slug-hash="WPrmga" style="height: 390px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="React Hooks">
+  <span>See the Pen <a href="https://codepen.io/stken2050/pen/WPrmga/">
+  React Hooks</a> by Ken OKABE (<a href="https://codepen.io/stken2050">@stken2050</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+++++
+
+----
+----
+
+* **JSX Syntax**
+
+[source,js]
+.counter-react-hooks.jsx
+----
+import React from 'react';
+import ReactDom from 'react-dom';
+
+const { useEffect, useState } = React; <1>
+
+const Counter = () => {
+  const [count, setCount] = useState(0); <2>
+  return (<div>           <3> 
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>    <4>
+        Click me
+      </button>
+      </div>);
+}
+
+ReactDOM.render(<Counter />, document.body);   <5>
+----
+
+
+Remember there are rules to use React Hooks: https://reactjs.org/docs/hooks-rules.html[Rules of Hooks]
+
+<1> Only Call Hooks at the Top Level
+<2> Only Call Hooks from React Functions
+<3> Return virtual DOM
+<4> Set new state
+<5> Render virtual DOM 
+
+== unlimitedzero(superfine + timeline-monad)
+
+On the other hand, **timeline-monad** does not have rules or limitations to use **__timeline__** (which corresponds to "state" in React, and will be explained in the next section).
+
+The below is usage of global __timeline__. For local __timeline__, I will illustrate the code later.
+
+* **HyperScript Syntax** (Currently, there seems no way to JSX@HyperScript in CodePen)
+
+++++
+<p class="codepen" data-height="494" data-theme-id="0" data-default-tab="js,result" data-user="stken2050" data-slug-hash="RvrOpJ" style="height: 494px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="unlimitedzero">
+  <span>See the Pen <a href="https://codepen.io/stken2050/pen/RvrOpJ/">
+  unlimitedzero</a> by Ken OKABE (<a href="https://codepen.io/stken2050">@stken2050</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+++++
+
+----
+----
+
+* **JSX Syntax**
+
+[source,js]
+.counter-unlimitedzero.jsx
+----
+import { T } from "timeline-monad";
+import { h, patch } from "superfine";
+
+  const countTL = T(); <1>
+
+  const topNodeTL = countTL.sync( <2>
+    count => (<div>       <3>
+      <p>You clicked {countTL.now} times</p>
+      <button onclick={() => countTL.now = countTL.now + 1}>  <4>
+        Click me
+      </button>
+      </div>)
+  );
+
+  const viewNodeTL = topNodeTL.sync( <5>
+    topNode => patch(viewNodeTL.now, topNode, document.body)
+  );
+
+  countTL.now = 0;  <6> 
+----
+
+<1> `countTL` is defined as a __timeline__ of the number of count
+<2> `topNodeTL` is defined as a synchronized __timeline__ with `countTL`
+<3>  returns virtual DOM
+<4>  Define the latest  __timeline__ of `count`
+<5>  `viewNodeTL` is defined as a synchronized __timeline__ with `topNodeTL` rendering virtual DOM (`topNode`)
+<6>  Initial number of count __timeline__ (`countTL` current "state")
+

@@ -1,0 +1,44 @@
+{
+  "name": "unlimitedjs",
+  "version": "1.0.0",
+  "description": "A minimal JavaScript framework for building UI with no limitations",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stken2050/unlimitedjs.git"
+  },
+  "keywords": [
+    "virtual",
+    "dom",
+    "ui",
+    "react",
+    "hooks",
+    "hyperapp",
+    "superfine",
+    "frp",
+    "functional",
+    "reactive",
+    "timeline"
+  ],
+  "author": "Ken Okabe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stken2050/unlimitedjs/issues"
+  },
+  "homepage": "https://github.com/stken2050/unlimitedjs#readme",
+  "dependencies": {
+    "superfine": "^6.0.1",
+    "timeline-monad": "^0.9.9"
+  },
+  "devDependencies": {
+    "esm": "^3.2.0",
+    "tslint": "^5.12.1",
+    "typescript": "^3.2.4"
+  }
+}

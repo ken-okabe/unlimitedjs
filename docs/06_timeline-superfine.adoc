@@ -1,0 +1,210 @@
+= unlimitedzero = superfine + timeline-monad
+ifndef::stem[:stem: latexmath]
+ifndef::imagesdir[:imagesdir: ./img/]
+ifndef::source-highlighter[:source-highlighter: highlightjs]
+ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
+
+Another good news is we can also forget `patch` since unlimitedzero embeds `patch` into  a certain code pattern.
+
+Although there are absolutely no rules or limitations, here is a very basic structure of unlimitedzero code.
+
+[source,js]
+.Hello world of unlimitedzero
+----
+import { T } from "timeline-monad";
+import { h, patch } from "superfine";
+
+  const topNodeTL = T(); <1>
+  const viewNodeTL = topNodeTL.sync( <2>
+    topNode => patch(viewNodeTL.now, topNode, document.body) <3>
+  );
+
+  const helloNode = <div>hello!</div>; <4>
+  topNodeTL.now = helloNode; <5>
+----
+
+<1> Define `topNodeTL` as a **timeline(__first class reactive value 'over time'__)** of virtual DOM node: `topNode`
+<2> Define `viewNodeTL` as a **timeline** of "last (old) node" that is *always synchronized with `topNodeTL`* <= `topNode` timeline
+<3> `topNode` is the next (new) virtual DOM node
+<4> virtual DOM node
+<5> Define the latest "state" on the topNode timeline, which means **update**
+
+In unlimitedzero(timeline) framework, if a value is mutable, then it's a timeline.
+
+== Mutable virtual DOM is easy
+
+If we understand the idea of Hello world code of unlimitedzero, to write a mutable virtual DOM is pretty much straight forward.
+
+No fancy rules, no restrictions. Just a plain JavaScript programming.
+
+[source,js]
+.Clock
+----
+import { T } from "timeline-monad";
+import { h, patch } from "superfine";
+
+  const topNodeTL = T(); <1>
+  const viewNodeTL = topNodeTL.sync( <2> 
+    topNode => patch(viewNodeTL.now, topNode, document.body) <3>
+  );
+
+  const f = () => { <4>
+    const timeString = new Date().toLocaleTimeString(); <5>
+    const clockNode = <div>{timeString}</div>; <6>
+    topNodeTL.now = clockNode; <7>
+  };
+  setInterval(f, 1000); <8>
+----
+
+<1> same as Hello world
+<2> same as Hello world
+<3> same as Hello world
+<4> `setInterval` function
+<5> Obtain the current time strings
+<6> `{timeString}` is a way to write variables inside of virtual DOM node in JSX
+<7> Define the latest "state" on the topNode timeline, which means **update**
+<8> `setInterval` triggers `f` every 1 second
+
+
+
+== SelfContained Clock
+
+[source,js]
+.Clock
+----
+import { T } from "timeline-monad";
+import { h, patch } from "superfine";
+
+  const clockTL = T((self) => {
+    const f = () =>
+      self.now = new Date().toLocaleTimeString();
+    setInterval(f, 1000);
+  });
+
+  const topNodeTL = clockTL.sync(
+    clock => (<h3>{clock}</h3>)
+  );
+
+  const viewNodeTL = topNodeTL.sync( 
+    topNode => patch(viewNodeTL.now, topNode, document.body) 
+  );
+----
+
+<1> same as Hello world
+<2> same as Hello world
+<3> same as Hello world
+<4> `setInterval` function
+<5> Obtain the current time strings
+<6> `{timeString}` is a way to write variables inside of virtual DOM node in JSX
+<7> Define the latest "state" on the topNode timeline, which means **update**
+<8> `setInterval` triggers `f` every 1 second
+
+== SelfContained Counter
+
+[source,js]
+.Counter
+----
+import { T } from "timeline-monad";
+import { h, patch } from "superfine";
+
+  const counterNodeTL = T(self => {
+    const countTL = T();
+    const buttonNode = (
+      <button onclick={() => countTL.now = countTL.now + 1}>
+        Click me
+      </button>);
+    const dummyTL = countTL.sync(
+      count => self.now = (<div>
+        <p>You clicked {countTL.now} times</p>
+        {buttonNode}
+      </div>)
+    );
+    const f = () => countTL.now = 0;
+    setTimeout(f, 0);
+  });
+
+  const topNodeTL = counterNodeTL;
+  const viewNodeTL = topNodeTL.sync(
+    topNode => patch(viewNodeTL.now, topNode, document.body)
+  );
+----
+
+<1> same as Hello world
+<2> same as Hello world
+<3> same as Hello world
+<4> `setInterval` function
+<5> Obtain the current time strings
+<6> `{timeString}` is a way to write variables inside of virtual DOM node in JSX
+<7> Define the latest "state" on the topNode timeline, which means **update**
+<8> `setInterval` triggers `f` every 1 second
+
+
+
+== SelfContained Clock&Counter
+
+[source,js]
+.Counter
+----
+import { T } from "timeline-monad";
+import { h, patch } from "superfine";
+
+  const clockNodeTL = T(self => {
+    const clockTL = T(
+      (self) => {
+        const f = () =>
+          self.now = new Date().toLocaleTimeString();
+        setInterval(f, 1000);
+      }
+    );
+    const dummyTL = clockTL.sync(
+      clock => self.now = <h3>{clock}</h3>
+    );
+  });
+
+  const counterNodeTL = T(self => {
+    const countTL = T();
+    const buttonNode = (
+      <button onclick={() => countTL.now = countTL.now + 1}>
+        Click me
+      </button>);
+    const dummyTL = countTL.sync(
+      count => self.now = (<div>
+        <p>You clicked {countTL.now} times</p>
+        {buttonNode}
+      </div>)
+    );
+    const f = () => countTL.now = 0;
+    setTimeout(f, 0);
+  });
+
+  const topNodeTL = T(self => {
+    const updateTL = T((self) => {
+      const tl1 = clockNodeTL
+        .sync(() => self.now = true);
+      const tl2 = counterNodeTL
+        .sync(() => self.now = true);
+    });
+    const dummyTL = updateTL.sync(
+      update => self.now = (<div>
+        <h3>{clockNodeTL.now}</h3>
+        {counterNodeTL.now}
+      </div>)
+    );
+  });
+
+  const viewNodeTL = topNodeTL.sync(
+    topNode => patch(viewNodeTL.now, topNode, document.body)
+  );
+----
+
+<1> same as Hello world
+<2> same as Hello world
+<3> same as Hello world
+<4> `setInterval` function
+<5> Obtain the current time strings
+<6> `{timeString}` is a way to write variables inside of virtual DOM node in JSX
+<7> Define the latest "state" on the topNode timeline, which means **update**
+<8> `setInterval` triggers `f` every 1 second
+
+
+== Star GitHubzz

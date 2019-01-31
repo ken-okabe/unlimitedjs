@@ -1,0 +1,124 @@
+= Vitural DOM
+ifndef::stem[:stem: latexmath]
+ifndef::imagesdir[:imagesdir: ./img/]
+ifndef::source-highlighter[:source-highlighter: highlightjs]
+ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
+
+== What is virtual DOM?
+
+[source,js]
+.virtual DOM
+----
+const helloNode = <div>Hello!</div>;
+----
+
+This is a virtual DOM written in JSX(JavaScript XML).
+
+https://reactjs.org/docs/introducing-jsx.html[Introducing JSX]
+
+JSX  is an extension to the JavaScript language syntax. Similar in appearance to HTML, JSX provides a way to structure UI in JavaScript.
+
+The significant feature here is we can treat DOM as a https://en.wikipedia.org/wiki/First-class_citizen[first class object] in JavaScript like any other values. This allows us efficient coding to build JavaScript UI, in theory.
+
+Since virtual DOM became a member of first class objects in JavaScript, we should be able to handle virtual DOM as input/output of functions like any other values in functional programming.
+
+
+== Transpile from JSX to JS
+
+Although JSX is useful, as it's an extension to the vanilla JavaScript syntax, we need to transpile to JS.
+
+We can use https://babeljs.io/[Babel] or https://www.typescriptlang.org/[TypeScript] as a transpiler. JSX of unlimitedzero(superfine) works on both.
+
+After the transpile, we will get the code like this:
+
+[source,js]
+.hyperscript
+---- 
+const helloNode = h("div", null, "Hello!");
+----
+
+This is called hyperscript syntax commonly used, and we need to prepare a function `h`.
+
+[source,js]
+.import h from superfine
+----
+import { h } from "superfine";
+const helloNode = h("div", null, "Hello!");
+----
+
+**One of the major role of superfine is to provide `h` that is an essential element of JSX/hyperscript.**
+
+== Render the view
+
+1. Every time something needs to be changed in our application view, we create a new virtual DOM using `h` (which is hidden in JSX).
+
+2. Then by comparing the old and new virtual DOM, we can update the difference of the DOM that actually changed instead of rendering the entire DOM from scratch. `patch` API of superfine preforms this task. 
+
+[source,js]
+.patch
+----
+patch(oldNode, newNode, container);
+----
+
+`patch` function returns the next node.
+
+Here's the detail of the API specification according to the TypeScript type definition file: https://github.com/jorgebucaran/superfine/blob/master/superfine.d.ts[superfine.d.ts].
+
+[source,js]
+.patch type definition
+----
+/**
+ * Render a virtual DOM node into a DOM element container.
+ *
+ * @param {VNode} oldNode The last virtual DOM node.
+ * @param {VNode} nextNode The next virtual DOM node.
+ * @param {Element?} container A DOM element where the new virtual DOM will be rendered.
+ * @returns {VNode} Returns nextNode.
+ **/
+export function patch(
+  lastNode: VNode,
+  nextNode: VNode,
+  container: Element
+): VNode
+
+----
+
+**Providing `patch` functionality is another major role of superfine.**
+
+Most importantly, for superfine library in virtual DOM aspect, `patch` **is the only API we need to learn.**
+
+`h` is hidden in JSX, so we can forget. (To be precise, there are more extra APIs in superfine, but it's not critical to use.) 
+
+So, if we want to render `helloNode`, the code should be as follows:
+
+
+[source,js]
+.render the view
+----
+import { h, patch } from "superfine";
+
+const helloNode = <div>Hello!</div>;  <1>
+
+const lastNode = patch( <2>
+      undefined,  <3>
+      helloNode,  <4> 
+      document.body <5>
+    );
+----
+
+<1> virtual DOM node
+<2> The only API `patch` returns next "last" node.
+<3> last (old) virtual DOM node
+<4> next (new) virtual DOM node
+<5> Real DOM Container to render the virtual DOM
+
+Although we need to import `{ h, patch }`, `h` will never appear in the code as long as we use JSX.
+
+++++
+<p class="codepen" data-height="333" data-theme-id="0" data-default-tab="js,result" data-user="stken2050" data-slug-hash="VgajBm" style="height: 333px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Hello superfine">
+  <span>See the Pen <a href="https://codepen.io/stken2050/pen/VgajBm/">
+  Hello superfine</a> by Ken OKABE (<a href="https://codepen.io/stken2050">@stken2050</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+++++

@@ -1,0 +1,54 @@
+= unlimitedzero
+Ken Okabe <stken2050@gmail.com>
+:keywords: virtual,dom,ui,react, hooks,hyperapp,superfine,frp,functional, reactive
+:description: A virtual DOM framework with zero rules - just pure functional and reactive programming with full flexibility and unlimited capability
+:homepage:    https://stken2050.github.io/unlimitedzero/
+:source:      https://github.com/stken2050/unlimitedzero
+:toc: left
+:sectnums:
+:toclevels: 1
+:source-highlighter: highlightjs
+:highlightjs-theme: solarized-dark
+:imagesdir: ./img/ 
+:stem: latexmath
+ 
+++++
+<style type="text/css">
+p >code {background-color: #aaaaaa};　
+td >code {background-color: #aaaaaa};
+</style>
+++++
+
+---
+ddfddf
+dfddf
+- GitHub Repository
+
+https://github.com/kenokabe/timeline-monad
+
+- npm
+
+https://www.npmjs.com/package/timeline-monad
+
+- Quick Fiddle test
+
+https://jsfiddle.net/kenokabe/d3ocyhqr/
+
+ 
+:leveloffset: 1
+
+include::./01_react.adoc[]
+
+include::./02_unlimitedzero.adoc[]
+
+include::./03_comparison.adoc[]
+
+include::./04_timeline-monad.adoc[]
+
+include::./05_superfine.adoc[]
+
+include::./06_timeline-superfine.adoc[]
+
+
+== Star GitHubzz
+

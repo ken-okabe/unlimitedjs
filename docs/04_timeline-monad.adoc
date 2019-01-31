@@ -1,0 +1,292 @@
+= What is timeline-monad?
+ifndef::stem[:stem: latexmath]
+ifndef::imagesdir[:imagesdir: ./img/]
+ifndef::source-highlighter[:source-highlighter: highlightjs]
+ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
+
+1. *timeline-monad* is a JavaScript(ES6+) module of a minimal (super simple) implementation for __Functional Reactive Programming(FPP)__. The module provides *first class reactive values _'over time'_* .
+
+2. *timeline-monad* is robust for _function composition_
+because it has a https://ncatlab.org/nlab/show/monad[_monad_] structure.
+
+3. *timeline-monad*'s https://github.com/stken2050/timeline-monad/blob/master/dist/esm/timeline-monad.js[source code] is **less than 40 lines**(ESModule version, the comment lines excluded).
+
+4. The code is https://github.com/stken2050/timeline-monad/tree/master/test-jest[heavily tested] including to https://github.com/stken2050/timeline-monad/blob/master/test-jest/monad.test.js[satisfy monad laws]. 
+
+
+Although it has a monad structure, for unlimitedzero applications, we don't have to dive into monad world.
+
+For this purpose, we use `timeline-monad` just as reactive mapping of timelines.
+
+== Timeline
+
+In timeline-monad, the first class reactive values 'over time' is called __**timeline**__.
+
+Many FRP libraries call it **stream** etc.. The problem of the naming: stream is it reminds us something dynamic, mutable, and the fundamental concept of FRP is to view the world immutable, so the value is called __**timeline**__ here.
+
+== FRP Background and Rationale
+
+https://wiki.haskell.org/FRP[Functional Reactive Programming (FRP)] integrates **time flow** and compositional events into functional programming.
+
+The basic idea is that **a time-varying value can be represented as a function of time**.
+
+https://en.wikipedia.org/wiki/Structure_and_Interpretation_of_Computer_Programs[Structure and Interpretation of Computer Programs(SICP)]
+(https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-24.html#%_sec_3.5[Chapter 3.5 : Streams])
+
+---
+Let's step back and review where this complexity comes from. In an attempt to model real-world phenomena, we made some apparently reasonable decisions: We modeled real-world objects with local state by computational objects with local variables. We identified time variation in the real world with time variation in the computer. We implemented the time variation of the states of the model objects in the computer with assignments to the local variables of the model objects.
+
+Is there another approach? Can we avoid identifying time in the computer with time in the modeled world? Must we make the model change with time in order to model phenomena in a changing world? **Think about the issue in terms of mathematical functions. We can describe the time-varying behavior of a quantity  `x`  as a function of time `x(t)`. If we concentrate on  `x` instant by instant, we think of it as a changing quantity. Yet if we concentrate on the entire time history of values, we do not emphasize change -- the function itself does not change.**
+(Physicists sometimes adopt this view by introducing the _world lines_ of particles as a device for reasoning about motion.)
+
+If time is measured in discrete steps, then **we can model a time function as a (possibly infinite) sequence**. In this section, we will see **how to model change in terms of sequences that represent the time histories of the systems being modeled**. To accomplish this, we introduce new data structures called  **_streams_**. From an abstract point of view, a stream is simply a sequence. However, we will find that the straightforward implementation of streams as lists (as in section 2.2.1) doesn't fully reveal the power of stream processing. As an alternative, we introduce the technique of **_delayed evaluation_, which enables us to represent very large (even infinite) sequences as streams**.
+
+This is really remarkable. Even though stream-withdraw implements a well-defined mathematical function whose behavior does not change, the user's perception here is one of interacting with a system that has a changing state. **One way to resolve this paradox is to realize that it is the user's temporal existence that imposes state on the system.** If the user could step back from the interaction and think in terms of streams of balances rather than individual transactions, the system would appear stateless.
+(**Similarly in physics, when we observe a moving particle, we say that the position (state) of the particle is changing. However, from the perspective of the particle's _world line in space-time_ there is no change involved.**)
+
+**we can model the world as a single, timeless, stateless unity**. 
+
+---
+
+Our world is modeled as an immutable, timeless, stateless unity from the perspective of physics
+
+image::https://upload.wikimedia.org/wikipedia/commons/6/6f/CMB_Timeline300_no_WMAP.jpg[]
+
+
+Frozen Block Universe and Human Consciousness
+
+image::https://github.com/kenokabe/00img/wiki/block-universe.jpg[]
+
+https://stackoverflow.com/questions/1028250/what-is-functional-reactive-programming[Conal Elliott(a developer who has contributed to early FRP) explaines]
+
+> FRP is about "datatypes that represent a value **over time**".
+> Conventional imperative programming captures these dynamic values only indirectly, through state and mutations. The complete history (past, present, future) has no first class representation. Moreover, only _discretely evolving_ values can be (indirectly) captured, since the imperative paradigm is temporally discrete.
+> In contrast, FRP captures these evolving values _directly_ and has no difficulty with _continuously_ evolving values.
+> Dynamic/evolving values (i.e., values "over time") are first class values in themselves. You can define them and combine them, pass them into & out of functions.
+
+== __timeline__ is similar to Promise instance
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise[ES6+ Promise] is widely used in JavaScript.
+
+Promise and timeline-monad(FRP) has a common nature to handle asynchronous behaviors in functional programming, and both has similar syntax.
+
+In fact, **Promise is __functional__ and __reactive__. A Promise instance is a first class reactive value 'over time', so it's kind of Functional Reactive Programming(FRP)**, and the difference is in general, **FRP value reacts on repeating process, on the other hand, Promise reacts only one time**.
+
+Hence, although FRP or __timeline__ might be a new idea to a leaner, if one already know what the Promise is, it should be straight forward to understand what the __timeline__ is.
+
+[source,js]
+.Promise and timeline-monad
+----
+import { T } from "timeline-monad";
+
+let promise1resolve;
+const promise1 = new Promise(resolve => { <1>
+  promise1resolve = resolve;
+});
+const timeline1 = T(); <2>
+
+const promise2 = promise1.then(a => a + " promise"); <3>
+const timeline2 = timeline1.sync(a => a + " timeline"); <4>
+
+const promise3 = promise2.then(a => console.log(a)); <5>
+const timeline3 = timeline2.sync(a => console.log(a)); <6>
+
+promise1resolve("hello"); <7>
+timeline1.now = "hello"; <8>
+----
+
+<1> Define an empty Promise
+<2> Define an empty __timeline__
+<3> `promise1.then` method **returns another Promise: `promise2`** that will be resolved along with the specified function with the resolved value: `a` of `promise1`
+<4> `timeline1.sync` method **returns another __timeline__: `timeline2`** that is always synchronized along with the specified function with the updated current value: `a` of `timeline1`
+<5> When `promise2` is resolved, then show the value 
+<6> When `timeline2` is updated, always show the value 
+<7> Resolve the value of `promise1` as `"hello"`
+<8> Update the current value of `timeline1` as `"hello"`
+
+[source,shell]
+.Console
+----
+hello promise
+hello timeline
+----
+
+
+`Promise.then` and `timeline.sync` is like `Array.map` in the manner of delayed or asynchronously. The object method returns the object itself containing the mapped value.
+ 
+
+=== Self Contained __timeline__
+
+[source,js]
+.Promise and timeline-monad
+----
+import { T } from "timeline-monad";
+
+const promise = new Promise(resolve => { <1>
+
+  const f = () => resolve("Hello promise!"); <2>
+  setTimeout(f, 1000); <3>
+
+});
+const timeline = T(self => { <4>
+
+  const f = () => (self.now = "Hello timeline!"); <5>
+  setTimeout(f, 1000); <6>
+
+});
+
+const promise1 = promise.then(a => console.log(a)); <7>
+const timeline1 = timeline.sync(a => console.log(a)); <8>
+----
+
+<1> Define `promise` and provide the resolving function: `resolve` 
+<2> `resolve` the value of `promise` as `"Hello promise!"`
+<3> and that will happen 1 second later
+<4> Define `timeline` and provide the __timeline__ itself: `self` to update itself 
+<5> Update the current value of `self` = `timeline` as `"Hello timeline!"`
+<6> and that will happen 1 second later
+<7> When `promise` is resolved, then show the value 
+<8> When `timeline` is updated, always show the value 
+
+[source,shell]
+.Console
+----
+Hello promise!
+Hello timeline!
+----
+
+=== Continuous updates
+
+[source,js]
+.Promise and timeline-monad
+----
+import { T } from "timeline-monad";
+
+const timeline2 = T(self => {
+
+  const f = () => (self.now = "Hello timeline!");
+  setInterval(f, 1000); <1>
+
+});
+
+const timeline3 = timeline2.sync(a => console.log(a));
+----
+
+<1> In this code, the only difference is to use `setInterval` instead of `setTimeout`
+
+[source,shell]
+.Console
+----
+Hello timeline!
+Hello timeline!
+Hello timeline!
+.....
+.....
+----
+
+
+== API
+
+https://github.com/stken2050/timeline-monad/blob/master/build/modules/timeline-monad.d.ts[timeline-monad TypeScript type definition]
+
+=== TypeScript type definition
+
+[source,js]
+.timeline type definition
+----
+interface timeline {
+    type: string;
+    now: any;
+    sync: Function;
+}
+declare const T: (timeFunction?: Function) => timeline;
+export { T };
+----
+
+
+== T( timeFunction )
+
+[source,js]
+----
+const T: (timeFunction?: Function) => timeline
+----
+
+`T` is a function to return `timeline` object.
+
+`timeFunction` is a function to define the `timeline` behavior with the argument `self` (`timeline` itself).
+
+== now
+
+[source,js]
+----
+const timeFunction = (self) ⇒ { /*…​*/ self.now = value;};
+----
+
+== .sync( someFunction )
+
+[source,js]
+----
+const timeline1 = timeline
+                         .sync( someFunction );
+----
+
+`timeFunction` is executed immediately by the `T` implementation, and when `self.now = value` is defined, the `sync` method returns a value that `someFunction` is applied to. 
+
+[TIP]
+.**timeline-monad** is extremely simple and easy to learn.
+====
+`T`, `now` and `sync` are all of the reserved words and units provided by the module. Once some `timeline` is created, `sync` is the only method a programmer cares.
+====
+
+
+[[Syntax]]
+=== Syntax
+
+[source,js]
+----
+const timeFunction = (self) ⇒ { /*…​*/ self.now = value;};
+
+const timeline = T( timeFunction );
+
+const timeline1 = timeline.sync( someFunction );
+----
+
+=== Simple usage
+
+`T()` is a `timeline` instance:
+
+.timeline instance
+```js
+const a = T();
+```
+
+As `timeline` is an infinite stream of time, `timeline` has a (a user's perspective) current value: `timeline.now`, and can be easily get/set as below:
+
+[source,shell]
+.write and read
+----
+a.now = 1;
+console.log(a.now);
+----
+
+[source,shell]
+.console
+----
+1
+----
+
+
+
+
+
+1
+sync  trigger
+
+
+sync  trigger
+1
+
+does not matter
+
+
+undefined never triggers
