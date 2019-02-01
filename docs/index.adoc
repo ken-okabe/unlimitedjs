@@ -19,20 +19,15 @@ td >code {background-color: #aaaaaa};
 </style>
 ++++
 
+++++
+<iframe src="https://ghbtns.com/github-btn.html?user=stken2050&repo=unlimitedjs&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+++++ 
+
 ---
-ddfddf
-dfddf
-- GitHub Repository
 
-https://github.com/kenokabe/timeline-monad
 
-- npm
+https://www.npmjs.com/package/unlimitedjs
 
-https://www.npmjs.com/package/timeline-monad
-
-- Quick Fiddle test
-
-https://jsfiddle.net/kenokabe/d3ocyhqr/
 
  
 :leveloffset: 1
