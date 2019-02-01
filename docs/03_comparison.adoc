@@ -10,12 +10,10 @@ The sample code based on https://reactjs.org/docs/hooks-state.html[Using the Sta
 
 * **JSX Syntax**
 ++++
-<p class="codepen" data-height="390" data-theme-id="0" data-default-tab="js,result" data-user="stken2050" data-slug-hash="WPrmga" style="height: 390px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="React Hooks">
-  <span>See the Pen <a href="https://codepen.io/stken2050/pen/WPrmga/">
-  React Hooks</a> by Ken OKABE (<a href="https://codepen.io/stken2050">@stken2050</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<iframe height="425" style="width: 100%;" scrolling="no" title="React Hooks" src="//codepen.io/stken2050/embed/WPrmga/?height=425&theme-id=0&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/WPrmga/'>React Hooks</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 ++++
 
 ----
@@ -29,7 +27,7 @@ The sample code based on https://reactjs.org/docs/hooks-state.html[Using the Sta
 import React from 'react';
 import ReactDom from 'react-dom';
 
-const { useEffect, useState } = React; <1>
+const { useState } = React; <1>
 
 const Counter = () => {
   const [count, setCount] = useState(0); <2>
@@ -62,12 +60,10 @@ The below is usage of global __timeline__. For local __timeline__, I will illust
 * **HyperScript Syntax** (Currently, there seems no way to JSX@HyperScript in CodePen)
 
 ++++
-<p class="codepen" data-height="494" data-theme-id="0" data-default-tab="js,result" data-user="stken2050" data-slug-hash="RvrOpJ" style="height: 494px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="unlimitedjs">
-  <span>See the Pen <a href="https://codepen.io/stken2050/pen/RvrOpJ/">
-  unlimitedjs</a> by Ken OKABE (<a href="https://codepen.io/stken2050">@stken2050</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<iframe height="472" style="width: 100%;" scrolling="no" title="unlimitedjs" src="//codepen.io/stken2050/embed/RvrOpJ/?height=472&theme-id=0&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/RvrOpJ/'>unlimitedjs</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 ++++
 
 ----
@@ -83,20 +79,20 @@ import { h, patch } from "superfine";
 
   const countTL = T(); <1>
 
-  const topNodeTL = countTL.sync( <2>
-    count => (<div>       <3>
-      <p>You clicked {countTL.now} times</p>
-      <button onclick={() => countTL.now = countTL.now + 1}>  <4>
+  const topNodeTL = countTL.sync(  <2>
+    count => (<div>    <3>
+      <p>You clicked {count} times</p>
+      <button onclick={() => countTL.now = count + 1}> <4>
         Click me
-      </button>
-      </div>)
+    </button>
+    </div>)
   );
 
-  const viewNodeTL = topNodeTL.sync( <5>
+  const viewNodeTL = topNodeTL.sync(   <5>
     topNode => patch(viewNodeTL.now, topNode, document.body)
   );
 
-  countTL.now = 0;  <6> 
+  countTL.now = 0;   <6>
 ----
 
 <1> `countTL` is defined as a __timeline__ of the number of count

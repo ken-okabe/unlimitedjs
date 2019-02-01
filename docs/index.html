@@ -679,12 +679,10 @@ td >code {background-color: #aaaaaa};
 </li>
 </ul>
 </div>
-<p class="codepen" data-height="390" data-theme-id="0" data-default-tab="js,result" data-user="stken2050" data-slug-hash="WPrmga" style="height: 390px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="React Hooks">
-  <span>See the Pen <a href="https://codepen.io/stken2050/pen/WPrmga/">
-  React Hooks</a> by Ken OKABE (<a href="https://codepen.io/stken2050">@stken2050</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<iframe height="425" style="width: 100%;" scrolling="no" title="React Hooks" src="//codepen.io/stken2050/embed/WPrmga/?height=425&theme-id=0&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/WPrmga/'>React Hooks</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 <div class="listingblock">
 <div class="content">
 <pre></pre>
@@ -703,7 +701,7 @@ td >code {background-color: #aaaaaa};
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import React from 'react';
 import ReactDom from 'react-dom';
 
-const { useEffect, useState } = React; <i class="conum" data-value="1"></i><b>(1)</b>
+const { useState } = React; <i class="conum" data-value="1"></i><b>(1)</b>
 
 const Counter = () =&gt; {
   const [count, setCount] = useState(0); <i class="conum" data-value="2"></i><b>(2)</b>
@@ -761,12 +759,10 @@ ReactDOM.render(&lt;Counter /&gt;, document.body);   <i class="conum" data-value
 </li>
 </ul>
 </div>
-<p class="codepen" data-height="494" data-theme-id="0" data-default-tab="js,result" data-user="stken2050" data-slug-hash="RvrOpJ" style="height: 494px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="unlimitedjs">
-  <span>See the Pen <a href="https://codepen.io/stken2050/pen/RvrOpJ/">
-  unlimitedjs</a> by Ken OKABE (<a href="https://codepen.io/stken2050">@stken2050</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<iframe height="472" style="width: 100%;" scrolling="no" title="unlimitedjs" src="//codepen.io/stken2050/embed/RvrOpJ/?height=472&theme-id=0&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/RvrOpJ/'>unlimitedjs</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 <div class="listingblock">
 <div class="content">
 <pre></pre>
@@ -787,20 +783,20 @@ import { h, patch } from "superfine";
 
   const countTL = T(); <i class="conum" data-value="1"></i><b>(1)</b>
 
-  const topNodeTL = countTL.sync( <i class="conum" data-value="2"></i><b>(2)</b>
-    count =&gt; (&lt;div&gt;       <i class="conum" data-value="3"></i><b>(3)</b>
-      &lt;p&gt;You clicked {countTL.now} times&lt;/p&gt;
-      &lt;button onclick={() =&gt; countTL.now = countTL.now + 1}&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
+  const topNodeTL = countTL.sync(  <i class="conum" data-value="2"></i><b>(2)</b>
+    count =&gt; (&lt;div&gt;    <i class="conum" data-value="3"></i><b>(3)</b>
+      &lt;p&gt;You clicked {count} times&lt;/p&gt;
+      &lt;button onclick={() =&gt; countTL.now = count + 1}&gt; <i class="conum" data-value="4"></i><b>(4)</b>
         Click me
-      &lt;/button&gt;
-      &lt;/div&gt;)
+    &lt;/button&gt;
+    &lt;/div&gt;)
   );
 
-  const viewNodeTL = topNodeTL.sync( <i class="conum" data-value="5"></i><b>(5)</b>
+  const viewNodeTL = topNodeTL.sync(   <i class="conum" data-value="5"></i><b>(5)</b>
     topNode =&gt; patch(viewNodeTL.now, topNode, document.body)
   );
 
-  countTL.now = 0;  <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+  countTL.now = 0;   <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1398,7 +1394,7 @@ import { h, patch } from "superfine";
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-01 20:30:18 JST
+Last updated 2019-02-01 21:57:18 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">

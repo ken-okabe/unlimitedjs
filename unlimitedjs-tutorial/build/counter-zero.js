@@ -8,9 +8,9 @@ const main = () => {
     count => (h("div", null,
         h("p", null,
             "You clicked ",
-            countTL.now,
+            count,
             " times"),
-        h("button", { onclick: () => countTL.now = countTL.now + 1 }, "Click me"))));
+        h("button", { onclick: () => countTL.now = count + 1 }, "Click me"))));
     const viewNodeTL = topNodeTL.sync(topNode => patch(viewNodeTL.now, topNode, document.body));
     countTL.now = 0;
 };

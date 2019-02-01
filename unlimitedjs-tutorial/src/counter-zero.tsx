@@ -8,8 +8,8 @@ const main = () => {
 
   const topNodeTL = countTL.sync(//synchronized with countTL
     count => (<div>
-      <p>You clicked {countTL.now} times</p>
-      <button onclick={() => countTL.now = countTL.now + 1}>
+      <p>You clicked {count} times</p>
+      <button onclick={() => countTL.now = count + 1}>
         Click me
     </button>
     </div>)
