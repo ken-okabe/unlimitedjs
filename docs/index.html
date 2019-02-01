@@ -445,10 +445,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_react">1. React?</a></li>
-<li><a href="#_comparison_of_codes_between_react_hooks_and_unlimitedzero">2. Comparison of codes between React Hooks and unlimitedzero</a></li>
+<li><a href="#_comparison_of_codes_between_react_hooks_and_unlimitedjs">2. Comparison of codes between React Hooks and unlimitedjs</a></li>
 <li><a href="#_what_is_timeline_monad">3. What is timeline-monad?</a></li>
 <li><a href="#_vitural_dom">4. Vitural DOM</a></li>
-<li><a href="#_unlimitedzero_superfine_timeline_monad">5. unlimitedzero = superfine + timeline-monad</a></li>
+<li><a href="#_unlimitedjs_superfine_timeline_monad">5. unlimitedjs = superfine + timeline-monad</a></li>
 <li><a href="#_mit_license">6. MIT License</a></li>
 </ul>
 </div>
@@ -588,7 +588,7 @@ td >code {background-color: #aaaaaa};
 </div>
 </div>
 <div class="sect1">
-<h2 id="_comparison_of_codes_between_react_hooks_and_unlimitedzero">2. Comparison of codes between React Hooks and unlimitedzero</h2>
+<h2 id="_comparison_of_codes_between_react_hooks_and_unlimitedjs">2. Comparison of codes between React Hooks and unlimitedjs</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_react_hooks">2.1. React Hooks</h3>
@@ -670,7 +670,7 @@ ReactDOM.render(&lt;Counter /&gt;, document.body);   <i class="conum" data-value
 </div>
 </div>
 <div class="sect2">
-<h3 id="_unlimitedzerosuperfine_timeline_monad">2.2. unlimitedzero(superfine + timeline-monad)</h3>
+<h3 id="_unlimitedjssuperfine_timeline_monad">2.2. unlimitedjs(superfine + timeline-monad)</h3>
 <div class="paragraph">
 <p>On the other hand, <strong>timeline-monad</strong> does not have rules or limitations to use <strong><em>timeline</em></strong> (which corresponds to "state" in React, and will be explained in the next section).</p>
 </div>
@@ -684,9 +684,9 @@ ReactDOM.render(&lt;Counter /&gt;, document.body);   <i class="conum" data-value
 </li>
 </ul>
 </div>
-<p class="codepen" data-height="494" data-theme-id="0" data-default-tab="js,result" data-user="stken2050" data-slug-hash="RvrOpJ" style="height: 494px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="unlimitedzero">
+<p class="codepen" data-height="494" data-theme-id="0" data-default-tab="js,result" data-user="stken2050" data-slug-hash="RvrOpJ" style="height: 494px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="unlimitedjs">
   <span>See the Pen <a href="https://codepen.io/stken2050/pen/RvrOpJ/">
-  unlimitedzero</a> by Ken OKABE (<a href="https://codepen.io/stken2050">@stken2050</a>)
+  unlimitedjs</a> by Ken OKABE (<a href="https://codepen.io/stken2050">@stken2050</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
@@ -703,7 +703,7 @@ ReactDOM.render(&lt;Counter /&gt;, document.body);   <i class="conum" data-value
 </ul>
 </div>
 <div class="listingblock">
-<div class="title">counter-unlimitedzero.jsx</div>
+<div class="title">counter-unlimitedjs.jsx</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "timeline-monad";
 import { h, patch } from "superfine";
@@ -778,7 +778,7 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 </ol>
 </div>
 <div class="paragraph">
-<p>Although it has a monad structure, for unlimitedzero applications, we don&#8217;t have to dive into monad world.</p>
+<p>Although it has a monad structure, for unlimitedjs applications, we don&#8217;t have to dive into monad world.</p>
 </div>
 <div class="paragraph">
 <p>For this purpose, we use <code>timeline-monad</code> just as reactive mapping of timelines.</p>
@@ -845,7 +845,7 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 <p>Although JSX is useful, as it&#8217;s an extension to the vanilla JavaScript syntax, we need to transpile to JS.</p>
 </div>
 <div class="paragraph">
-<p>We can use <a href="https://babeljs.io/">Babel</a> or <a href="https://www.typescriptlang.org/">TypeScript</a> as a transpiler. JSX of unlimitedzero(superfine) works on both.</p>
+<p>We can use <a href="https://babeljs.io/">Babel</a> or <a href="https://www.typescriptlang.org/">TypeScript</a> as a transpiler. JSX of unlimitedjs(superfine) works on both.</p>
 </div>
 <div class="paragraph">
 <p>After the transpile, we will get the code like this:</p>
@@ -975,16 +975,16 @@ const lastNode = patch( <i class="conum" data-value="2"></i><b>(2)</b>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_unlimitedzero_superfine_timeline_monad">5. unlimitedzero = superfine + timeline-monad</h2>
+<h2 id="_unlimitedjs_superfine_timeline_monad">5. unlimitedjs = superfine + timeline-monad</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Another good news is we can also forget <code>patch</code> since unlimitedzero embeds <code>patch</code> into  a certain code pattern.</p>
+<p>Another good news is we can also forget <code>patch</code> since unlimitedjs embeds <code>patch</code> into  a certain code pattern.</p>
 </div>
 <div class="paragraph">
-<p>Although there are absolutely no rules or limitations, here is a very basic structure of unlimitedzero code.</p>
+<p>Although there are absolutely no rules or limitations, here is a very basic structure of unlimitedjs code.</p>
 </div>
 <div class="listingblock">
-<div class="title">Hello world of unlimitedzero</div>
+<div class="title">Hello world of unlimitedjs</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "timeline-monad";
 import { h, patch } from "superfine";
@@ -1023,12 +1023,12 @@ import { h, patch } from "superfine";
 </table>
 </div>
 <div class="paragraph">
-<p>In unlimitedzero(timeline) framework, if a value is mutable, then it&#8217;s a timeline.</p>
+<p>In unlimitedjs(timeline) framework, if a value is mutable, then it&#8217;s a timeline.</p>
 </div>
 <div class="sect2">
 <h3 id="_mutable_virtual_dom_is_easy">5.1. Mutable virtual DOM is easy</h3>
 <div class="paragraph">
-<p>If we understand the idea of Hello world code of unlimitedzero, to write a mutable virtual DOM is pretty much straight forward.</p>
+<p>If we understand the idea of Hello world code of unlimitedjs, to write a mutable virtual DOM is pretty much straight forward.</p>
 </div>
 <div class="paragraph">
 <p>No fancy rules, no restrictions. Just a plain JavaScript programming.</p>
@@ -1321,7 +1321,7 @@ import { h, patch } from "superfine";
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-01 19:20:17 JST
+Last updated 2019-02-01 19:39:43 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">

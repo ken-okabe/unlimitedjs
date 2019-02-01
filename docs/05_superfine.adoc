@@ -27,7 +27,7 @@ Since virtual DOM became a member of first class objects in JavaScript, we shoul
 
 Although JSX is useful, as it's an extension to the vanilla JavaScript syntax, we need to transpile to JS.
 
-We can use https://babeljs.io/[Babel] or https://www.typescriptlang.org/[TypeScript] as a transpiler. JSX of unlimitedzero(superfine) works on both.
+We can use https://babeljs.io/[Babel] or https://www.typescriptlang.org/[TypeScript] as a transpiler. JSX of unlimitedjs(superfine) works on both.
 
 After the transpile, we will get the code like this:
 

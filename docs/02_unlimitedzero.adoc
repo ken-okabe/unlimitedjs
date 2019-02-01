@@ -1,18 +1,18 @@
-= unlimitedzero
+= unlimitedjs
 ifndef::stem[:stem: latexmath]
 ifndef::imagesdir[:imagesdir: ./img/]
 ifndef::source-highlighter[:source-highlighter: highlightjs]
 ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
 
-**unlimitedzero
+**unlimitedjs
 = https://github.com/jorgebucaran/superfine[superfine] + https://github.com/stken2050/timeline-monad[timeline-monad]**
 
 
 == Zero lines of code
-unlimitedzero is a virtual DOM framework, however, this framework itself does not provide a single line of code.
+unlimitedjs is a virtual DOM framework, however, this framework itself does not provide a single line of code.
 
 == Zero assumptions = generic, minimal and independent
-unlimitedzero consists of two independent existing libraries:
+unlimitedjs consists of two independent existing libraries:
 
 * https://github.com/jorgebucaran/superfine[superfine] (the core of https://github.com/jorgebucaran/hyperapp[Hyperapp]) as a generic and minimal library for virtual DOM. The https://github.com/jorgebucaran/superfine/blob/master/src/index.js[code] is **less than 500 lines**.
 
@@ -44,8 +44,8 @@ We've learned enough. "state" is complicated and hard to use.
 
 It's time to use Functional Reactive Programming(FRP) instead.
 
-== unlimitedzero is available now with stable status
+== unlimitedjs is available now with stable status
 
-Finally, unlimitedzero already has been available for a while with stable status.
+Finally, unlimitedjs already has been available for a while with stable status.
 
 The authors of the both libraries do not intend to change the minimal APIs.

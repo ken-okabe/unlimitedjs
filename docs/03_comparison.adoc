@@ -1,4 +1,4 @@
-= Comparison of codes between React Hooks and unlimitedzero
+= Comparison of codes between React Hooks and unlimitedjs
 ifndef::stem[:stem: latexmath]
 ifndef::imagesdir[:imagesdir: ./img/]
 ifndef::source-highlighter[:source-highlighter: highlightjs]
@@ -53,7 +53,7 @@ Remember there are rules to use React Hooks: https://reactjs.org/docs/hooks-rule
 <4> Set new state
 <5> Render virtual DOM 
 
-== unlimitedzero(superfine + timeline-monad)
+== unlimitedjs(superfine + timeline-monad)
 
 On the other hand, **timeline-monad** does not have rules or limitations to use **__timeline__** (which corresponds to "state" in React, and will be explained in the next section).
 
@@ -62,9 +62,9 @@ The below is usage of global __timeline__. For local __timeline__, I will illust
 * **HyperScript Syntax** (Currently, there seems no way to JSX@HyperScript in CodePen)
 
 ++++
-<p class="codepen" data-height="494" data-theme-id="0" data-default-tab="js,result" data-user="stken2050" data-slug-hash="RvrOpJ" style="height: 494px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="unlimitedzero">
+<p class="codepen" data-height="494" data-theme-id="0" data-default-tab="js,result" data-user="stken2050" data-slug-hash="RvrOpJ" style="height: 494px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="unlimitedjs">
   <span>See the Pen <a href="https://codepen.io/stken2050/pen/RvrOpJ/">
-  unlimitedzero</a> by Ken OKABE (<a href="https://codepen.io/stken2050">@stken2050</a>)
+  unlimitedjs</a> by Ken OKABE (<a href="https://codepen.io/stken2050">@stken2050</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
@@ -76,7 +76,7 @@ The below is usage of global __timeline__. For local __timeline__, I will illust
 * **JSX Syntax**
 
 [source,js]
-.counter-unlimitedzero.jsx
+.counter-unlimitedjs.jsx
 ----
 import { T } from "timeline-monad";
 import { h, patch } from "superfine";
