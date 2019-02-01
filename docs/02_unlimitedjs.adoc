@@ -4,8 +4,7 @@ ifndef::imagesdir[:imagesdir: ./img/]
 ifndef::source-highlighter[:source-highlighter: highlightjs]
 ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
 
-**unlimitedjs
-= https://github.com/jorgebucaran/superfine[superfine] + https://github.com/stken2050/timeline-monad[timeline-monad]**
+**unlimitedjs = https://github.com/jorgebucaran/superfine[superfine] + https://github.com/stken2050/timeline-monad[timeline_monad]**
 
 
 == Zero lines of code

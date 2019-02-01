@@ -445,11 +445,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_react">1. React?</a></li>
-<li><a href="#_comparison_of_codes_between_react_hooks_and_unlimitedjs">2. Comparison of codes between React Hooks and unlimitedjs</a></li>
-<li><a href="#_what_is_timeline_monad">3. What is timeline-monad?</a></li>
-<li><a href="#_vitural_dom">4. Vitural DOM</a></li>
-<li><a href="#_unlimitedjs_superfine_timeline_monad">5. unlimitedjs = superfine + timeline-monad</a></li>
-<li><a href="#_mit_license">6. MIT License</a></li>
+<li><a href="#_unlimitedjs">2. unlimitedjs</a></li>
+<li><a href="#_comparison_of_codes_between_react_hooks_and_unlimitedjs">3. Comparison of codes between React Hooks and unlimitedjs</a></li>
+<li><a href="#_what_is_timeline_monad">4. What is timeline-monad?</a></li>
+<li><a href="#_vitural_dom">5. Vitural DOM</a></li>
+<li><a href="#_unlimitedjs_superfine_timeline_monad">6. unlimitedjs = superfine + timeline-monad</a></li>
+<li><a href="#_mit_license">7. MIT License</a></li>
 </ul>
 </div>
 </div>
@@ -582,16 +583,92 @@ td >code {background-color: #aaaaaa};
 <div class="paragraph">
 <p>Many of what to do, what not to do, and what to use. With Hooks, React remains to be a very complicated framework and hard to catch up, and hard to use.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_unlimitedjs">2. unlimitedjs</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::./02_unlimitedjs.adoc[]</p>
+<p><strong>unlimitedjs = <a href="https://github.com/jorgebucaran/superfine">superfine</a> + <a href="https://github.com/stken2050/timeline-monad">timeline_monad</a></strong></p>
+</div>
+<div class="sect2">
+<h3 id="_zero_lines_of_code">2.1. Zero lines of code</h3>
+<div class="paragraph">
+<p>unlimitedjs is a virtual DOM framework, however, this framework itself does not provide a single line of code.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_zero_assumptions_generic_minimal_and_independent">2.2. Zero assumptions = generic, minimal and independent</h3>
+<div class="paragraph">
+<p>unlimitedjs consists of two independent existing libraries:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/jorgebucaran/superfine">superfine</a> (the core of <a href="https://github.com/jorgebucaran/hyperapp">Hyperapp</a>) as a generic and minimal library for virtual DOM. The <a href="https://github.com/jorgebucaran/superfine/blob/master/src/index.js">code</a> is <strong>less than 500 lines</strong>.</p>
+<div class="literalblock">
+<div class="content">
+<pre>Minimal view layer for creating declarative web user interfaces</pre>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/stken2050/timeline-monad">timeline-monad</a> as a generic and minimal library for Functional Reactive Programming(FRP). The <a href="https://github.com/stken2050/timeline-monad/blob/master/build/modules/timeline-monad.js">code</a> is <strong>less than 40 lines</strong>(comment lines excluded).</p>
+<div class="literalblock">
+<div class="content">
+<pre>Micro Functional Reactive Programming (FRP) Framework with Monad structure</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The both libraries are developed independently by different authors(<a href="https://github.com/jorgebucaran">Jorge Bucaran @jorgebucaran</a> and <a href="https://github.com/stken2050">Ken OKABE @stken2050</a>) for a generic purpose of different fields of programming - virtual DOM and FRP, and the both libraries do not rely on each others or any others(zero dependency).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_zero_rules">2.3. Zero rules</h3>
+<div class="paragraph">
+<p>They provide minimal APIs that are only necessary to describe the essential concepts of virtual DOM and FRP and do not add any rules for how to use them.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_simplicity_of_zero_rules_open_the_world_of_maximum_flexibility_and_unlimited_capabilities_of_functional_programming">2.4. The simplicity of zero rules open the world of maximum flexibility and unlimited capabilities of functional programming</h3>
+<div class="paragraph">
+<p>A <em>function</em> should be just a pure vanilla JavaScript function because the simplicity is the key concept of functional programming.</p>
+</div>
+<div class="paragraph">
+<p>The principle of functional programming is to build our programs using those small pure functions that can be assembled together as if you were combining small lego pieces. No extra assumptions and rules.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_functional_reactive_programmingfrp">2.5. Functional Reactive Programming(FRP)</h3>
+<div class="paragraph">
+<p>State management of Virtual DOM should be not specific to a Vitrual DOM library but generic in JavaScript, and <strong>"state" scheme does not work well.</strong></p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ve learned enough. "state" is complicated and hard to use.</p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s time to use Functional Reactive Programming(FRP) instead.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_unlimitedjs_is_available_now_with_stable_status">2.6. unlimitedjs is available now with stable status</h3>
+<div class="paragraph">
+<p>Finally, unlimitedjs already has been available for a while with stable status.</p>
+</div>
+<div class="paragraph">
+<p>The authors of the both libraries do not intend to change the minimal APIs.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_comparison_of_codes_between_react_hooks_and_unlimitedjs">2. Comparison of codes between React Hooks and unlimitedjs</h2>
+<h2 id="_comparison_of_codes_between_react_hooks_and_unlimitedjs">3. Comparison of codes between React Hooks and unlimitedjs</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_react_hooks">2.1. React Hooks</h3>
+<h3 id="_react_hooks">3.1. React Hooks</h3>
 <div class="paragraph">
 <p>The sample code based on <a href="https://reactjs.org/docs/hooks-state.html">Using the State Hook</a>:</p>
 </div>
@@ -670,7 +747,7 @@ ReactDOM.render(&lt;Counter /&gt;, document.body);   <i class="conum" data-value
 </div>
 </div>
 <div class="sect2">
-<h3 id="_unlimitedjssuperfine_timeline_monad">2.2. unlimitedjs(superfine + timeline-monad)</h3>
+<h3 id="_unlimitedjssuperfine_timeline_monad">3.2. unlimitedjs(superfine + timeline-monad)</h3>
 <div class="paragraph">
 <p>On the other hand, <strong>timeline-monad</strong> does not have rules or limitations to use <strong><em>timeline</em></strong> (which corresponds to "state" in React, and will be explained in the next section).</p>
 </div>
@@ -758,7 +835,7 @@ import { h, patch } from "superfine";
 </div>
 </div>
 <div class="sect1">
-<h2 id="_what_is_timeline_monad">3. What is timeline-monad?</h2>
+<h2 id="_what_is_timeline_monad">4. What is timeline-monad?</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -784,7 +861,7 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 <p>For this purpose, we use <code>timeline-monad</code> just as reactive mapping of timelines.</p>
 </div>
 <div class="sect2">
-<h3 id="_timeline">3.1. Timeline</h3>
+<h3 id="_timeline">4.1. Timeline</h3>
 <div class="paragraph">
 <p>In timeline-monad, the first class reactive values 'over time' is called <em><strong>timeline</strong></em>.</p>
 </div>
@@ -792,14 +869,14 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 <p>Many FRP libraries call it <strong>stream</strong> etc.. The problem of the naming: stream is it reminds us something dynamic, mutable, and the fundamental concept of FRP is to view the world immutable, so the value is called <em><strong>timeline</strong></em> here.</p>
 </div>
 <div class="sect3">
-<h4 id="_hello_timeline">3.1.1. Hello timeline</h4>
+<h4 id="_hello_timeline">4.1.1. Hello timeline</h4>
 <iframe height="265" style="width: 100%;" scrolling="no" title="Hello Timeline" src="//codepen.io/stken2050/embed/ZwOaEr/?height=265&theme-id=0&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/ZwOaEr/'>Hello Timeline</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 </div>
 <div class="sect3">
-<h4 id="_timer_timeline">3.1.2. Timer timeline</h4>
+<h4 id="_timer_timeline">4.1.2. Timer timeline</h4>
 <iframe height="373" style="width: 100%;" scrolling="no" title="Hello Timeline timer" src="//codepen.io/stken2050/embed/daNXja/?height=373&theme-id=0&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/daNXja/'>Hello Timeline timer</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
@@ -807,16 +884,16 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 </div>
 </div>
 <div class="sect2">
-<h3 id="_read_more_on_timeline_monad_docs_tutorial">3.2. Read more on <a href="https://stken2050.github.io/timeline-monad/">timeline-monad Docs &amp; Tutorial</a></h3>
+<h3 id="_read_more_on_timeline_monad_docs_tutorial">4.2. Read more on <a href="https://stken2050.github.io/timeline-monad/">timeline-monad Docs &amp; Tutorial</a></h3>
 
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_vitural_dom">4. Vitural DOM</h2>
+<h2 id="_vitural_dom">5. Vitural DOM</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_what_is_virtual_dom">4.1. What is virtual DOM?</h3>
+<h3 id="_what_is_virtual_dom">5.1. What is virtual DOM?</h3>
 <div class="listingblock">
 <div class="title">virtual DOM</div>
 <div class="content">
@@ -840,7 +917,7 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 </div>
 </div>
 <div class="sect2">
-<h3 id="_transpile_from_jsx_to_js">4.2. Transpile from JSX to JS</h3>
+<h3 id="_transpile_from_jsx_to_js">5.2. Transpile from JSX to JS</h3>
 <div class="paragraph">
 <p>Although JSX is useful, as it&#8217;s an extension to the vanilla JavaScript syntax, we need to transpile to JS.</p>
 </div>
@@ -871,7 +948,7 @@ const helloNode = h("div", null, "Hello!");</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_render_the_view">4.3. Render the view</h3>
+<h3 id="_render_the_view">5.3. Render the view</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -975,7 +1052,7 @@ const lastNode = patch( <i class="conum" data-value="2"></i><b>(2)</b>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_unlimitedjs_superfine_timeline_monad">5. unlimitedjs = superfine + timeline-monad</h2>
+<h2 id="_unlimitedjs_superfine_timeline_monad">6. unlimitedjs = superfine + timeline-monad</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Another good news is we can also forget <code>patch</code> since unlimitedjs embeds <code>patch</code> into  a certain code pattern.</p>
@@ -1026,7 +1103,7 @@ import { h, patch } from "superfine";
 <p>In unlimitedjs(timeline) framework, if a value is mutable, then it&#8217;s a timeline.</p>
 </div>
 <div class="sect2">
-<h3 id="_mutable_virtual_dom_is_easy">5.1. Mutable virtual DOM is easy</h3>
+<h3 id="_mutable_virtual_dom_is_easy">6.1. Mutable virtual DOM is easy</h3>
 <div class="paragraph">
 <p>If we understand the idea of Hello world code of unlimitedjs, to write a mutable virtual DOM is pretty much straight forward.</p>
 </div>
@@ -1090,7 +1167,7 @@ import { h, patch } from "superfine";
 </div>
 </div>
 <div class="sect2">
-<h3 id="_selfcontained_clock">5.2. SelfContained Clock</h3>
+<h3 id="_selfcontained_clock">6.2. SelfContained Clock</h3>
 <div class="listingblock">
 <div class="title">Clock</div>
 <div class="content">
@@ -1150,7 +1227,7 @@ import { h, patch } from "superfine";
 </div>
 </div>
 <div class="sect2">
-<h3 id="_selfcontained_counter">5.3. SelfContained Counter</h3>
+<h3 id="_selfcontained_counter">6.3. SelfContained Counter</h3>
 <div class="listingblock">
 <div class="title">Counter</div>
 <div class="content">
@@ -1217,7 +1294,7 @@ import { h, patch } from "superfine";
 </div>
 </div>
 <div class="sect2">
-<h3 id="_selfcontained_clockcounter">5.4. SelfContained Clock&amp;Counter</h3>
+<h3 id="_selfcontained_clockcounter">6.4. SelfContained Clock&amp;Counter</h3>
 <div class="listingblock">
 <div class="title">Counter</div>
 <div class="content">
@@ -1313,7 +1390,7 @@ import { h, patch } from "superfine";
 </div>
 </div>
 <div class="sect1">
-<h2 id="_mit_license">6. MIT License</h2>
+<h2 id="_mit_license">7. MIT License</h2>
 <div class="sectionbody">
 <iframe src="https://ghbtns.com/github-btn.html?user=stken2050&repo=unlimitedjs&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
 </div>
@@ -1321,7 +1398,7 @@ import { h, patch } from "superfine";
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-01 19:39:43 JST
+Last updated 2019-02-01 20:30:18 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">
