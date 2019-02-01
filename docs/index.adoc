@@ -43,5 +43,9 @@ include::./05_superfine.adoc[]
 include::./06_timeline-superfine.adoc[]
 
 
-== Star GitHubzz
+== MIT License
+
+++++
+<iframe src="https://ghbtns.com/github-btn.html?user=stken2050&repo=unlimitedjs&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+++++ 
 
