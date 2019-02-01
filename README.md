@@ -39,6 +39,8 @@ tsc -p ./unlimitedjs-start/
 
 **`unlimitedjs/unlimitedjs-start.html`**
 
+**`unlimitedjs/unlimitedjs-start-cdn.html`**
+
 Firefox recommended since Chrome does not work with local ESM files for security restriction.
 
 ## MIT License

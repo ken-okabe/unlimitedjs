@@ -3,17 +3,15 @@
 
 <head>
   <meta charset="UTF-8" />
-  <script src="https://unpkg.com/superfine"></script>
-  <script src="https://unpkg.com/timeline-monad/dist/cdn/timeline-monad.js"></script>
-  <script src="https://unpkg.com/timeline-monad/dist/cdn/allThenResetTL.js"></script>
 </head>
 
 <body>
-  <script>
-    const h = window.superfine.h;
-    const patch = window.superfine.patch;
-    const T = window.timelinemonad_T;
-    const allThenResetTL = window.timelinemonad_allThenResetTL;
+  <script type="module">
+    import { h, patch } from "https://unpkg.com/superfine/src/index.js";
+
+    import { T } from "https://unpkg.com/timeline-monad/dist/esm/timeline-monad.js";
+    import { allThenResetTL } from "https://unpkg.com/timeline-monad/dist/esm/allThenResetTL.js";
+
     const countTL = T();
     const topNodeTL = countTL.sync(count =>
       h(
