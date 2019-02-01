@@ -3,7 +3,7 @@ A minimal JavaScript framework for building UI with no limitations
 
 A virtual DOM framework with zero rules and limitations - just pure functional and reactive programming with full flexibility and unlimited capability
 
-## [Docs & Tutorial]( https://stken2050.github.io/timeline-monad/)
+## [Docs & Tutorial]( https://stken2050.github.io/unlimitedjs/)
 
 ## unlimitedjs Quick Start
 
