@@ -42,6 +42,7 @@ include::./05_superfine.adoc[]
 
 include::./06_timeline-superfine.adoc[]
 
+:leveloffset: 0
 
 == MIT License
 

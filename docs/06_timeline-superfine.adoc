@@ -205,6 +205,3 @@ import { h, patch } from "superfine";
 <6> `{timeString}` is a way to write variables inside of virtual DOM node in JSX
 <7> Define the latest "state" on the topNode timeline, which means **update**
 <8> `setInterval` triggers `f` every 1 second
-
-
-== Star GitHubzz

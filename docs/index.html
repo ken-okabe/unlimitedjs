@@ -5,10 +5,10 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.7.1">
-<meta name="description" content="A virtual DOM framework with zero rules - just pure functional and reactive programming with full flexibility and unlimited capability">
+<meta name="description" content="A minimal JavaScript framework for building UI without any limitation">
 <meta name="keywords" content="virtual,dom,ui,react, hooks,hyperapp,superfine,frp,functional, reactive">
 <meta name="author" content="Ken Okabe">
-<title>unlimitedzero</title>
+<title>unlimitedjs</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -436,7 +436,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>unlimitedzero</h1>
+<h1>unlimitedjs</h1>
 <div class="details">
 <span id="author" class="author">Ken Okabe</span><br>
 <span id="email" class="email"><a href="mailto:stken2050@gmail.com">stken2050@gmail.com</a></span><br>
@@ -445,11 +445,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_react">1. React?</a></li>
-<li><a href="#_unlimitedzero">2. unlimitedzero</a></li>
-<li><a href="#_comparison_of_codes_between_react_hooks_and_unlimitedzero">3. Comparison of codes between React Hooks and unlimitedzero</a></li>
-<li><a href="#_what_is_timeline_monad">4. What is timeline-monad?</a></li>
-<li><a href="#_vitural_dom">5. Vitural DOM</a></li>
-<li><a href="#_unlimitedzero_superfine_timeline_monad">6. unlimitedzero = superfine + timeline-monad</a></li>
+<li><a href="#_comparison_of_codes_between_react_hooks_and_unlimitedzero">2. Comparison of codes between React Hooks and unlimitedzero</a></li>
+<li><a href="#_what_is_timeline_monad">3. What is timeline-monad?</a></li>
+<li><a href="#_vitural_dom">4. Vitural DOM</a></li>
+<li><a href="#_unlimitedzero_superfine_timeline_monad">5. unlimitedzero = superfine + timeline-monad</a></li>
+<li><a href="#_mit_license">6. MIT License</a></li>
 </ul>
 </div>
 </div>
@@ -582,93 +582,16 @@ td >code {background-color: #aaaaaa};
 <div class="paragraph">
 <p>Many of what to do, what not to do, and what to use. With Hooks, React remains to be a very complicated framework and hard to catch up, and hard to use.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_unlimitedzero">2. unlimitedzero</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p><strong>unlimitedzero
-= <a href="https://github.com/jorgebucaran/superfine">superfine</a> + <a href="https://github.com/stken2050/timeline-monad">timeline-monad</a></strong></p>
-</div>
-<div class="sect2">
-<h3 id="_zero_lines_of_code">2.1. Zero lines of code</h3>
-<div class="paragraph">
-<p>unlimitedzero is a virtual DOM framework, however, this framework itself does not provide a single line of code.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_zero_assumptions_generic_minimal_and_independent">2.2. Zero assumptions = generic, minimal and independent</h3>
-<div class="paragraph">
-<p>unlimitedzero consists of two independent existing libraries:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/jorgebucaran/superfine">superfine</a> (the core of <a href="https://github.com/jorgebucaran/hyperapp">Hyperapp</a>) as a generic and minimal library for virtual DOM. The <a href="https://github.com/jorgebucaran/superfine/blob/master/src/index.js">code</a> is <strong>less than 500 lines</strong>.</p>
-<div class="literalblock">
-<div class="content">
-<pre>Minimal view layer for creating declarative web user interfaces</pre>
-</div>
-</div>
-</li>
-<li>
-<p><a href="https://github.com/stken2050/timeline-monad">timeline-monad</a> as a generic and minimal library for Functional Reactive Programming(FRP). The <a href="https://github.com/stken2050/timeline-monad/blob/master/build/modules/timeline-monad.js">code</a> is <strong>less than 40 lines</strong>(comment lines excluded).</p>
-<div class="literalblock">
-<div class="content">
-<pre>Micro Functional Reactive Programming (FRP) Framework with Monad structure</pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The both libraries are developed independently by different authors(<a href="https://github.com/jorgebucaran">Jorge Bucaran @jorgebucaran</a> and <a href="https://github.com/stken2050">Ken OKABE @stken2050</a>) for a generic purpose of different fields of programming - virtual DOM and FRP, and the both libraries do not rely on each others or any others(zero dependency).</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_zero_rules">2.3. Zero rules</h3>
-<div class="paragraph">
-<p>They provide minimal APIs that are only necessary to describe the essential concepts of virtual DOM and FRP and do not add any rules for how to use them.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_the_simplicity_of_zero_rules_open_the_world_of_maximum_flexibility_and_unlimited_capabilities_of_functional_programming">2.4. The simplicity of zero rules open the world of maximum flexibility and unlimited capabilities of functional programming</h3>
-<div class="paragraph">
-<p>A <em>function</em> should be just a pure vanilla JavaScript function because the simplicity is the key concept of functional programming.</p>
-</div>
-<div class="paragraph">
-<p>The principle of functional programming is to build our programs using those small pure functions that can be assembled together as if you were combining small lego pieces. No extra assumptions and rules.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_functional_reactive_programmingfrp">2.5. Functional Reactive Programming(FRP)</h3>
-<div class="paragraph">
-<p>State management of Virtual DOM should be not specific to a Vitrual DOM library but generic in JavaScript, and <strong>"state" scheme does not work well.</strong></p>
-</div>
-<div class="paragraph">
-<p>We&#8217;ve learned enough. "state" is complicated and hard to use.</p>
-</div>
-<div class="paragraph">
-<p>It&#8217;s time to use Functional Reactive Programming(FRP) instead.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_unlimitedzero_is_available_now_with_stable_status">2.6. unlimitedzero is available now with stable status</h3>
-<div class="paragraph">
-<p>Finally, unlimitedzero already has been available for a while with stable status.</p>
-</div>
-<div class="paragraph">
-<p>The authors of the both libraries do not intend to change the minimal APIs.</p>
-</div>
+<p>Unresolved directive in &lt;stdin&gt; - include::./02_unlimitedjs.adoc[]</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_comparison_of_codes_between_react_hooks_and_unlimitedzero">3. Comparison of codes between React Hooks and unlimitedzero</h2>
+<h2 id="_comparison_of_codes_between_react_hooks_and_unlimitedzero">2. Comparison of codes between React Hooks and unlimitedzero</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_react_hooks">3.1. React Hooks</h3>
+<h3 id="_react_hooks">2.1. React Hooks</h3>
 <div class="paragraph">
 <p>The sample code based on <a href="https://reactjs.org/docs/hooks-state.html">Using the State Hook</a>:</p>
 </div>
@@ -747,7 +670,7 @@ ReactDOM.render(&lt;Counter /&gt;, document.body);   <i class="conum" data-value
 </div>
 </div>
 <div class="sect2">
-<h3 id="_unlimitedzerosuperfine_timeline_monad">3.2. unlimitedzero(superfine + timeline-monad)</h3>
+<h3 id="_unlimitedzerosuperfine_timeline_monad">2.2. unlimitedzero(superfine + timeline-monad)</h3>
 <div class="paragraph">
 <p>On the other hand, <strong>timeline-monad</strong> does not have rules or limitations to use <strong><em>timeline</em></strong> (which corresponds to "state" in React, and will be explained in the next section).</p>
 </div>
@@ -835,7 +758,7 @@ import { h, patch } from "superfine";
 </div>
 </div>
 <div class="sect1">
-<h2 id="_what_is_timeline_monad">4. What is timeline-monad?</h2>
+<h2 id="_what_is_timeline_monad">3. What is timeline-monad?</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -861,7 +784,7 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 <p>For this purpose, we use <code>timeline-monad</code> just as reactive mapping of timelines.</p>
 </div>
 <div class="sect2">
-<h3 id="_timeline">4.1. Timeline</h3>
+<h3 id="_timeline">3.1. Timeline</h3>
 <div class="paragraph">
 <p>In timeline-monad, the first class reactive values 'over time' is called <em><strong>timeline</strong></em>.</p>
 </div>
@@ -870,7 +793,7 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 </div>
 </div>
 <div class="sect2">
-<h3 id="_frp_background_and_rationale">4.2. FRP Background and Rationale</h3>
+<h3 id="_frp_background_and_rationale">3.2. FRP Background and Rationale</h3>
 <div class="paragraph">
 <p><a href="https://wiki.haskell.org/FRP">Functional Reactive Programming (FRP)</a> integrates <strong>time flow</strong> and compositional events into functional programming.</p>
 </div>
@@ -931,7 +854,7 @@ Dynamic/evolving values (i.e., values "over time") are first class values in the
 </div>
 </div>
 <div class="sect2">
-<h3 id="_timeline_is_similar_to_promise_instance">4.3. <em>timeline</em> is similar to Promise instance</h3>
+<h3 id="_timeline_is_similar_to_promise_instance">3.3. <em>timeline</em> is similar to Promise instance</h3>
 <div class="paragraph">
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">ES6+ Promise</a> is widely used in JavaScript.</p>
 </div>
@@ -1012,7 +935,7 @@ hello timeline</code></pre>
 <p><code>Promise.then</code> and <code>timeline.sync</code> is like <code>Array.map</code> in the manner of delayed or asynchronously. The object method returns the object itself containing the mapped value.</p>
 </div>
 <div class="sect3">
-<h4 id="_self_contained_timeline">4.3.1. Self Contained <em>timeline</em></h4>
+<h4 id="_self_contained_timeline">3.3.1. Self Contained <em>timeline</em></h4>
 <div class="listingblock">
 <div class="title">Promise and timeline-monad</div>
 <div class="content">
@@ -1080,7 +1003,7 @@ Hello timeline!</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_continuous_updates">4.3.2. Continuous updates</h4>
+<h4 id="_continuous_updates">3.3.2. Continuous updates</h4>
 <div class="listingblock">
 <div class="title">Promise and timeline-monad</div>
 <div class="content">
@@ -1117,12 +1040,12 @@ Hello timeline!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_api">4.4. API</h3>
+<h3 id="_api">3.4. API</h3>
 <div class="paragraph">
 <p><a href="https://github.com/stken2050/timeline-monad/blob/master/build/modules/timeline-monad.d.ts">timeline-monad TypeScript type definition</a></p>
 </div>
 <div class="sect3">
-<h4 id="_typescript_type_definition">4.4.1. TypeScript type definition</h4>
+<h4 id="_typescript_type_definition">3.4.1. TypeScript type definition</h4>
 <div class="listingblock">
 <div class="title">timeline type definition</div>
 <div class="content">
@@ -1138,7 +1061,7 @@ export { T };</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_t_timefunction">4.5. T( timeFunction )</h3>
+<h3 id="_t_timefunction">3.5. T( timeFunction )</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const T: (timeFunction?: Function) =&gt; timeline</code></pre>
@@ -1152,7 +1075,7 @@ export { T };</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_now">4.6. now</h3>
+<h3 id="_now">3.6. now</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const timeFunction = (self) ⇒ { /*…​*/ self.now = value;};</code></pre>
@@ -1160,7 +1083,7 @@ export { T };</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sync_somefunction">4.7. .sync( someFunction )</h3>
+<h3 id="_sync_somefunction">3.7. .sync( someFunction )</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const timeline1 = timeline
@@ -1186,7 +1109,7 @@ export { T };</code></pre>
 </table>
 </div>
 <div class="sect3">
-<h4 id="Syntax">4.7.1. Syntax</h4>
+<h4 id="Syntax">3.7.1. Syntax</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const timeFunction = (self) ⇒ { /*…​*/ self.now = value;};
@@ -1198,7 +1121,7 @@ const timeline1 = timeline.sync( someFunction );</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_simple_usage">4.7.2. Simple usage</h4>
+<h4 id="_simple_usage">3.7.2. Simple usage</h4>
 <div class="paragraph">
 <p><code>T()</code> is a <code>timeline</code> instance:</p>
 </div>
@@ -1243,10 +1166,10 @@ sync  trigger</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_vitural_dom">5. Vitural DOM</h2>
+<h2 id="_vitural_dom">4. Vitural DOM</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_what_is_virtual_dom">5.1. What is virtual DOM?</h3>
+<h3 id="_what_is_virtual_dom">4.1. What is virtual DOM?</h3>
 <div class="listingblock">
 <div class="title">virtual DOM</div>
 <div class="content">
@@ -1270,7 +1193,7 @@ sync  trigger</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_transpile_from_jsx_to_js">5.2. Transpile from JSX to JS</h3>
+<h3 id="_transpile_from_jsx_to_js">4.2. Transpile from JSX to JS</h3>
 <div class="paragraph">
 <p>Although JSX is useful, as it&#8217;s an extension to the vanilla JavaScript syntax, we need to transpile to JS.</p>
 </div>
@@ -1301,7 +1224,7 @@ const helloNode = h("div", null, "Hello!");</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_render_the_view">5.3. Render the view</h3>
+<h3 id="_render_the_view">4.3. Render the view</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1405,7 +1328,7 @@ const lastNode = patch( <i class="conum" data-value="2"></i><b>(2)</b>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_unlimitedzero_superfine_timeline_monad">6. unlimitedzero = superfine + timeline-monad</h2>
+<h2 id="_unlimitedzero_superfine_timeline_monad">5. unlimitedzero = superfine + timeline-monad</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Another good news is we can also forget <code>patch</code> since unlimitedzero embeds <code>patch</code> into  a certain code pattern.</p>
@@ -1456,7 +1379,7 @@ import { h, patch } from "superfine";
 <p>In unlimitedzero(timeline) framework, if a value is mutable, then it&#8217;s a timeline.</p>
 </div>
 <div class="sect2">
-<h3 id="_mutable_virtual_dom_is_easy">6.1. Mutable virtual DOM is easy</h3>
+<h3 id="_mutable_virtual_dom_is_easy">5.1. Mutable virtual DOM is easy</h3>
 <div class="paragraph">
 <p>If we understand the idea of Hello world code of unlimitedzero, to write a mutable virtual DOM is pretty much straight forward.</p>
 </div>
@@ -1520,7 +1443,7 @@ import { h, patch } from "superfine";
 </div>
 </div>
 <div class="sect2">
-<h3 id="_selfcontained_clock">6.2. SelfContained Clock</h3>
+<h3 id="_selfcontained_clock">5.2. SelfContained Clock</h3>
 <div class="listingblock">
 <div class="title">Clock</div>
 <div class="content">
@@ -1580,7 +1503,7 @@ import { h, patch } from "superfine";
 </div>
 </div>
 <div class="sect2">
-<h3 id="_selfcontained_counter">6.3. SelfContained Counter</h3>
+<h3 id="_selfcontained_counter">5.3. SelfContained Counter</h3>
 <div class="listingblock">
 <div class="title">Counter</div>
 <div class="content">
@@ -1647,7 +1570,7 @@ import { h, patch } from "superfine";
 </div>
 </div>
 <div class="sect2">
-<h3 id="_selfcontained_clockcounter">6.4. SelfContained Clock&amp;Counter</h3>
+<h3 id="_selfcontained_clockcounter">5.4. SelfContained Clock&amp;Counter</h3>
 <div class="listingblock">
 <div class="title">Counter</div>
 <div class="content">
@@ -1740,20 +1663,18 @@ import { h, patch } from "superfine";
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_star_githubzz">6.5. Star GitHubzz</h3>
-
 </div>
-<div class="sect2">
-<h3 id="_star_githubzz_2">6.6. Star GitHubzz</h3>
-
 </div>
+<div class="sect1">
+<h2 id="_mit_license">6. MIT License</h2>
+<div class="sectionbody">
+<iframe src="https://ghbtns.com/github-btn.html?user=stken2050&repo=unlimitedjs&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-01 18:32:12 JST
+Last updated 2019-02-01 18:43:20 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">
