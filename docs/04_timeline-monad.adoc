@@ -40,4 +40,106 @@ Many FRP libraries call it **stream** etc.. The problem of the naming: stream is
 </iframe>
 ++++
 
+=== Canvas
+
+++++
+<iframe height="550" style="width: 100%;" scrolling="no" title="unlimitedjs_canvas" src="//codepen.io/stken2050/embed/jdmeYK/?height=550&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/jdmeYK/'>unlimitedjs_canvas</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+++++
+
+[source,js]
+.timeline Canvas
+----
+import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
+
+const _canvas = document.getElementById('canvas1');
+const canvas = (_canvas == null)
+  ? {} as HTMLCanvasElement
+  : _canvas as HTMLCanvasElement;
+
+const pointerTL = T(self => {
+  canvas.onmousemove = e =>
+    self.now = { x: e.clientX, y: e.clientY };
+});
+
+const drawTL = T(self => {
+  const _ctx = canvas.getContext('2d');
+  const ctx = (_ctx == null)
+    ? {} as CanvasRenderingContext2D
+    : _ctx;
+  const timeline = self.sync(pointer => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(pointer.x - 10, pointer.y - 10, 10, 0, Math.PI * 2, true);
+    ctx.fillStyle = "red";
+    ctx.fill();
+  });
+});
+
+const timeline = pointerTL.sync(pointer =>
+  drawTL.now = pointer
+);
+----
+
+<1> virtual DOM node
+<2> The only API `patch` returns next "last" node.
+<3> last (old) virtual DOM node
+<4> next (new) virtual DOM node
+<5> Real DOM Container to render the virtual DOM
+
+=== Virtual DOM (Superfine)
+
+++++
+<iframe height="654" style="width: 100%;" scrolling="no" title="unlimitedjs_vdom" src="//codepen.io/stken2050/embed/xMdyjx/?height=654&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/xMdyjx/'>unlimitedjs_vdom</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+++++
+
+[source,js]
+.timeline virtualDOM
+----
+import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
+import { h, patch } from "../../node_modules/superfine/src/index.js";
+
+const _canvas = document.getElementById('vdom1');
+const canvas = (_canvas == null)
+  ? {} as HTMLElement
+  : _canvas as HTMLElement;
+
+const pointerTL = T(self => {
+  canvas.onmousemove = e =>
+    self.now = { x: e.clientX, y: e.clientY };
+});
+
+const drawTL = T(self => {
+  const topNodeTL = self.sync(pointer =>
+    <div style={{
+      "left": (pointer.x - 20) + "px",
+      "top": (pointer.y - 20) + "px",
+      "width": "20px",
+      "height": "20px",
+      "border-radius": "50%",
+      "background-color": "red",
+      "position": "relative"
+    }}></div>
+  );
+  const viewNodeTL = topNodeTL.sync(topNode =>
+    patch(viewNodeTL.now, topNode, canvas)
+  );
+});
+
+const timeline = pointerTL.sync(pointer =>
+  drawTL.now = pointer
+); 
+----
+
+<1> virtual DOM node
+<2> The only API `patch` returns next "last" node.
+<3> last (old) virtual DOM node
+<4> next (new) virtual DOM node
+<5> Real DOM Container to render the virtual DOM
+
 == Read more on https://stken2050.github.io/timeline-monad/[timeline-monad Docs & Tutorial]

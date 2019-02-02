@@ -6,8 +6,9 @@
 
 //import { main } from "./updown.js";
 
-import { main } from "./counter-zero.js";
+//import { main } from "./counter-zero.js";
 
+import { main } from "./counter-zero1.js";
 //import { main } from "./clock-counter1.js";
 
 main();

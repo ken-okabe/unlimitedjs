@@ -4,25 +4,22 @@ import { h, patch } from "../../node_modules/superfine/src/index.js";
 const main = () => {
 
   const counterNodeTL = T(self => {
-    const countTL = T();//timeline of the number of count
-    const buttonNode = (//define buttonNode
-      <button onclick={() => countTL.now = countTL.now + 1}>
-        Click me
-      </button>);
+    const countTL = T(self => {
+      const f = () => self.now = 0;
+      setTimeout(f, 0);
+    });//timeline of the number of count
     const dummyTL = countTL.sync(
       count => self.now = (<div>
-        <p>You clicked {countTL.now} times</p>
-        {buttonNode}
+        <p>You clicked {count} times</p>
+        <button onclick={() => countTL.now = count + 1}>
+          Click me
+      </button>
       </div>)
     );
-    const f = () => countTL.now = 0;
-    setTimeout(f, 0);
   });
-
   const topNodeTL = counterNodeTL;
   const viewNodeTL = topNodeTL.sync(
-    topNode => patch(viewNodeTL.now, topNode, document.body
-    )
+    topNode => patch(viewNodeTL.now, topNode, document.body)
   );
 
 };

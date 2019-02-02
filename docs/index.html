@@ -878,6 +878,140 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 </div>
+<div class="sect3">
+<h4 id="_canvas">4.1.3. Canvas</h4>
+<iframe height="550" style="width: 100%;" scrolling="no" title="unlimitedjs_canvas" src="//codepen.io/stken2050/embed/jdmeYK/?height=550&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/jdmeYK/'>unlimitedjs_canvas</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+<div class="listingblock">
+<div class="title">timeline Canvas</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
+
+const _canvas = document.getElementById('canvas1');
+const canvas = (_canvas == null)
+  ? {} as HTMLCanvasElement
+  : _canvas as HTMLCanvasElement;
+
+const pointerTL = T(self =&gt; {
+  canvas.onmousemove = e =&gt;
+    self.now = { x: e.clientX, y: e.clientY };
+});
+
+const drawTL = T(self =&gt; {
+  const _ctx = canvas.getContext('2d');
+  const ctx = (_ctx == null)
+    ? {} as CanvasRenderingContext2D
+    : _ctx;
+  const timeline = self.sync(pointer =&gt; {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(pointer.x - 10, pointer.y - 10, 10, 0, Math.PI * 2, true);
+    ctx.fillStyle = "red";
+    ctx.fill();
+  });
+});
+
+const timeline = pointerTL.sync(pointer =&gt;
+  drawTL.now = pointer
+);</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>virtual DOM node</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The only API <code>patch</code> returns next "last" node.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>last (old) virtual DOM node</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>next (new) virtual DOM node</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Real DOM Container to render the virtual DOM</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_virtual_dom_superfine">4.1.4. Virtual DOM (Superfine)</h4>
+<iframe height="654" style="width: 100%;" scrolling="no" title="unlimitedjs_vdom" src="//codepen.io/stken2050/embed/xMdyjx/?height=654&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/xMdyjx/'>unlimitedjs_vdom</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+<div class="listingblock">
+<div class="title">timeline virtualDOM</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
+import { h, patch } from "../../node_modules/superfine/src/index.js";
+
+const _canvas = document.getElementById('vdom1');
+const canvas = (_canvas == null)
+  ? {} as HTMLElement
+  : _canvas as HTMLElement;
+
+const pointerTL = T(self =&gt; {
+  canvas.onmousemove = e =&gt;
+    self.now = { x: e.clientX, y: e.clientY };
+});
+
+const drawTL = T(self =&gt; {
+  const topNodeTL = self.sync(pointer =&gt;
+    &lt;div style={{
+      "left": (pointer.x - 20) + "px",
+      "top": (pointer.y - 20) + "px",
+      "width": "20px",
+      "height": "20px",
+      "border-radius": "50%",
+      "background-color": "red",
+      "position": "relative"
+    }}&gt;&lt;/div&gt;
+  );
+  const viewNodeTL = topNodeTL.sync(topNode =&gt;
+    patch(viewNodeTL.now, topNode, canvas)
+  );
+});
+
+const timeline = pointerTL.sync(pointer =&gt;
+  drawTL.now = pointer
+);</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>virtual DOM node</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The only API <code>patch</code> returns next "last" node.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>last (old) virtual DOM node</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>next (new) virtual DOM node</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Real DOM Container to render the virtual DOM</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_read_more_on_timeline_monad_docs_tutorial">4.2. Read more on <a href="https://stken2050.github.io/timeline-monad/">timeline-monad Docs &amp; Tutorial</a></h3>
@@ -1394,7 +1528,7 @@ import { h, patch } from "superfine";
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-01 21:57:18 JST
+Last updated 2019-02-03 07:35:15 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">
