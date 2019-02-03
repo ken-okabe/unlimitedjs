@@ -79,13 +79,13 @@ import { h, patch } from "superfine";
 
   const countTL = T(); <1>
 
-  const topNodeTL = countTL.sync(  <2>
-    count => (<div>    <3>
+  const topNodeTL = countTL.sync(count =>   <2>
+    <div>    <3>
       <p>You clicked {count} times</p>
       <button onclick={() => countTL.now = count + 1}> <4>
         Click me
     </button>
-    </div>)
+    </div>
   );
 
   const viewNodeTL = topNodeTL.sync(   <5>

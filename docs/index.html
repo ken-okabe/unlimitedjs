@@ -783,13 +783,13 @@ import { h, patch } from "superfine";
 
   const countTL = T(); <i class="conum" data-value="1"></i><b>(1)</b>
 
-  const topNodeTL = countTL.sync(  <i class="conum" data-value="2"></i><b>(2)</b>
-    count =&gt; (&lt;div&gt;    <i class="conum" data-value="3"></i><b>(3)</b>
+  const topNodeTL = countTL.sync(count =&gt;   <i class="conum" data-value="2"></i><b>(2)</b>
+    &lt;div&gt;    <i class="conum" data-value="3"></i><b>(3)</b>
       &lt;p&gt;You clicked {count} times&lt;/p&gt;
       &lt;button onclick={() =&gt; countTL.now = count + 1}&gt; <i class="conum" data-value="4"></i><b>(4)</b>
         Click me
     &lt;/button&gt;
-    &lt;/div&gt;)
+    &lt;/div&gt;
   );
 
   const viewNodeTL = topNodeTL.sync(   <i class="conum" data-value="5"></i><b>(5)</b>
@@ -866,14 +866,14 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 </div>
 <div class="sect3">
 <h4 id="_hello_timeline">4.1.1. Hello timeline</h4>
-<iframe height="265" style="width: 100%;" scrolling="no" title="Hello Timeline" src="//codepen.io/stken2050/embed/ZwOaEr/?height=265&theme-id=0&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="265" style="width: 100%;" scrolling="no" title="Hello Timeline" src="//codepen.io/stken2050/embed/ZwOaEr/?height=265&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/ZwOaEr/'>Hello Timeline</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 </div>
 <div class="sect3">
 <h4 id="_timer_timeline">4.1.2. Timer timeline</h4>
-<iframe height="373" style="width: 100%;" scrolling="no" title="Hello Timeline timer" src="//codepen.io/stken2050/embed/daNXja/?height=373&theme-id=0&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="373" style="width: 100%;" scrolling="no" title="Hello Timeline timer" src="//codepen.io/stken2050/embed/daNXja/?height=373&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/daNXja/'>Hello Timeline timer</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -1172,12 +1172,10 @@ const lastNode = patch( <i class="conum" data-value="2"></i><b>(2)</b>
 <div class="paragraph">
 <p>Although we need to import <code>{ h, patch }</code>, <code>h</code> will never appear in the code as long as we use JSX.</p>
 </div>
-<p class="codepen" data-height="333" data-theme-id="0" data-default-tab="js,result" data-user="stken2050" data-slug-hash="VgajBm" style="height: 333px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Hello superfine">
-  <span>See the Pen <a href="https://codepen.io/stken2050/pen/VgajBm/">
-  Hello superfine</a> by Ken OKABE (<a href="https://codepen.io/stken2050">@stken2050</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<iframe height="300" style="width: 100%;" scrolling="no" title="Hello superfine" src="//codepen.io/stken2050/embed/VgajBm/?height=300&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/VgajBm/'>Hello superfine</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 </div>
 </div>
 </div>
@@ -1528,7 +1526,7 @@ import { h, patch } from "superfine";
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-03 07:56:36 JST
+Last updated 2019-02-03 09:41:26 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">
