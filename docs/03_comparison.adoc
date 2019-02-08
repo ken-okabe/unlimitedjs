@@ -10,7 +10,7 @@ The sample code based on https://reactjs.org/docs/hooks-state.html[Using the Sta
 
 * **JSX Syntax**
 ++++
-<iframe height="425" style="width: 100%;" scrolling="no" title="React Hooks" src="//codepen.io/stken2050/embed/WPrmga/?height=425&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="386" style="width: 100%;" scrolling="no" title="React Hooks" src="//codepen.io/stken2050/embed/WPrmga/?height=386&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/WPrmga/'>React Hooks</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
