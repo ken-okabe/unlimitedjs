@@ -27,7 +27,7 @@ A minimal JavaScript framework for building UI with no limitations, full flexibi
 ++++ 
 
 [NOTE]
-.Quick Starter project available
+.Quick Starter project available(JavaScript/TypeScript)
 ====
 https://github.com/stken2050/unlimitedjs[unlimitedjs (timeline-monad + superfine) Quick Start template project]
 ==== 
