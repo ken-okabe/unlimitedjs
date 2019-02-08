@@ -27,7 +27,14 @@ td >code {background-color: #aaaaaa};
 
 https://www.npmjs.com/package/unlimitedjs
 
- 
+
+[NOTE]
+.Quick Starter project available
+====
+https://github.com/stken2050/unlimitedjs[unlimitedjs (timeline-monad + superfine) Quick Start template project]
+==== 
+
+
 :leveloffset: 1
 
 include::./01_react.adoc[]
