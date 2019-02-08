@@ -8,6 +8,8 @@ https://github.com/facebook/react[React] is the most popular virtual DOM library
 
 React v16.8.0 introduces new API called Hooks.
 
+https://reactjs.org/blog/2019/02/06/react-v16.8.0.html[React v16.8: The One With Hooks]
+
 https://reactjs.org/docs/hooks-intro.html[Introducing Hooks]
 
 https://reactjs.org/docs/hooks-intro.html#motivation[Motivation]
