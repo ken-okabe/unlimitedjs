@@ -13,10 +13,14 @@ because it has a https://ncatlab.org/nlab/show/monad[_monad_] structure.
 
 4. The code is https://github.com/stken2050/timeline-monad/tree/master/test-jest[heavily tested] including to https://github.com/stken2050/timeline-monad/blob/master/test-jest/monad.test.js[satisfy monad laws]. 
 
-
-Although it has a monad structure, for unlimitedjs applications, we don't have to dive into monad world.
+[TIP]
+.Monad?
+====
+Although **timeline-monad** has a monad structure, for **unlimitedjs** applications, we don't have to dive into monad world.
 
 For this purpose, we use **timeline-monad** just as reactive mapping of __timeline__.
+==== 
+
 
 == Timeline
 
