@@ -898,14 +898,75 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 </iframe>
 </div>
 <div class="sect3">
-<h4 id="_timer_timeline">4.1.2. Timer timeline</h4>
+<h4 id="_equation">4.1.2. Equation</h4>
+<div class="stemblock">
+<div class="content">
+\[timelineB = timelineA \times 2\]
+</div>
+</div>
+<div class="paragraph">
+<p><code>timelineB</code> is declared to be <em>always</em> synchronized with <code>timelineA</code>, and the equation is guaranteed to be satisfied.</p>
+</div>
+<div class="paragraph">
+<p><code>timelineB</code> depends (relies) on <code>timelineA</code>, and when <code>timelineA</code> is updated, <code>timelineB</code> is also automatically updated.</p>
+</div>
+<div class="paragraph">
+<p>To describe this relation, the code is below:</p>
+</div>
+<div class="listingblock">
+<div class="title">timeline virtualDOM</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const timelineA = T(); <i class="conum" data-value="1"></i><b>(1)</b>
+const timelineB = timelineA
+            .sync(a =&gt; a * 2); <i class="conum" data-value="2"></i><b>(2)</b>
+const timeline = timelineB
+          .sync(b =&gt; console.log(b)); <i class="conum" data-value="3"></i><b>(3)</b>
+
+setTimeout(()=&gt;
+      (timelineA.now = 1), 100);  <i class="conum" data-value="4"></i><b>(4)</b>
+
+setTimeout(()=&gt;
+      (timelineA.now = 5), 200);  <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Declare empty <code>timelineA</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Declare <code>timelineB</code> that is synchronized with <code>timelineA</code> that satisfies the given function</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>On <code>timelineB</code> updates, <code>console.log</code> the value</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>later, the value of <code>timelineA</code> becomes <code>1</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>later, the value of <code>timelineA</code> becomes <code>5</code></td>
+</tr>
+</table>
+</div>
+<iframe height="447" style="width: 100%;" scrolling="no" title="Hello Timeline Sync" src="//codepen.io/stken2050/embed/mvpaER/?height=447&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/mvpaER/'>Hello Timeline Sync</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+</div>
+<div class="sect3">
+<h4 id="_timer_timeline">4.1.3. Timer timeline</h4>
 <iframe height="373" style="width: 100%;" scrolling="no" title="Hello Timeline timer" src="//codepen.io/stken2050/embed/daNXja/?height=373&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/daNXja/'>Hello Timeline timer</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 </div>
 <div class="sect3">
-<h4 id="_canvas">4.1.3. Canvas</h4>
+<h4 id="_canvas">4.1.4. Canvas</h4>
 <iframe height="550" style="width: 100%;" scrolling="no" title="unlimitedjs_canvas" src="//codepen.io/stken2050/embed/jdmeYK/?height=550&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/jdmeYK/'>unlimitedjs_canvas</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
@@ -960,7 +1021,7 @@ const timeline = pointerTL.sync(pointer =&gt;    <i class="conum" data-value="4"
 </div>
 </div>
 <div class="sect3">
-<h4 id="_virtual_dom_superfine">4.1.4. Virtual DOM (Superfine)</h4>
+<h4 id="_virtual_dom_superfine">4.1.5. Virtual DOM (Superfine)</h4>
 <iframe height="654" style="width: 100%;" scrolling="no" title="unlimitedjs_vdom" src="//codepen.io/stken2050/embed/xMdyjx/?height=654&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/xMdyjx/'>unlimitedjs_vdom</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
@@ -1485,7 +1546,7 @@ import { h, patch } from "superfine";
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-08 16:36:58 JST
+Last updated 2019-02-08 18:38:06 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">

@@ -36,6 +36,48 @@ Many FRP libraries call it __stream__ etc.. The problem of the naming: __stream_
 </iframe>
 ++++
 
+=== Equation
+
+[stem]
+++++
+timelineB = timelineA \times 2
+++++
+ 
+`timelineB` is declared to be _always_ synchronized with `timelineA`, and the equation is guaranteed to be satisfied.
+
+`timelineB` depends (relies) on `timelineA`, and when `timelineA` is updated, `timelineB` is also automatically updated.
+
+To describe this relation, the code is below:
+
+[source,js]
+.timeline virtualDOM
+----
+const timelineA = T(); <1>
+const timelineB = timelineA
+            .sync(a => a * 2); <2>
+const timeline = timelineB
+          .sync(b => console.log(b)); <3>
+  
+setTimeout(()=>
+      (timelineA.now = 1), 100);  <4>
+  
+setTimeout(()=>
+      (timelineA.now = 5), 200);  <5>
+----
+
+<1> Declare empty `timelineA`
+<2> Declare `timelineB` that is synchronized with `timelineA` that satisfies the given function
+<3> On `timelineB` updates, `console.log` the value
+<4> later, the value of `timelineA` becomes `1`
+<5> later, the value of `timelineA` becomes `5`
+
+++++
+<iframe height="447" style="width: 100%;" scrolling="no" title="Hello Timeline Sync" src="//codepen.io/stken2050/embed/mvpaER/?height=447&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/mvpaER/'>Hello Timeline Sync</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+++++
+
 === Timer timeline
 ++++
 <iframe height="373" style="width: 100%;" scrolling="no" title="Hello Timeline timer" src="//codepen.io/stken2050/embed/daNXja/?height=373&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
