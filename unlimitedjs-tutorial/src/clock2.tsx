@@ -3,15 +3,16 @@ import { h, patch } from "../../node_modules/superfine/src/index.js";
 
 const main = () => {
 
-  const clockTL = T((self) => {
-    const f = () =>
-      self.now = new Date().toLocaleTimeString();
-    setInterval(f, 1000);
+  const clockNodeTL = T(self => {
+    const clockTL = T((self) => {
+      const f = () =>
+        self.now = new Date().toLocaleTimeString();
+      setInterval(f, 1000);
+    });
+    const timeline = clockTL.sync(clock =>
+      self.now = <div>{clock}</div>
+    );
   });
-
-  const clockNodeTL = clockTL.sync(
-    clock => (<div>{clock}</div>)
-  );
 
   const topNodeTL = clockNodeTL;
 

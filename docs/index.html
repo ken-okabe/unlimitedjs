@@ -1369,6 +1369,49 @@ import { h, patch } from "superfine";
   See the Pen <a href='https://codepen.io/stken2050/pen/daJmRE/'>unlimitedjs self-contained clock</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
+<div class="paragraph">
+<p>In the above case, <code>clockTL</code> is a global <em>timeline</em>, and it&#8217;s also possible to define it as a local <em>timeline</em> as below.</p>
+</div>
+<div class="listingblock">
+<div class="title">SelfContained Counter2</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "timeline-monad";
+import { h, patch } from "superfine";
+
+  const clockNodeTL = T(self =&gt; {
+    const clockTL = T((self) =&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
+      const f = () =&gt;
+        self.now = new Date().toLocaleTimeString();
+      setInterval(f, 1000);
+    });
+    const timeline = clockTL.sync(clock =&gt;
+      self.now = &lt;div&gt;{clock}&lt;/div&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+    );
+  });
+
+  const topNodeTL = clockNodeTL;
+
+  const viewNodeTL = topNodeTL.sync(
+    topNode =&gt; patch(viewNodeTL.now, topNode, document.body)
+  );</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>clockTL</code> is a local <em>timeline</em> contained in the global <code>clockNodeTL</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>self</code> is the <code>clockNodeTL</code> itself and synchronized with <code>clockTL</code></td>
+</tr>
+</table>
+</div>
+<iframe height="551" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained clock2" src="//codepen.io/stken2050/embed/bzaxzm/?height=551&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/bzaxzm/'>unlimitedjs self-contained clock2</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 <div class="listingblock">
 <div class="title">SelfContained Counter</div>
 <div class="content">
@@ -1441,7 +1484,7 @@ import { h, patch } from "superfine";
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-08 13:08:14 JST
+Last updated 2019-02-08 15:55:40 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">

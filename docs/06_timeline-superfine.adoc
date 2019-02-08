@@ -118,6 +118,43 @@ import { h, patch } from "superfine";
 </iframe>
 ++++
 
+In the above case, `clockTL` is a global __timeline__, and it's also possible to define it as a local __timeline__ as below.
+
+[source,js]
+.SelfContained Counter2
+----
+import { T } from "timeline-monad";
+import { h, patch } from "superfine";
+
+  const clockNodeTL = T(self => {
+    const clockTL = T((self) => { <1>
+      const f = () =>
+        self.now = new Date().toLocaleTimeString();
+      setInterval(f, 1000);
+    });
+    const timeline = clockTL.sync(clock =>
+      self.now = <div>{clock}</div> <2>
+    );
+  });
+
+  const topNodeTL = clockNodeTL;
+
+  const viewNodeTL = topNodeTL.sync(
+    topNode => patch(viewNodeTL.now, topNode, document.body)
+  );
+----
+
+<1> `clockTL` is a local __timeline__ contained in the global `clockNodeTL`
+<2> `self` is the `clockNodeTL` itself and synchronized with `clockTL`
+
+++++
+<iframe height="551" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained clock2" src="//codepen.io/stken2050/embed/bzaxzm/?height=551&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/bzaxzm/'>unlimitedjs self-contained clock2</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+++++
+
+
 [source,js]
 .SelfContained Counter
 ----
