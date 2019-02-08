@@ -84,7 +84,7 @@ import { h, patch } from "superfine";
       <p>You clicked {count} times</p>
       <button onclick={() => countTL.now = count + 1}> <4>
         Click me
-    </button>
+    　</button>
     </div>
   );
 

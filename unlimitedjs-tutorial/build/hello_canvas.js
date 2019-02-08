@@ -19,5 +19,4 @@ const drawTL = T(self => {
         ctx.fill();
     });
 });
-const timeline = pointerTL.sync(pointer =>
-    drawTL.now = pointer);
+const timeline = pointerTL.sync(pointer => drawTL.now = pointer);

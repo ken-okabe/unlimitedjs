@@ -1,4 +1,4 @@
-= Vitural DOM
+= Vitural DOM (superfine)
 ifndef::stem[:stem: latexmath]
 ifndef::imagesdir[:imagesdir: ./img/]
 ifndef::source-highlighter[:source-highlighter: highlightjs]
@@ -50,7 +50,7 @@ const helloNode = h("div", null, "Hello!");
 
 == Render the view
 
-1. Every time something needs to be changed in our application view, we create a new virtual DOM using `h` (which is hidden in JSX).
+1. Every time something needs to be updated in our application view, we create a new virtual DOM using `h` (which is hidden in JSX).
 
 2. Then by comparing the old and new virtual DOM, we can update the difference of the DOM that actually changed instead of rendering the entire DOM from scratch. `patch` API of superfine preforms this task. 
 

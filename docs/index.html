@@ -448,7 +448,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_unlimitedjs">2. unlimitedjs</a></li>
 <li><a href="#_comparison_of_codes_between_react_hooks_and_unlimitedjs">3. Comparison of codes between React Hooks and unlimitedjs</a></li>
 <li><a href="#_what_is_timeline_monad">4. What is timeline-monad?</a></li>
-<li><a href="#_vitural_dom">5. Vitural DOM</a></li>
+<li><a href="#_vitural_dom_superfine">5. Vitural DOM (superfine)</a></li>
 <li><a href="#_unlimitedjs_superfine_timeline_monad">6. unlimitedjs = superfine + timeline-monad</a></li>
 <li><a href="#_mit_license">7. MIT License</a></li>
 </ul>
@@ -679,7 +679,7 @@ td >code {background-color: #aaaaaa};
 </li>
 </ul>
 </div>
-<iframe height="425" style="width: 100%;" scrolling="no" title="React Hooks" src="//codepen.io/stken2050/embed/WPrmga/?height=425&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="386" style="width: 100%;" scrolling="no" title="React Hooks" src="//codepen.io/stken2050/embed/WPrmga/?height=386&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/WPrmga/'>React Hooks</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -788,7 +788,7 @@ import { h, patch } from "superfine";
       &lt;p&gt;You clicked {count} times&lt;/p&gt;
       &lt;button onclick={() =&gt; countTL.now = count + 1}&gt; <i class="conum" data-value="4"></i><b>(4)</b>
         Click me
-    &lt;/button&gt;
+    　&lt;/button&gt;
     &lt;/div&gt;
   );
 
@@ -854,15 +854,15 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 <p>Although it has a monad structure, for unlimitedjs applications, we don&#8217;t have to dive into monad world.</p>
 </div>
 <div class="paragraph">
-<p>For this purpose, we use <code>timeline-monad</code> just as reactive mapping of timelines.</p>
+<p>For this purpose, we use <strong>timeline-monad</strong> just as reactive mapping of <em>timeline</em>.</p>
 </div>
 <div class="sect2">
 <h3 id="_timeline">4.1. Timeline</h3>
 <div class="paragraph">
-<p>In timeline-monad, the first class reactive values 'over time' is called <em><strong>timeline</strong></em>.</p>
+<p>In <strong>timeline-monad</strong>, the first class reactive values 'over time' is called <em><strong>timeline</strong></em>.</p>
 </div>
 <div class="paragraph">
-<p>Many FRP libraries call it <strong>stream</strong> etc.. The problem of the naming: stream is it reminds us something dynamic, mutable, and the fundamental concept of FRP is to view the world immutable, so the value is called <em><strong>timeline</strong></em> here.</p>
+<p>Many FRP libraries call it <em>stream</em> etc.. The problem of the naming: <em>stream</em> is it reminds us something dynamic, mutable, and the fundamental concept of FRP is to view the world immutable, so the value is called <em>timeline</em> here.</p>
 </div>
 <div class="sect3">
 <h4 id="_hello_timeline">4.1.1. Hello timeline</h4>
@@ -889,21 +889,15 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
 
-const _canvas = document.getElementById('canvas1');
-const canvas = (_canvas == null)
-  ? {} as HTMLCanvasElement
-  : _canvas as HTMLCanvasElement;
+const canvas = document.getElementById('canvas1'); <i class="conum" data-value="1"></i><b>(1)</b>
 
-const pointerTL = T(self =&gt; {
+const pointerTL = T(self =&gt; {    <i class="conum" data-value="2"></i><b>(2)</b>
   canvas.onmousemove = e =&gt;
     self.now = { x: e.clientX, y: e.clientY };
 });
 
-const drawTL = T(self =&gt; {
-  const _ctx = canvas.getContext('2d');
-  const ctx = (_ctx == null)
-    ? {} as CanvasRenderingContext2D
-    : _ctx;
+const drawTL = T(self =&gt; {   <i class="conum" data-value="3"></i><b>(3)</b>
+  const ctx = canvas.getContext('2d');
   const timeline = self.sync(pointer =&gt; {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
@@ -913,7 +907,7 @@ const drawTL = T(self =&gt; {
   });
 });
 
-const timeline = pointerTL.sync(pointer =&gt;
+const timeline = pointerTL.sync(pointer =&gt;    <i class="conum" data-value="4"></i><b>(4)</b>
   drawTL.now = pointer
 );</code></pre>
 </div>
@@ -922,23 +916,19 @@ const timeline = pointerTL.sync(pointer =&gt;
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>virtual DOM node</td>
+<td>canvas DOM node</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The only API <code>patch</code> returns next "last" node.</td>
+<td>INPUT: <em>timeline</em> of mouse pointer coordinate</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>last (old) virtual DOM node</td>
+<td>OUTPUT: <em>timeline</em> of canvas drawing</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>next (new) virtual DOM node</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Real DOM Container to render the virtual DOM</td>
+<td>INPUT(pointerTL) is synchronized with OUTPUT(drawTL)</td>
 </tr>
 </table>
 </div>
@@ -955,17 +945,14 @@ const timeline = pointerTL.sync(pointer =&gt;
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
 import { h, patch } from "../../node_modules/superfine/src/index.js";
 
-const _canvas = document.getElementById('vdom1');
-const canvas = (_canvas == null)
-  ? {} as HTMLElement
-  : _canvas as HTMLElement;
+const canvas = document.getElementById('vdom1'); <i class="conum" data-value="1"></i><b>(1)</b>
 
-const pointerTL = T(self =&gt; {
+const pointerTL = T(self =&gt; {    <i class="conum" data-value="2"></i><b>(2)</b>
   canvas.onmousemove = e =&gt;
     self.now = { x: e.clientX, y: e.clientY };
 });
 
-const drawTL = T(self =&gt; {
+const drawTL = T(self =&gt; {    <i class="conum" data-value="3"></i><b>(3)</b>
   const topNodeTL = self.sync(pointer =&gt;
     &lt;div style={{
       "left": (pointer.x - 20) + "px",
@@ -982,7 +969,7 @@ const drawTL = T(self =&gt; {
   );
 });
 
-const timeline = pointerTL.sync(pointer =&gt;
+const timeline = pointerTL.sync(pointer =&gt;   <i class="conum" data-value="4"></i><b>(4)</b>
   drawTL.now = pointer
 );</code></pre>
 </div>
@@ -991,23 +978,19 @@ const timeline = pointerTL.sync(pointer =&gt;
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>virtual DOM node</td>
+<td>real DOM node (named as <code>canvas</code>)</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The only API <code>patch</code> returns next "last" node.</td>
+<td>INPUT: <em>timeline</em> of mouse pointer coordinate : <em>same code of <strong>timeline Canvas</strong></em></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>last (old) virtual DOM node</td>
+<td>OUTPUT: <em>timeline</em> of virtualDOM drawing(rendering)</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>next (new) virtual DOM node</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Real DOM Container to render the virtual DOM</td>
+<td>INPUT(pointerTL) is synchronized with OUTPUT(drawTL)  : <em>same code of <strong>timeline Canvas</strong></em></td>
 </tr>
 </table>
 </div>
@@ -1020,7 +1003,7 @@ const timeline = pointerTL.sync(pointer =&gt;
 </div>
 </div>
 <div class="sect1">
-<h2 id="_vitural_dom">5. Vitural DOM</h2>
+<h2 id="_vitural_dom_superfine">5. Vitural DOM (superfine)</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_what_is_virtual_dom">5.1. What is virtual DOM?</h3>
@@ -1082,7 +1065,7 @@ const helloNode = h("div", null, "Hello!");</code></pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Every time something needs to be changed in our application view, we create a new virtual DOM using <code>h</code> (which is hidden in JSX).</p>
+<p>Every time something needs to be updated in our application view, we create a new virtual DOM using <code>h</code> (which is hidden in JSX).</p>
 </li>
 <li>
 <p>Then by comparing the old and new virtual DOM, we can update the difference of the DOM that actually changed instead of rendering the entire DOM from scratch. <code>patch</code> API of superfine preforms this task.</p>
@@ -1230,6 +1213,10 @@ import { h, patch } from "superfine";
 <div class="paragraph">
 <p>In unlimitedjs(timeline) framework, if a value is mutable, then it&#8217;s a timeline.</p>
 </div>
+<iframe height="345" style="width: 100%;" scrolling="no" title="Hello unlimitedjs" src="//codepen.io/stken2050/embed/yZpvQV/?height=345&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/yZpvQV/'>Hello unlimitedjs</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 <div class="sect2">
 <h3 id="_mutable_virtual_dom_is_easy">6.1. Mutable virtual DOM is easy</h3>
 <div class="paragraph">
@@ -1273,7 +1260,7 @@ import { h, patch } from "superfine";
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><code>setInterval</code> function</td>
+<td><code>setInterval</code> function : <code>f</code></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
@@ -1293,26 +1280,32 @@ import { h, patch } from "superfine";
 </tr>
 </table>
 </div>
+<iframe height="447" style="width: 100%;" scrolling="no" title="unlimitedjs clock" src="//codepen.io/stken2050/embed/WPdzrG/?height=447&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/WPdzrG/'>unlimitedjs clock</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 </div>
 <div class="sect2">
-<h3 id="_selfcontained_clock">6.2. SelfContained Clock</h3>
+<h3 id="_selfcontained_timeline_of_virtual_dom">6.2. SelfContained <em>timeline</em> of virtual DOM</h3>
 <div class="listingblock">
-<div class="title">Clock</div>
+<div class="title">SelfContained Clock</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "timeline-monad";
 import { h, patch } from "superfine";
 
-  const clockTL = T((self) =&gt; {
-    const f = () =&gt;
-      self.now = new Date().toLocaleTimeString();
-    setInterval(f, 1000);
+  const clockTL = T((self) =&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
+    const f = () =&gt;     <i class="conum" data-value="2"></i><b>(2)</b>
+      self.now = new Date().toLocaleTimeString(); <i class="conum" data-value="3"></i><b>(3)</b>
+    setInterval(f, 1000);    <i class="conum" data-value="4"></i><b>(4)</b>
   });
 
-  const topNodeTL = clockTL.sync(
-    clock =&gt; (&lt;h3&gt;{clock}&lt;/h3&gt;)
+  const clockNodeTL = clockTL.sync( <i class="conum" data-value="5"></i><b>(5)</b>
+    clock =&gt; (&lt;div&gt;{clock}&lt;/div&gt;)
   );
 
-  const viewNodeTL = topNodeTL.sync(
+  const topNodeTL = clockNodeTL;
+
+  const viewNodeTL = topNodeTL.sync( <i class="conum" data-value="6"></i><b>(6)</b>
     topNode =&gt; patch(viewNodeTL.now, topNode, document.body)
   );</code></pre>
 </div>
@@ -1321,66 +1314,59 @@ import { h, patch } from "superfine";
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>same as Hello world</td>
+<td>SelfContained Clock <em>timeline</em></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>same as Hello world</td>
+<td><code>setInterval</code> function : <code>f</code></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>same as Hello world</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><code>setInterval</code> function</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
 <td>Obtain the current time strings</td>
 </tr>
 <tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><code>{timeString}</code> is a way to write variables inside of virtual DOM node in JSX</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>Define the latest "state" on the topNode timeline, which means <strong>update</strong></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
 <td><code>setInterval</code> triggers <code>f</code> every 1 second</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><code>clockTL</code> is synchronized with the <code>clockNode</code> virtual DOM <em>timeline</em></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>virtual DOM rendering</td>
 </tr>
 </table>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_selfcontained_counter">6.3. SelfContained Counter</h3>
+<iframe height="427" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained clock" src="//codepen.io/stken2050/embed/daJmRE/?height=427&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/daJmRE/'>unlimitedjs self-contained clock</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 <div class="listingblock">
-<div class="title">Counter</div>
+<div class="title">SelfContained Counter</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "timeline-monad";
 import { h, patch } from "superfine";
 
-  const counterNodeTL = T(self =&gt; {
-    const countTL = T();
-    const buttonNode = (
-      &lt;button onclick={() =&gt; countTL.now = countTL.now + 1}&gt;
-        Click me
-      &lt;/button&gt;);
-    const dummyTL = countTL.sync(
-      count =&gt; self.now = (&lt;div&gt;
-        &lt;p&gt;You clicked {countTL.now} times&lt;/p&gt;
-        {buttonNode}
+  const counterNodeTL = T(self =&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
+    const countTL = T(self =&gt; {  <i class="conum" data-value="2"></i><b>(2)</b>
+      const f = () =&gt; self.now = 0;  <i class="conum" data-value="3"></i><b>(3)</b>
+      setTimeout(f, 0); <i class="conum" data-value="4"></i><b>(4)</b>
+    });
+    const timeline = countTL.sync(count =&gt;  <i class="conum" data-value="5"></i><b>(5)</b>
+      self.now = (&lt;div&gt;
+        &lt;p&gt;You clicked {count} times&lt;/p&gt;
+        &lt;button onclick={() =&gt; countTL.now = count + 1}&gt;
+          Click me
+        &lt;/button&gt;
       &lt;/div&gt;)
     );
-    const f = () =&gt; countTL.now = 0;
-    setTimeout(f, 0);
   });
 
   const topNodeTL = counterNodeTL;
-  const viewNodeTL = topNodeTL.sync(
-    topNode =&gt; patch(viewNodeTL.now, topNode, document.body)
+
+  const viewNodeTL = topNodeTL.sync(topNode =&gt; <i class="conum" data-value="6"></i><b>(6)</b>
+    patch(viewNodeTL.now, topNode, document.body)
   );</code></pre>
 </div>
 </div>
@@ -1388,132 +1374,34 @@ import { h, patch } from "superfine";
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>same as Hello world</td>
+<td>SelfContained CounterNode <em>timeline</em></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>same as Hello world</td>
+<td>SelfContained Count <em>timeline</em></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>same as Hello world</td>
+<td>Initialize the count number</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><code>setInterval</code> function</td>
+<td>setTimeout next tick after the whole declarations</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Obtain the current time strings</td>
+<td><code>countTL</code> is synchronized with the virtual DOM <em>timeline</em></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><code>{timeString}</code> is a way to write variables inside of virtual DOM node in JSX</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>Define the latest "state" on the topNode timeline, which means <strong>update</strong></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="8"></i><b>8</b></td>
-<td><code>setInterval</code> triggers <code>f</code> every 1 second</td>
+<td>virtual DOM rendering</td>
 </tr>
 </table>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_selfcontained_clockcounter">6.4. SelfContained Clock&amp;Counter</h3>
-<div class="listingblock">
-<div class="title">Counter</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "timeline-monad";
-import { h, patch } from "superfine";
-
-  const clockNodeTL = T(self =&gt; {
-    const clockTL = T(
-      (self) =&gt; {
-        const f = () =&gt;
-          self.now = new Date().toLocaleTimeString();
-        setInterval(f, 1000);
-      }
-    );
-    const dummyTL = clockTL.sync(
-      clock =&gt; self.now = &lt;h3&gt;{clock}&lt;/h3&gt;
-    );
-  });
-
-  const counterNodeTL = T(self =&gt; {
-    const countTL = T();
-    const buttonNode = (
-      &lt;button onclick={() =&gt; countTL.now = countTL.now + 1}&gt;
-        Click me
-      &lt;/button&gt;);
-    const dummyTL = countTL.sync(
-      count =&gt; self.now = (&lt;div&gt;
-        &lt;p&gt;You clicked {countTL.now} times&lt;/p&gt;
-        {buttonNode}
-      &lt;/div&gt;)
-    );
-    const f = () =&gt; countTL.now = 0;
-    setTimeout(f, 0);
-  });
-
-  const topNodeTL = T(self =&gt; {
-    const updateTL = T((self) =&gt; {
-      const tl1 = clockNodeTL
-        .sync(() =&gt; self.now = true);
-      const tl2 = counterNodeTL
-        .sync(() =&gt; self.now = true);
-    });
-    const dummyTL = updateTL.sync(
-      update =&gt; self.now = (&lt;div&gt;
-        &lt;h3&gt;{clockNodeTL.now}&lt;/h3&gt;
-        {counterNodeTL.now}
-      &lt;/div&gt;)
-    );
-  });
-
-  const viewNodeTL = topNodeTL.sync(
-    topNode =&gt; patch(viewNodeTL.now, topNode, document.body)
-  );</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>same as Hello world</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>same as Hello world</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>same as Hello world</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><code>setInterval</code> function</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Obtain the current time strings</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><code>{timeString}</code> is a way to write variables inside of virtual DOM node in JSX</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>Define the latest "state" on the topNode timeline, which means <strong>update</strong></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="8"></i><b>8</b></td>
-<td><code>setInterval</code> triggers <code>f</code> every 1 second</td>
-</tr>
-</table>
-</div>
+<iframe height="636" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained counter" src="//codepen.io/stken2050/embed/MLrVPX/?height=636&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/MLrVPX/'>unlimitedjs self-contained counter</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 </div>
 </div>
 </div>
@@ -1526,7 +1414,7 @@ import { h, patch } from "superfine";
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-03 09:41:26 JST
+Last updated 2019-02-08 12:09:55 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">

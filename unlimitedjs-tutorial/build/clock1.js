@@ -5,7 +5,7 @@ const main = () => {
         const f = () => self.now = new Date().toLocaleTimeString();
         setInterval(f, 1000);
     });
-    const topNodeTL = clockTL.sync(clock => (h("h3", null, clock)));
+    const topNodeTL = clockTL.sync(clock => (h("div", null, clock)));
     const viewNodeTL = topNodeTL.sync(topNode => patch(viewNodeTL.now, topNode, document.body));
 };
 export { main };

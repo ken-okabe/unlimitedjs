@@ -8,18 +8,18 @@ const main = () => {
       const f = () => self.now = 0;
       setTimeout(f, 0);
     });//timeline of the number of count
-    const dummyTL = countTL.sync(
-      count => self.now = (<div>
+    const dummyTL = countTL.sync(count =>
+      self.now = (<div>
         <p>You clicked {count} times</p>
         <button onclick={() => countTL.now = count + 1}>
           Click me
-      </button>
+        </button>
       </div>)
     );
   });
   const topNodeTL = counterNodeTL;
-  const viewNodeTL = topNodeTL.sync(
-    topNode => patch(viewNodeTL.now, topNode, document.body)
+  const viewNodeTL = topNodeTL.sync(topNode =>
+    patch(viewNodeTL.now, topNode, document.body)
   );
 
 };

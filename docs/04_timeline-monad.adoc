@@ -16,13 +16,13 @@ because it has a https://ncatlab.org/nlab/show/monad[_monad_] structure.
 
 Although it has a monad structure, for unlimitedjs applications, we don't have to dive into monad world.
 
-For this purpose, we use `timeline-monad` just as reactive mapping of timelines.
+For this purpose, we use **timeline-monad** just as reactive mapping of __timeline__.
 
 == Timeline
 
-In timeline-monad, the first class reactive values 'over time' is called __**timeline**__.
+In **timeline-monad**, the first class reactive values 'over time' is called __**timeline**__.
 
-Many FRP libraries call it **stream** etc.. The problem of the naming: stream is it reminds us something dynamic, mutable, and the fundamental concept of FRP is to view the world immutable, so the value is called __**timeline**__ here.
+Many FRP libraries call it __stream__ etc.. The problem of the naming: __stream__ is it reminds us something dynamic, mutable, and the fundamental concept of FRP is to view the world immutable, so the value is called __timeline__ here.
 
 === Hello timeline
 ++++
@@ -54,21 +54,15 @@ Many FRP libraries call it **stream** etc.. The problem of the naming: stream is
 ----
 import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
 
-const _canvas = document.getElementById('canvas1');
-const canvas = (_canvas == null)
-  ? {} as HTMLCanvasElement
-  : _canvas as HTMLCanvasElement;
+const canvas = document.getElementById('canvas1'); <1>
 
-const pointerTL = T(self => {
+const pointerTL = T(self => {    <2>
   canvas.onmousemove = e =>
     self.now = { x: e.clientX, y: e.clientY };
 });
 
-const drawTL = T(self => {
-  const _ctx = canvas.getContext('2d');
-  const ctx = (_ctx == null)
-    ? {} as CanvasRenderingContext2D
-    : _ctx;
+const drawTL = T(self => {   <3>
+  const ctx = canvas.getContext('2d');
   const timeline = self.sync(pointer => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
@@ -78,16 +72,15 @@ const drawTL = T(self => {
   });
 });
 
-const timeline = pointerTL.sync(pointer =>
+const timeline = pointerTL.sync(pointer =>    <4>
   drawTL.now = pointer
 );
 ----
 
-<1> virtual DOM node
-<2> The only API `patch` returns next "last" node.
-<3> last (old) virtual DOM node
-<4> next (new) virtual DOM node
-<5> Real DOM Container to render the virtual DOM
+<1> canvas DOM node
+<2> INPUT: __timeline__ of mouse pointer coordinate
+<3> OUTPUT: __timeline__ of canvas drawing
+<4> INPUT(pointerTL) is synchronized with OUTPUT(drawTL)
 
 === Virtual DOM (Superfine)
 
@@ -104,17 +97,14 @@ const timeline = pointerTL.sync(pointer =>
 import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
 import { h, patch } from "../../node_modules/superfine/src/index.js";
 
-const _canvas = document.getElementById('vdom1');
-const canvas = (_canvas == null)
-  ? {} as HTMLElement
-  : _canvas as HTMLElement;
+const canvas = document.getElementById('vdom1'); <1>
 
-const pointerTL = T(self => {
+const pointerTL = T(self => {    <2>
   canvas.onmousemove = e =>
     self.now = { x: e.clientX, y: e.clientY };
 });
 
-const drawTL = T(self => {
+const drawTL = T(self => {    <3>
   const topNodeTL = self.sync(pointer =>
     <div style={{
       "left": (pointer.x - 20) + "px",
@@ -131,15 +121,14 @@ const drawTL = T(self => {
   );
 });
 
-const timeline = pointerTL.sync(pointer =>
+const timeline = pointerTL.sync(pointer =>   <4>
   drawTL.now = pointer
 ); 
 ----
 
-<1> virtual DOM node
-<2> The only API `patch` returns next "last" node.
-<3> last (old) virtual DOM node
-<4> next (new) virtual DOM node
-<5> Real DOM Container to render the virtual DOM
+<1> real DOM node (named as `canvas`)
+<2> INPUT: __timeline__ of mouse pointer coordinate : __same code of **timeline Canvas**__ 
+<3> OUTPUT: __timeline__ of virtualDOM drawing(rendering)
+<4> INPUT(pointerTL) is synchronized with OUTPUT(drawTL)  : __same code of **timeline Canvas**__
 
 == Read more on https://stken2050.github.io/timeline-monad/[timeline-monad Docs & Tutorial]

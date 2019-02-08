@@ -10,7 +10,7 @@ const main = () => {
   });
 
   const topNodeTL = clockTL.sync(
-    clock => (<h3>{clock}</h3>)
+    clock => (<div>{clock}</div>)
   );
 
   const viewNodeTL = topNodeTL.sync(
