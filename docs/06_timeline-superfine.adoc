@@ -118,6 +118,8 @@ import { h, patch } from "superfine";
 </iframe>
 ++++
 
+---
+
 In the above case, `clockTL` is a global __timeline__, and it's also possible to define it as a local __timeline__ as below.
 
 [source,js]
