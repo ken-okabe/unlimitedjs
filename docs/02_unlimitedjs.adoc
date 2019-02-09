@@ -19,7 +19,7 @@ unlimitedjs consists of two independent existing libraries:
  Minimal view layer for creating declarative web user interfaces
 
 
-* https://github.com/stken2050/timeline-monad[timeline-monad] as a generic and minimal library for Functional Reactive Programming(FRP). The https://github.com/stken2050/timeline-monad/blob/master/build/modules/timeline-monad.js[code] is **less than 40 lines**(comment lines excluded).
+* https://github.com/stken2050/timeline-monad[timeline-monad] as a generic and minimal library for Functional Reactive Programming(FRP). The https://github.com/stken2050/timeline-monad/blob/master/dist/esm/timeline-monad.js[code] is **less than 40 lines**(comment lines excluded).
 
  Micro Functional Reactive Programming (FRP) Framework with Monad structure
 
