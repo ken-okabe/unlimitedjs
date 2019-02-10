@@ -37,7 +37,7 @@ const viewNodeTL = topNodeTL.sync(topNode =>
 One of the functional way is to define "mirge" __timeline__ like this:
 
 [source,js]
-.mirge __timeline__
+.merge __timeline__
 ----
   const mergeTL = TLs => T(self =>
     TLs.map(TL => TL.sync(() =>
@@ -46,6 +46,8 @@ One of the functional way is to define "mirge" __timeline__ like this:
   );
 ----
 
+Here's how the `mergeTL` works:
+
 ++++
 <iframe height="638" style="width: 100%;" scrolling="no" title="mirge Timeline test" src="//codepen.io/stken2050/embed/damJZP/?height=638&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/damJZP/'>mirge Timeline test</a> by Ken OKABE
@@ -53,7 +55,9 @@ One of the functional way is to define "mirge" __timeline__ like this:
 </iframe>
 ++++
 
-With `mirgeTL`, topNode __timeline__ can be defined as follow:
+---
+
+With `mergeTL`, topNode __timeline__ can be defined as follow:
 
 [source,js]
 .topNode __timeline__

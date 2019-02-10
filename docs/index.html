@@ -1720,7 +1720,7 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 <p>One of the functional way is to define "mirge" <em>timeline</em> like this:</p>
 </div>
 <div class="listingblock">
-<div class="title">mirge <em>timeline</em></div>
+<div class="title">merge <em>timeline</em></div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">  const mergeTL = TLs =&gt; T(self =&gt;
     TLs.map(TL =&gt; TL.sync(() =&gt;
@@ -1729,12 +1729,16 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
   );</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Here&#8217;s how the <code>mergeTL</code> works:</p>
+</div>
 <iframe height="638" style="width: 100%;" scrolling="no" title="mirge Timeline test" src="//codepen.io/stken2050/embed/damJZP/?height=638&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/damJZP/'>mirge Timeline test</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
+<hr>
 <div class="paragraph">
-<p>With <code>mirgeTL</code>, topNode <em>timeline</em> can be defined as follow:</p>
+<p>With <code>mergeTL</code>, topNode <em>timeline</em> can be defined as follow:</p>
 </div>
 <div class="listingblock">
 <div class="title">topNode <em>timeline</em></div>
@@ -1836,7 +1840,7 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-11 05:04:27 JST
+Last updated 2019-02-11 05:11:44 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">
