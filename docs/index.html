@@ -1538,6 +1538,97 @@ import { h, patch } from "superfine";
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 </div>
+<div class="sect2">
+<h3 id="_no_extra_apis">6.3. No extra APIs</h3>
+<div class="paragraph">
+<p>React <a href="https://reactjs.org/docs/hooks-reference.html#additional-hooks">Additional Hooks
+</a>: <a href="https://reactjs.org/docs/hooks-reference.html#usereducer">useReducer</a> is a complicated API.</p>
+</div>
+<div class="paragraph">
+<p>One of the usage is:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://reactjs.org/docs/hooks-reference.html#lazy-initialization" class="bare">https://reactjs.org/docs/hooks-reference.html#lazy-initialization</a></p>
+</div>
+<div class="listingblock">
+<div class="title">useReducer lazy</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const { useReducer } = React;
+
+function init(initialCount) {
+  return {count: initialCount};
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return {count: state.count + 1};
+    case 'decrement':
+      return {count: state.count - 1};
+    case 'reset':
+      return init(action.payload);
+    default:
+      throw new Error();
+  }
+}
+
+function Counter({initialCount}) {
+  const [state, dispatch] = useReducer(reducer, initialCount, init);
+  return (
+    &lt;&gt;
+      Count: {state.count}
+      &lt;button
+        onClick={() =&gt; dispatch({type: 'reset', payload: initialCount})}&gt;
+        Reset
+      &lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch({type: 'increment'})}&gt;+&lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch({type: 'decrement'})}&gt;-&lt;/button&gt;
+    &lt;/&gt;
+  );
+}
+
+ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In unlimitedjs, we can refactor the code without extra APIs like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">Refactor useReducer lazy in unlimitedjs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">  const btnTL = T();
+
+  const countTL = T(self =&gt; {
+    const timeline = btnTL.sync(btn =&gt;
+      self.now = (btn === 0)
+        ? 0
+        : self.now + btn);
+  });
+
+  const topNodeTL = countTL.sync(count =&gt;
+    &lt;div&gt;
+      &lt;h3&gt;{count}&lt;/h3&gt;
+      &lt;button
+        onclick={() =&gt; btnTL.now = 0}&gt;Reset&lt;/button&gt;
+      &lt;button
+        onclick={() =&gt; btnTL.now = -1}&gt;-&lt;/button&gt;
+      &lt;button
+        onclick={() =&gt; btnTL.now = 1}&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+  );
+
+  const viewNodeTL = topNodeTL.sync(topNode =&gt;
+    patch(viewNodeTL.now, topNode, document.body)
+  );
+
+  countTL.now = 0;</code></pre>
+</div>
+</div>
+<iframe height="547" style="width: 100%;" scrolling="no" title="unlimitedjs refactor ReactHooks reducer" src="//codepen.io/stken2050/embed/JxLdWb/?height=547&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/JxLdWb/'>unlimitedjs refactor ReactHooks reducer</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1549,7 +1640,7 @@ import { h, patch } from "superfine";
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-09 10:08:45 JST
+Last updated 2019-02-10 09:53:51 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">

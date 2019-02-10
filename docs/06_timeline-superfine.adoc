@@ -199,3 +199,93 @@ import { h, patch } from "superfine";
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 ++++
+
+== No extra APIs
+React https://reactjs.org/docs/hooks-reference.html#additional-hooks[Additional Hooks
+]: https://reactjs.org/docs/hooks-reference.html#usereducer[useReducer] is a complicated API.
+
+One of the usage is:
+
+https://reactjs.org/docs/hooks-reference.html#lazy-initialization
+
+
+[source,js]
+.useReducer lazy
+----
+const { useReducer } = React; 
+
+function init(initialCount) {
+  return {count: initialCount};
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return {count: state.count + 1};
+    case 'decrement':
+      return {count: state.count - 1};
+    case 'reset':
+      return init(action.payload);
+    default:
+      throw new Error();
+  }
+}
+
+function Counter({initialCount}) {
+  const [state, dispatch] = useReducer(reducer, initialCount, init);
+  return (
+    <>
+      Count: {state.count}
+      <button
+        onClick={() => dispatch({type: 'reset', payload: initialCount})}>
+        Reset
+      </button>
+      <button onClick={() => dispatch({type: 'increment'})}>+</button>
+      <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+    </>
+  );
+}
+
+ReactDOM.render(<Counter initialCount=0 />, document.body);
+----
+
+In unlimitedjs, we can refactor the code without extra APIs like this:
+
+[source,js]
+.Refactor useReducer lazy in unlimitedjs
+----
+  const btnTL = T();
+
+  const countTL = T(self => {
+    const timeline = btnTL.sync(btn =>
+      self.now = (btn === 0)
+        ? 0
+        : self.now + btn);
+  });
+
+  const topNodeTL = countTL.sync(count =>
+    <div>
+      <h3>{count}</h3>
+      <button
+        onclick={() => btnTL.now = 0}>Reset</button>
+      <button
+        onclick={() => btnTL.now = -1}>-</button>
+      <button
+        onclick={() => btnTL.now = 1}>+</button>
+    </div>
+  );
+
+  const viewNodeTL = topNodeTL.sync(topNode =>
+    patch(viewNodeTL.now, topNode, document.body)
+  );
+
+  countTL.now = 0;
+----
+
+
+++++
+<iframe height="547" style="width: 100%;" scrolling="no" title="unlimitedjs refactor ReactHooks reducer" src="//codepen.io/stken2050/embed/JxLdWb/?height=547&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/JxLdWb/'>unlimitedjs refactor ReactHooks reducer</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+++++

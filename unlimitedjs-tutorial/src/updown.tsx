@@ -2,29 +2,30 @@ import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js"
 import { h, patch } from "../../node_modules/superfine/src/index.js";
 
 const main = () => {
-  const countTL = T();
 
-  const upNode = (
-    <button onclick={() => countTL.now = countTL.now + 1}>+</button>
-  );
+  const btnTL = T();
 
-  const dnNode = (
-    <button onclick={() => countTL.now = countTL.now - 1}>-</button>
-  );
+  const countTL = T(self => {
+    const timeline = btnTL.sync(btn =>
+      self.now = (btn === 0)
+        ? 0
+        : self.now + btn);
+  });
 
-  const topNodeTL = countTL.sync(
-    count => <div>
-      <h1>{count}</h1>
-      {dnNode}{upNode}
+  const topNodeTL = countTL.sync(count =>
+    <div>
+      <h3>{count}</h3>
+      <button
+        onclick={() => btnTL.now = 0}>Reset</button>
+      <button
+        onclick={() => btnTL.now = -1}>-</button>
+      <button
+        onclick={() => btnTL.now = 1}>+</button>
     </div>
   );
 
-  const viewNodeTL = topNodeTL.sync(
-    topNode => patch(
-      viewNodeTL.now,
-      topNode,
-      document.body
-    )
+  const viewNodeTL = topNodeTL.sync(topNode =>
+    patch(viewNodeTL.now, topNode, document.body)
   );
 
   countTL.now = 0;
