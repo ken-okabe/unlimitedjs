@@ -34,7 +34,7 @@ const viewNodeTL = topNodeTL.sync(topNode =>
 
 * topNode <- (clockNode + counterNode)
 
-One of the functional way is to define "mirge" __timeline__ like this:
+One of the functional way is to define "merge" __timeline__ like this:
 
 [source,js]
 .merge __timeline__
