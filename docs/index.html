@@ -450,7 +450,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_what_is_timeline_monad">4. What is timeline-monad?</a></li>
 <li><a href="#_vitural_dom_superfine">5. Vitural DOM (superfine)</a></li>
 <li><a href="#_unlimitedjs_superfine_timeline_monad">6. unlimitedjs = superfine + timeline-monad</a></li>
-<li><a href="#_mit_license">7. MIT License</a></li>
+<li><a href="#_selfcontained_timeline_of_virtual_dom">7. SelfContained <em>timeline</em> of virtual DOM</a></li>
+<li><a href="#_no_extra_apis">8. No extra APIs</a></li>
+<li><a href="#_compose_timeline_of_virtual_dom_functionally">9. Compose <em>timeline</em> of virtual DOM functionally</a></li>
+<li><a href="#_mit_license">10. MIT License</a></li>
 </ul>
 </div>
 </div>
@@ -1375,8 +1378,17 @@ import { h, patch } from "superfine";
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 </div>
-<div class="sect2">
-<h3 id="_selfcontained_timeline_of_virtual_dom">6.2. SelfContained <em>timeline</em> of virtual DOM</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_selfcontained_timeline_of_virtual_dom">7. SelfContained <em>timeline</em> of virtual DOM</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>As introduced in <a href="https://stken2050.github.io/timeline-monad/#_timeline_is_similar_to_promise_instance"><em>timeline</em> is similar to Promise instance</a>, the <em>timeline</em> API is simplified one of ES6+ standardized <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>.</strong></p>
+</div>
+<div class="paragraph">
+<p>The selfContained <em>timeline</em> mechanism can be also applied to virtual DOM.</p>
+</div>
 <div class="listingblock">
 <div class="title">SelfContained Clock</div>
 <div class="content">
@@ -1538,8 +1550,10 @@ import { h, patch } from "superfine";
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 </div>
-<div class="sect2">
-<h3 id="_no_extra_apis">6.3. No extra APIs</h3>
+</div>
+<div class="sect1">
+<h2 id="_no_extra_apis">8. No extra APIs</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>React <a href="https://reactjs.org/docs/hooks-reference.html#additional-hooks">Additional Hooks
 </a>: <a href="https://reactjs.org/docs/hooks-reference.html#usereducer">useReducer</a> is a complicated API.</p>
@@ -1630,9 +1644,191 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 </iframe>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_compose_timeline_of_virtual_dom_functionally">9. Compose <em>timeline</em> of virtual DOM functionally</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Everything mutable(as it seems in immutable universe) in unlimitedjs is <em>timeline</em> including value and <strong>virtualDOM node</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Unlike <a href="https://reactjs.org/docs/components-and-props.html">React.Component</a>, in unlimitedjs, a mutable virtualDOM node is abstracted simply as an <strong><em>timeline</em> of virtualDOM node</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Suppose we have <em>timelines</em> of virtualDOM node as below:</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title"><em>timeline</em> structure</div>
+<div class="ulist">
+<ul>
+<li>
+<p>viewNode (represents the realDOM)</p>
+</li>
+<li>
+<p>topNode</p>
+<div class="ulist">
+<ul>
+<li>
+<p>clockNode</p>
+</li>
+<li>
+<p>counterNode</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong><em>timeline</em> of virtual DOM is composed in various ways in functional programming scheme without any extra APIs and rules.</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>viewNode &#8592; topNode</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Although there&#8217;s no rule, but we already have a patterned code to describe to connect <code>viewNode</code> and <code>topNode</code> which means reactive rendering the virualDOM(<code>topNode</code>) to the realDOM(<code>viewNode</code>).</p>
+</div>
+<div class="listingblock">
+<div class="title">render the view</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const viewNodeTL = topNodeTL.sync(topNode =&gt;
+    patch(viewNodeTL.now, topNode, document.body)
+);</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>topNode &#8592; (clockNode + counterNode)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>One of the functional way is to define "mirge" <em>timeline</em> like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">mirge <em>timeline</em></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">  const mergeTL = TLs =&gt; T(self =&gt;
+    TLs.map(TL =&gt; TL.sync(() =&gt;
+      self.now = TLs.map(TL =&gt; TL.now)
+    ))
+  );</code></pre>
+</div>
+</div>
+<iframe height="638" style="width: 100%;" scrolling="no" title="mirge Timeline test" src="//codepen.io/stken2050/embed/damJZP/?height=638&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/damJZP/'>mirge Timeline test</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+<div class="paragraph">
+<p>With <code>mirgeTL</code>, topNode <em>timeline</em> can be defined as follow:</p>
+</div>
+<div class="listingblock">
+<div class="title">topNode <em>timeline</em></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">  const topNodeTL = T(self =&gt;
+    mergeTL([clockNodeTL, counterNodeTL])
+      .sync(([clockNode, counterNode]) =&gt;
+        self.now = &lt;div&gt;
+          &lt;h3&gt;{clockNode}&lt;/h3&gt;
+          {counterNode}
+        &lt;/div&gt;
+      )
+  );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The final code is:</p>
+</div>
+<div class="listingblock">
+<div class="title">viewNode &#8592; topNode &#8592; (clockNode + counterNode)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">  const clockNodeTL = T(self =&gt; {
+    const clockTL = T(
+      (self) =&gt; {
+        const f = () =&gt;
+          self.now = new Date().toLocaleTimeString();
+        setInterval(f, 1000);
+      }
+    );
+    const timeline = clockTL.sync(clock =&gt;
+      self.now = &lt;h3&gt;{clock}&lt;/h3&gt;
+    );
+  });
+
+  const counterNodeTL = T(self =&gt; {
+    const countTL = T();
+    const buttonNode = &lt;button
+      onclick={() =&gt; countTL.now = countTL.now + 1}&gt;
+      Click me
+      &lt;/button&gt;;
+    const timeline = countTL.sync(count =&gt;
+      self.now = &lt;div&gt;
+        &lt;p&gt;You clicked {countTL.now} times&lt;/p&gt;
+        {buttonNode}
+      &lt;/div&gt;
+    );
+    const f = () =&gt; countTL.now = 0;
+    setTimeout(f, 0);
+  });
+
+  const mergeTL = TLs =&gt; T(self =&gt;
+    TLs.map(TL =&gt; TL.sync(() =&gt;
+      self.now = TLs.map(TL =&gt; TL.now)
+    ))
+  );
+
+  const topNodeTL = T(self =&gt;
+    mergeTL([clockNodeTL, counterNodeTL])
+      .sync(([clockNode, counterNode]) =&gt;
+        self.now = &lt;div&gt;
+          &lt;h3&gt;{clockNode}&lt;/h3&gt;
+          {counterNode}
+        &lt;/div&gt;
+      )
+  );
+
+  const viewNodeTL = topNodeTL.sync(topNode =&gt;
+    patch(viewNodeTL.now, topNode, document.body)
+  );</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Everything mutable is described as <em>timeline</em></div>
+<div class="paragraph">
+<p>All of the global variables are <em>timeline</em> of Node (virtualDOM) except the <code>mergeTL</code> definitoin</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<iframe height="312" style="width: 100%;" scrolling="no" title="unlimitedjs mirge timelines of clock &amp; counter node" src="//codepen.io/stken2050/embed/WPzMNK/?height=312&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/WPzMNK/'>unlimitedjs mirge timelines of clock &amp; counter node</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+</div>
 </div>
 <div class="sect1">
-<h2 id="_mit_license">7. MIT License</h2>
+<h2 id="_mit_license">10. MIT License</h2>
 <div class="sectionbody">
 <iframe src="https://ghbtns.com/github-btn.html?user=stken2050&repo=unlimitedjs&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
 </div>
@@ -1640,7 +1836,7 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-10 09:53:51 JST
+Last updated 2019-02-11 05:04:27 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">

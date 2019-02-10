@@ -1,0 +1,128 @@
+= SelfContained __timeline__ of virtual DOM
+ifndef::stem[:stem: latexmath]
+ifndef::imagesdir[:imagesdir: ./img/]
+ifndef::source-highlighter[:source-highlighter: highlightjs]
+ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
+
+**As introduced in https://stken2050.github.io/timeline-monad/#_timeline_is_similar_to_promise_instance[__timeline__ is similar to Promise instance], the __timeline__ API is simplified one of ES6+ standardized https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise[Promise].**
+
+The selfContained __timeline__ mechanism can be also applied to virtual DOM.
+
+[source,js]
+.SelfContained Clock
+----
+import { T } from "timeline-monad";
+import { h, patch } from "superfine";
+
+  const clockTL = T((self) => { <1>
+    const f = () =>     <2>
+      self.now = new Date().toLocaleTimeString(); <3>
+    setInterval(f, 1000);    <4>
+  });
+
+  const clockNodeTL = clockTL.sync( <5>
+    clock => (<div>{clock}</div>)
+  );
+
+  const topNodeTL = clockNodeTL;
+
+  const viewNodeTL = topNodeTL.sync( <6>
+    topNode => patch(viewNodeTL.now, topNode, document.body) 
+  );
+----
+
+<1> SelfContained Clock __timeline__
+<2> `setInterval` function : `f`
+<3> Obtain the current time strings
+<4> `setInterval` triggers `f` every 1 second
+<5> `clockTL` is synchronized with the `clockNode` virtual DOM __timeline__
+<6> virtual DOM rendering
+
+++++
+<iframe height="427" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained clock" src="//codepen.io/stken2050/embed/daJmRE/?height=427&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/daJmRE/'>unlimitedjs self-contained clock</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+++++
+
+---
+
+In the above case, `clockTL` is a global __timeline__, and it's also possible to define it as a local __timeline__ as below.
+
+[source,js]
+.SelfContained Counter2
+----
+import { T } from "timeline-monad";
+import { h, patch } from "superfine";
+
+  const clockNodeTL = T(self => {
+    const clockTL = T((self) => { <1>
+      const f = () =>
+        self.now = new Date().toLocaleTimeString();
+      setInterval(f, 1000);
+    });
+    const timeline = clockTL.sync(clock =>
+      self.now = <div>{clock}</div> <2>
+    );
+  });
+
+  const topNodeTL = clockNodeTL;
+
+  const viewNodeTL = topNodeTL.sync(
+    topNode => patch(viewNodeTL.now, topNode, document.body)
+  );
+----
+
+<1> `clockTL` is a local __timeline__ contained in the global `clockNodeTL`
+<2> `self` is the `clockNodeTL` itself and synchronized with `clockTL`
+
+++++
+<iframe height="551" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained clock2" src="//codepen.io/stken2050/embed/bzaxzm/?height=551&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/bzaxzm/'>unlimitedjs self-contained clock2</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+++++
+
+---
+
+[source,js]
+.SelfContained Counter
+----
+import { T } from "timeline-monad";
+import { h, patch } from "superfine";
+
+  const counterNodeTL = T(self => { <1>
+    const countTL = T(self => {  <2>
+      const f = () => self.now = 0;  <3>
+      setTimeout(f, 0); <4>
+    }); 
+    const timeline = countTL.sync(count =>  <5>
+      self.now = (<div>
+        <p>You clicked {count} times</p>
+        <button onclick={() => countTL.now = count + 1}>
+          Click me
+        </button>
+      </div>)
+    );
+  });
+
+  const topNodeTL = counterNodeTL;
+
+  const viewNodeTL = topNodeTL.sync(topNode => <6>
+    patch(viewNodeTL.now, topNode, document.body)
+  );
+----
+
+<1> SelfContained CounterNode __timeline__
+<2> SelfContained Count __timeline__
+<3> Initialize the count number
+<4> setTimeout next tick after the whole declarations
+<5> `countTL` is synchronized with the virtual DOM __timeline__
+<6> virtual DOM rendering
+
+++++
+<iframe height="636" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained counter" src="//codepen.io/stken2050/embed/MLrVPX/?height=636&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/MLrVPX/'>unlimitedjs self-contained counter</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+++++

@@ -7,7 +7,7 @@ const main = () => {
             const f = () => self.now = 0;
             setTimeout(f, 0);
         }); //timeline of the number of count
-        const dummyTL = countTL.sync(count => self.now = (h("div", null,
+        const timeline = countTL.sync(count => self.now = (h("div", null,
             h("p", null,
                 "You clicked ",
                 count,
