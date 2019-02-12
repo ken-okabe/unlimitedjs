@@ -47,10 +47,7 @@ See <<10_material-MDC.adoc#topcode>>
 ====
 image::./mdc.png[align="center"]
 
-++++
-<video src="https://storage.googleapis.com/spec-host-backup/mio-material%2Fassets%2F1MvJxcu1kd5TFR6c5IBhxjLueQzSZvVQz%2Fm2-manifesto.mp4" width="100%"></video>
-++++
-
+video::https://storage.googleapis.com/spec-host-backup/mio-material%2Fassets%2F1MvJxcu1kd5TFR6c5IBhxjLueQzSZvVQz%2Fm2-manifesto.mp4[width="100%"]
 ==== 
 
 

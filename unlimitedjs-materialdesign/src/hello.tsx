@@ -33,8 +33,10 @@ const main = () => {
     //===
     return <div>
 
+    
+
     <h2 class="mdc-typography--headline2">
-      Hello, unlimitedjs!</h2>
+    Flawlessly with Material Design</h2>
 
     <div class="mdc-text-field">
       <input type="text" id="first-name"
