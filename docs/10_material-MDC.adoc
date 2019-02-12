@@ -55,7 +55,7 @@ const main = () => {
     );
 
     //===
-    return <div>
+    return (<div>
       <h2 class="mdc-typography--headline2">
         Flawlessly with Material Design</h2>
 
@@ -79,10 +79,11 @@ const main = () => {
         <div class="mdc-line-ripple"></div>
       </div>
       <br />
-      <button type="button" class="mdc-button mdc-button--raised mdc-button--primary"
+      <button type="button" 
+        class="mdc-button mdc-button--raised mdc-button--primary"
         onclick={() => btnTL.now = true} >
         Press Me</button>
-    </div>;
+    </div>);
     //===
   })(messageTL);
 

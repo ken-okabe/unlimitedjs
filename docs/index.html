@@ -1925,7 +1925,7 @@ const main = () =&gt; {
     );
 
     //===
-    return &lt;div&gt;
+    return (&lt;div&gt;
       &lt;h2 class="mdc-typography--headline2"&gt;
         Flawlessly with Material Design&lt;/h2&gt;
 
@@ -1949,10 +1949,11 @@ const main = () =&gt; {
         &lt;div class="mdc-line-ripple"&gt;&lt;/div&gt;
       &lt;/div&gt;
       &lt;br /&gt;
-      &lt;button type="button" class="mdc-button mdc-button--raised mdc-button--primary"
+      &lt;button type="button"
+        class="mdc-button mdc-button--raised mdc-button--primary"
         onclick={() =&gt; btnTL.now = true} &gt;
         Press Me&lt;/button&gt;
-    &lt;/div&gt;;
+    &lt;/div&gt;);
     //===
   })(messageTL);
 
@@ -2004,7 +2005,7 @@ export { main };</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-12 11:52:21 JST
+Last updated 2019-02-12 11:59:37 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">
