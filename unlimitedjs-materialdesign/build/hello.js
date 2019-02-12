@@ -14,7 +14,7 @@ const main = () => {
                     firstTL.now + " " + lastTL.now));
         //===
         return h("div", null,
-            h("h2", { class: "mdc-typography--headline2" }, "Hello, unlimitedjs!"),
+            h("h2", { class: "mdc-typography--headline2" }, "Flawlessly with Material Design"),
             h("div", { class: "mdc-text-field" },
                 h("input", { type: "text", id: "first-name", class: "mdc-text-field__input", onchange: e => firstTL.now = e.currentTarget.value }),
                 h("label", { class: "mdc-floating-label", for: "first-name" }, "First name"),
@@ -25,7 +25,7 @@ const main = () => {
                 h("label", { class: "mdc-floating-label", for: "last-name" }, "Last name"),
                 h("div", { class: "mdc-line-ripple" })),
             h("br", null),
-            h("button", { type: "button", class: "mdc-button \n    mdc-button--raised mdc-button--primary", onclick: () => btnTL.now = true }, "Press Me"));
+            h("button", { type: "button", class: "mdc-button mdc-button--raised mdc-button--primary", onclick: () => btnTL.now = true }, "Press Me"));
         //===
     })(messageTL);
     const topNodeTL = outputNodeTL.sync(outputNode => h("div", null,

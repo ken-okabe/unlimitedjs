@@ -1904,8 +1904,8 @@ const main = () =&gt; {
   const outputNodeTL = (messageTL =&gt;
     T(self =&gt;
       messageTL.sync(message =&gt;
-        self.now = &lt;h3 mdc-typography--headline3&gt;
-        {message}&lt;/h3&gt;
+        self.now = &lt;h2 mdc-typography--headline2
+        &gt;{message}&lt;/h2&gt;
       )
     )
   )(messageTL);
@@ -1926,39 +1926,32 @@ const main = () =&gt; {
 
     //===
     return &lt;div&gt;
+      &lt;h2 class="mdc-typography--headline2"&gt;
+        Flawlessly with Material Design&lt;/h2&gt;
 
-    &lt;h2 class="mdc-typography--headline2"&gt;
-      Hello, unlimitedjs!&lt;/h2&gt;
-
-    &lt;div class="mdc-text-field"&gt;
-      &lt;input type="text" id="first-name"
-        class="mdc-text-field__input"
-        onchange = {e=&gt;
-          firstTL.now = e.currentTarget.value}/&gt;
-      &lt;label class="mdc-floating-label"
-        for="first-name"&gt;First name&lt;/label&gt;
-      &lt;div class="mdc-line-ripple"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;br/&gt;
-
-    &lt;div class="mdc-text-field"&gt;
-      &lt;input type="text" id="last-name"
-        class="mdc-text-field__input"
-        onchange = {e=&gt;
-          lastTL.now = e.currentTarget.value}/&gt;
-      &lt;label class="mdc-floating-label"
-        for="last-name"&gt;Last name&lt;/label&gt;
-      &lt;div class="mdc-line-ripple"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;br/&gt;
-
-    &lt;button type="button" class="mdc-button
-    mdc-button--raised mdc-button--primary"
-    onclick = {()=&gt; btnTL.now = true} &gt;
-      Press Me&lt;/button&gt;
-
+      &lt;div class="mdc-text-field"&gt;
+        &lt;input type="text" id="first-name"
+          class="mdc-text-field__input"
+          onchange={e =&gt;
+            firstTL.now = e.currentTarget.value} /&gt;
+        &lt;label class="mdc-floating-label"
+          for="first-name"&gt;First name&lt;/label&gt;
+        &lt;div class="mdc-line-ripple"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;br /&gt;
+      &lt;div class="mdc-text-field"&gt;
+        &lt;input type="text" id="last-name"
+          class="mdc-text-field__input"
+          onchange={e =&gt;
+            lastTL.now = e.currentTarget.value} /&gt;
+        &lt;label class="mdc-floating-label"
+          for="last-name"&gt;Last name&lt;/label&gt;
+        &lt;div class="mdc-line-ripple"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;br /&gt;
+      &lt;button type="button" class="mdc-button mdc-button--raised mdc-button--primary"
+        onclick={() =&gt; btnTL.now = true} &gt;
+        Press Me&lt;/button&gt;
     &lt;/div&gt;;
     //===
   })(messageTL);
@@ -2011,7 +2004,7 @@ export { main };</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-12 11:39:42 JST
+Last updated 2019-02-12 11:52:21 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">

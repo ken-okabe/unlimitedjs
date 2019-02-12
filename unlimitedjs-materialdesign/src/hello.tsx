@@ -32,41 +32,32 @@ const main = () => {
 
     //===
     return <div>
+      <h2 class="mdc-typography--headline2">
+        Flawlessly with Material Design</h2>
 
-    
-
-    <h2 class="mdc-typography--headline2">
-    Flawlessly with Material Design</h2>
-
-    <div class="mdc-text-field">
-      <input type="text" id="first-name"
-        class="mdc-text-field__input" 
-        onchange = {e=> 
-          firstTL.now = e.currentTarget.value}/>
-      <label class="mdc-floating-label"
-        for="first-name">First name</label>
-      <div class="mdc-line-ripple"></div>
-    </div>
-
-    <br/>
-
-    <div class="mdc-text-field">
-      <input type="text" id="last-name"
-        class="mdc-text-field__input" 
-        onchange = {e=> 
-          lastTL.now = e.currentTarget.value}/>
-      <label class="mdc-floating-label"
-        for="last-name">Last name</label>
-      <div class="mdc-line-ripple"></div>
-    </div>
-
-    <br/>
-    
-    <button type="button" class="mdc-button 
-    mdc-button--raised mdc-button--primary"
-    onclick = {()=> btnTL.now = true} >
-      Press Me</button>
-
+      <div class="mdc-text-field">
+        <input type="text" id="first-name"
+          class="mdc-text-field__input"
+          onchange={e =>
+            firstTL.now = e.currentTarget.value} />
+        <label class="mdc-floating-label"
+          for="first-name">First name</label>
+        <div class="mdc-line-ripple"></div>
+      </div>
+      <br />
+      <div class="mdc-text-field">
+        <input type="text" id="last-name"
+          class="mdc-text-field__input"
+          onchange={e =>
+            lastTL.now = e.currentTarget.value} />
+        <label class="mdc-floating-label"
+          for="last-name">Last name</label>
+        <div class="mdc-line-ripple"></div>
+      </div>
+      <br />
+      <button type="button" class="mdc-button mdc-button--raised mdc-button--primary"
+        onclick={() => btnTL.now = true} >
+        Press Me</button>
     </div>;
     //===
   })(messageTL);
