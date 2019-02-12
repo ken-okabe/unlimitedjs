@@ -10,8 +10,8 @@ const main = () => {
   const outputNodeTL = (messageTL =>
     T(self =>
       messageTL.sync(message =>
-        self.now = <h2 mdc-typography--headline2
-        >{message}</h2>
+        self.now = <h2 mdc-typography--headline2>
+          {message}</h2>
       )
     )
   )(messageTL);
