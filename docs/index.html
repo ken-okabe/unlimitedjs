@@ -453,7 +453,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_selfcontained_timeline_of_virtual_dom">7. SelfContained <em>timeline</em> of virtual DOM</a></li>
 <li><a href="#_no_extra_apis">8. No extra APIs</a></li>
 <li><a href="#_compose_timeline_of_virtual_dom_functionally">9. Compose <em>timeline</em> of virtual DOM functionally</a></li>
-<li><a href="#_mit_license">10. MIT License</a></li>
+<li><a href="#_material_design_components_for_web">10. Material Design Components for web</a></li>
+<li><a href="#_mit_license">11. MIT License</a></li>
 </ul>
 </div>
 </div>
@@ -465,7 +466,7 @@ p >code {background-color: #aaaaaa};
 td >code {background-color: #aaaaaa};
 </style>
 <div class="paragraph">
-<p>A minimal JavaScript framework for building UI with no limitations, full flexibility and zero rules - just pure functional and reactive programming to compose virtual DOM</p>
+<p>Production-ready with a minimal JavaScript framework for building UI with no limitations, full flexibility and zero rules - just pure functional and reactive programming to compose virtual DOM</p>
 </div>
 <iframe src="https://ghbtns.com/github-btn.html?user=stken2050&repo=unlimitedjs&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
 <div class="admonitionblock note">
@@ -482,6 +483,14 @@ td >code {background-color: #aaaaaa};
 </td>
 </tr>
 </table>
+</div>
+<iframe height="624" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC hello" src="//codepen.io/stken2050/embed/vbjzBP/?height=624&theme-id=36003&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/vbjzBP/'>unlimitedjs + MDC hello</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+<div class="paragraph">
+<p>See <a href="#topcode">unlimitedjs works with Material Design Components for web</a>
+ to study how the code etc.</p>
 </div>
 </div>
 </div>
@@ -1832,7 +1841,143 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_mit_license">10. MIT License</h2>
+<h2 id="_material_design_components_for_web">10. Material Design Components for web</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="topcode">10.1. unlimitedjs works with Material Design Components for web</h3>
+<div class="paragraph">
+<p>Material Design Components for the web (MDC Web) offers designers and developers a way to implement Material Design in their websites. Developed by a core team of engineers and UX designers at Google, these components enable a reliable development workflow to build beautiful and functional web projects.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://material.io/design/" class="bare">https://material.io/design/</a></p>
+</div>
+<div class="paragraph">
+<p>MDC web is the successor to Material Design Lite, and in this article we are going to go through a basic set up of how to use MDC web.</p>
+</div>
+<div class="paragraph">
+<p>There are two ways to include MDC Web: either by adding a few lines of code and instantiating the JavaScript file or by using MDC Web as Node modules, bundling the Sass and JavaScript yourself using something like webpack.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/material-components/material-components-web/blob/master/docs/getting-started.md" class="bare">https://github.com/material-components/material-components-web/blob/master/docs/getting-started.md</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hello_mdc">10.2. Hello MDC</h3>
+<div class="listingblock">
+<div class="title">Hello unlimitedjs+MDC</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
+import { h, patch } from "../../node_modules/superfine/src/index.js";
+
+const main = () =&gt; {
+
+  const messageTL = T(self =&gt;
+    setTimeout(() =&gt; (self.now = ""), 0)
+  );
+
+  const outputNodeTL = (messageTL =&gt;
+    T(self =&gt;
+      messageTL.sync(message =&gt;
+        self.now = &lt;h3 mdc-typography--headline3&gt;
+        {message}&lt;/h3&gt;
+      )
+    )
+  )(messageTL);
+
+  const inputNode = (messageTL =&gt; {
+    const firstTL = T();
+    const lastTL = T();
+    const btnTL = T(self =&gt;
+      self.sync(() =&gt;
+        messageTL.now =
+        firstTL.now === undefined
+          || lastTL.now === undefined
+          ? undefined
+          : "Welcome " +
+          firstTL.now + " " + lastTL.now
+      )
+    );
+
+    //===
+    return &lt;div&gt;
+
+    &lt;h2 class="mdc-typography--headline2"&gt;
+      Hello, unlimitedjs!&lt;/h2&gt;
+
+    &lt;div class="mdc-text-field"&gt;
+      &lt;input type="text" id="first-name"
+        class="mdc-text-field__input"
+        onchange = {e=&gt;
+          firstTL.now = e.currentTarget.value}/&gt;
+      &lt;label class="mdc-floating-label"
+        for="first-name"&gt;First name&lt;/label&gt;
+      &lt;div class="mdc-line-ripple"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;br/&gt;
+
+    &lt;div class="mdc-text-field"&gt;
+      &lt;input type="text" id="last-name"
+        class="mdc-text-field__input"
+        onchange = {e=&gt;
+          lastTL.now = e.currentTarget.value}/&gt;
+      &lt;label class="mdc-floating-label"
+        for="last-name"&gt;Last name&lt;/label&gt;
+      &lt;div class="mdc-line-ripple"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;br/&gt;
+
+    &lt;button type="button" class="mdc-button
+    mdc-button--raised mdc-button--primary"
+    onclick = {()=&gt; btnTL.now = true} &gt;
+      Press Me&lt;/button&gt;
+
+    &lt;/div&gt;;
+    //===
+  })(messageTL);
+
+  const topNodeTL = outputNodeTL.sync(outputNode =&gt;
+    &lt;div&gt;
+      {inputNode}
+      {outputNode}
+    &lt;/div&gt;
+  );
+
+  const viewNodeTL = topNodeTL.sync(topNode =&gt;
+    patch(viewNodeTL.now, topNode, document.body)
+  );
+
+  const mdcTL = viewNodeTL.sync(() =&gt; {
+
+    Array.from(document
+      .querySelectorAll('.mdc-text-field'))
+      .map(textField =&gt;
+        (window as any).mdc.textField
+          .MDCTextField.attachTo(textField));
+
+    Array.from(document
+      .querySelectorAll('.mdc-button'))
+      .map(button =&gt;
+        (window as any).mdc.ripple
+          .MDCRipple.attachTo(button));
+
+  });
+
+};
+
+export { main };</code></pre>
+</div>
+</div>
+<iframe height="707" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC hello" src="//codepen.io/stken2050/embed/vbjzBP/?height=707&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/vbjzBP/'>unlimitedjs + MDC hello</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mit_license">11. MIT License</h2>
 <div class="sectionbody">
 <iframe src="https://ghbtns.com/github-btn.html?user=stken2050&repo=unlimitedjs&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
 </div>
@@ -1840,7 +1985,7 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-11 05:17:04 JST
+Last updated 2019-02-12 09:13:23 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">

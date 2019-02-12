@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/stken2050/unlimitedjs#readme",
   "dependencies": {
+    "material-components-web": "*",
     "superfine": "*",
     "timeline-monad": "*"
   },

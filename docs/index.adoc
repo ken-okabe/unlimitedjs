@@ -19,7 +19,7 @@ td >code {background-color: #aaaaaa};
 </style>
 ++++
 
-A minimal JavaScript framework for building UI with no limitations, full flexibility and zero rules - just pure functional and reactive programming to compose virtual DOM
+Production-ready with a minimal JavaScript framework for building UI with no limitations, full flexibility and zero rules - just pure functional and reactive programming to compose virtual DOM
 
 
 ++++
@@ -31,6 +31,17 @@ A minimal JavaScript framework for building UI with no limitations, full flexibi
 ====
 https://github.com/stken2050/unlimitedjs[unlimitedjs (timeline-monad + superfine) Quick Start template project]
 ==== 
+
+
+++++
+<iframe height="624" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC hello" src="//codepen.io/stken2050/embed/vbjzBP/?height=624&theme-id=36003&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/vbjzBP/'>unlimitedjs + MDC hello</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+++++
+
+See <<10_material-MDC.adoc#topcode>>
+ to study how the code etc.
 
 
 :leveloffset: 1
@@ -52,6 +63,10 @@ include::./07_selfcontained-timeline.adoc[]
 include::./08_no-extraAPI.adoc[]
 
 include::./09_timeline-composition.adoc[]
+
+
+include::./10_material-MDC.adoc[]
+
 
 :leveloffset: 0
 
