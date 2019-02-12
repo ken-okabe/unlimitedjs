@@ -40,8 +40,15 @@ https://github.com/stken2050/unlimitedjs[unlimitedjs (timeline-monad + superfine
 </iframe>
 ++++
 
+[TIP]
 See <<10_material-MDC.adoc#topcode>>
- to study how the code etc.
+ to study how the code works with MDC.
+====
+image::./mdc.png[align="center"]
+
+
+==== 
+
 
 
 :leveloffset: 1

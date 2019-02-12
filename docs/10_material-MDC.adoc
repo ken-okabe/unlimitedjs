@@ -5,7 +5,7 @@ ifndef::source-highlighter[:source-highlighter: highlightjs]
 ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
 
 [[topcode]]
-== unlimitedjs works with Material Design Components for web
+== unlimitedjs works with Material Design Components(MDC) for web
 
 Material Design Components for the web (MDC Web) offers designers and developers a way to implement Material Design in their websites. Developed by a core team of engineers and UX designers at Google, these components enable a reliable development workflow to build beautiful and functional web projects.
 
