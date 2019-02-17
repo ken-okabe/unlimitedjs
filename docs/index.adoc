@@ -19,6 +19,8 @@ td >code {background-color: #aaaaaa};
 </style>
 ++++
 
+image::./unlimitedjs-logo.png[align="center"]
+
 Production-ready with a minimal JavaScript framework for building UI with no limitations, full flexibility and zero rules - just pure functional and reactive programming to compose virtual DOM
 
 
