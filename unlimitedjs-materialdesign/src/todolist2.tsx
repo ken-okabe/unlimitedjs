@@ -38,12 +38,10 @@ const main = () => {
       const timeline2 = removeTL.sync(index =>
         self.now = removeArray(self.now)(index)
       );
-
       const timeline3 = editTL.sync(edit => (
         self.now = replaceArray(self.now)(edit.index)
           (edit.text))
       );
-
       setTimeout(() => (self.now = initData), 0);
     })
   )(addTL)(removeTL)(editTL);
@@ -119,7 +117,6 @@ const main = () => {
   const itemNode = (editTL =>
     item => index =>
       <div class="mdc-text-field  mdc-text-field--with-trailing-icon" >
-
         <input type="text" id={"todoedit" + index}
           class="mdc-text-field__input"
           tabindex={index * 3 + 1}
@@ -130,9 +127,7 @@ const main = () => {
               text: e.currentTarget.value
             }
           } />
-
         {itemRemoveNode(index)}
-
         <div class="mdc-line-ripple"></div>
       </div>)
     (editTL);
@@ -142,11 +137,9 @@ const main = () => {
       mergeTL([inputNodeTL, listTL])
         .sync(([inputNode, list]) => self.now =
           <ul class="mdc-list">
-
             <li class="mdc-list-item">
               {inputNode}
             </li>
-
             {list.map((item, index) =>
               <li class="mdc-list-item">
                 {itemNode(item)(index)}
@@ -176,7 +169,6 @@ const main = () => {
       .map(textField =>
         (window as any).mdc.ripple
           .MDCRipple.attachTo(textField));
-
 
     Array.from(document
       .querySelectorAll(".mdc-text-field-icon"))
