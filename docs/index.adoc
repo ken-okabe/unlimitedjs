@@ -44,6 +44,13 @@ unlimitejs works with https://material.io/develop/web/[Material Design Component
 </iframe>
 ++++
 
+[TIP]
+.JSX(TSX) Code
+====
+https://github.com/stken2050/unlimitedjs/blob/master/unlimitedjs-materialdesign/src/hello.tsx[source]
+==== 
+
+
 ---
 
 
@@ -58,12 +65,14 @@ ToDo-list app with Add/Delete/Edit functionalities.
 </iframe>
 ++++
 
+
 [TIP]
-.JSX Code
+.JSX(TSX) Code
+====
+https://github.com/stken2050/unlimitedjs/blob/master/unlimitedjs-materialdesign/src/todolist2.tsx[source]
+
 See <<10_material-MDC.adoc#topcode>>
  to study how the JSX code works with MDC.
-====
-image::./mdc.png[align="center"]
 
 video::https://storage.googleapis.com/spec-host-backup/mio-material%2Fassets%2F1MvJxcu1kd5TFR6c5IBhxjLueQzSZvVQz%2Fm2-manifesto.mp4[width="100%"]
 ==== 
