@@ -4,7 +4,6 @@
 
 A minimal JavaScript framework for building UI with no limitations, full flexibility and zero rules - just pure functional and reactive programming to compose virtual DOM
 
-
 ## unlimitedjs Quick Start
 
 ### 1. Clone this repository
