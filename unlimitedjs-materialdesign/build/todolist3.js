@@ -92,6 +92,10 @@ const main = () => {
             .map(textField => window.mdc.textField
             .MDCTextField.attachTo(textField));
         Array.from(document
+            .querySelectorAll(".mdc-text-field"))
+            .map(textField => window.mdc.ripple
+            .MDCRipple.attachTo(textField));
+        Array.from(document
             .querySelectorAll(".mdc-text-field-icon"))
             .map(textFieldIcon => window.mdc.textField.icon
             .MDCTextFieldIcon.attachTo(textFieldIcon));

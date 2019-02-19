@@ -23,10 +23,12 @@ const mergeTL = TLs => T(self =>
 
 const main = () => {
 
+  const initData =
+    ["Breakfast", "Lunch", "Dinner", "Sleep"];
+
   const addTL = T();
   const removeTL = T();
-  const editTL = T(self =>
-    setTimeout(() => (self.now = {}), 0));
+  const editTL = T();
 
   const listTL = (addTL => removeTL => editTL =>
     T(self => {
@@ -36,12 +38,13 @@ const main = () => {
       const timeline2 = removeTL.sync(index =>
         self.now = removeArray(self.now)(index)
       );
-      const timeline3 = editTL.sync(edit =>
-        self.now = (edit.index === undefined)
-          ? []
-          : replaceArray(self.now)(edit.index)
-            (edit.text)
+
+      const timeline3 = editTL.sync(edit => (
+        self.now = replaceArray(self.now)(edit.index)
+          (edit.text))
       );
+
+      setTimeout(() => (self.now = initData), 0);
     })
   )(addTL)(removeTL)(editTL);
 
@@ -56,89 +59,9 @@ const main = () => {
       console.log(list));
   }
 
-  const listNodeTL = (listTL =>
-    T(self =>
-      listTL.sync(list => self.now =
-        <ul>{list.map((item, index) =>
-          <li>
-            {itemNode(item)(index)
-              (editTL.now)
-              (T(self => self.now = item))}
-          </li>
-        )}</ul>
-      )
-    )
-  )(listTL);
-
-  const itemNode = item => index => edit =>
-    editTextTL =>
-      right(edit.mode === undefined
-        ? edit.mode = false
-        : undefined)
-        (<div>
-          {itemTextNode(item)(index)(edit)(editTextTL)}
-          {itemEditNode(index)(edit)(editTextTL)}
-          {itemRemoveNode(index)(edit)}
-        </div>);
-
-  const itemTextNode =
-    item => index => edit => editTextTL =>
-      (edit.mode) && (edit.index === index)
-        ? <input type="text" id="edit"
-          value={item}
-          onchange={e =>
-            editTextTL.now = e.currentTarget.value} />
-        : item;
-
-  const itemEditNode = (editTL =>
-    index => edit => editTextTL =>
-      <button type="button"
-        disabled={edit.mode &&
-          edit.index !== index}
-        onclick={() => editTL.now =
-          (edit.mode === false)
-            ? {
-              "index": index,
-              "text": editTextTL.now,
-              "mode": true
-            }
-            : {
-              "index": index,
-              "text": editTextTL.now,
-              "mode": false
-            }
-        } >
-        {(edit.mode) &&
-          (edit.index === index)
-          ? "EditDone"
-          : "Edit"}
-      </button>)
-    (editTL);
-
-  const itemRemoveNode = (removeTL =>
-    index => edit =>
-      <button type="button"
-        disabled={edit.mode}
-        onclick={() =>
-          removeTL.now = index} >
-        Remove</button>)
-    (removeTL);
-
   const inputTextTL = T(self =>
     setTimeout(() => (self.now = ""), 0)
   );
-
-  const inputTextNodeTL = (inputTextTL =>
-    T(self =>
-      inputTextTL.sync(inputText =>
-        self.now =
-        <input type="text"
-          value={inputText}
-          onchange={e =>
-            inputTextTL.now = e.currentTarget.value} />
-      )
-    )
-  )(inputTextTL);
 
   const inputBtnTL = (inputTextTL => addTL =>
     T(self =>
@@ -152,46 +75,123 @@ const main = () => {
     )
   )(inputTextTL)(addTL);
 
-  const inputBtnNodeTL = (inputBtnTL => editTL =>
-    T(self =>
-      editTL.sync(edit =>
-        self.now =
-        <button type="button" disabled={edit.mode}
-          onclick={() => inputBtnTL.now = true} >
-          Add</button>
-      )
-    )
-  )(inputBtnTL)(editTL);
+  const inputBtnNode = (inputBtnTL =>
+    <i class="material-icons mdc-text-field__icon"
+      role="button"
+      tabindex={0}
+      onclick={() => inputBtnTL.now = true} >
+      add</i>
+  )(inputBtnTL);
 
   const inputNodeTL =
-    (inputTextNodeTL => inputBtnNodeTL =>
-      T(self => mergeTL(
-        [inputTextNodeTL, inputBtnNodeTL])
-        .sync(([inputTextNode, inputBtnNode]) =>
-          self.now = <div>
-            {inputTextNode}
-            {inputBtnNode}
-          </div>
-        )
-      )
-    )(inputTextNodeTL)(inputBtnNodeTL);
-
-  const topNodeTL =
-    (inputNodeTL => listNodeTL =>
+    (inputTextTL =>
       T(self =>
-        mergeTL([inputNodeTL, listNodeTL])
-          .sync(([inputNode, listNode]) => self.now =
-            <div>
-              {inputNode}
-              {listNode}
+        inputTextTL
+          .sync(inputText =>
+            self.now =
+            <div class="mdc-text-field mdc-text-field--with-trailing-icon">
+              <input type="text" id="todoinput"
+                class="mdc-text-field__input"
+                value={inputText}
+                onchange={e =>
+                  inputTextTL.now = e.currentTarget.value} />
+              <label class="mdc-floating-label"
+                for="todopinput">ToDo Here</label>
+
+              {inputBtnNode}
+
+              <div class="mdc-line-ripple"></div>
             </div>
           )
       )
-    )(inputNodeTL)(listNodeTL);
+    )(inputTextTL);
+
+  const itemRemoveNode = (removeTL =>
+    index =>
+      <i class="material-icons mdc-text-field__icon"
+        role="button"
+        tabindex={index * 3 + 3}
+        onclick={() =>
+          removeTL.now = index} >
+        delete</i>)
+    (removeTL);
+
+  const itemNode = (editTL =>
+    item => index =>
+      <div class="mdc-text-field  mdc-text-field--with-trailing-icon" >
+
+        <input type="text" id={"todoedit" + index}
+          class="mdc-text-field__input"
+          tabindex={index * 3 + 1}
+          value={item}
+          onchange={e =>
+            editTL.now = {
+              index: index,
+              text: e.currentTarget.value
+            }
+          } />
+
+        {itemRemoveNode(index)}
+
+        <div class="mdc-line-ripple"></div>
+      </div>)
+    (editTL);
+
+  const listNodeTL = (inputNodeTL => listTL =>
+    T(self =>
+      mergeTL([inputNodeTL, listTL])
+        .sync(([inputNode, list]) => self.now =
+          <ul class="mdc-list">
+
+            <li class="mdc-list-item">
+              {inputNode}
+            </li>
+
+            {list.map((item, index) =>
+              <li class="mdc-list-item">
+                {itemNode(item)(index)}
+              </li>
+            )}
+          </ul>
+        )
+    )
+  )(inputNodeTL)(listTL);
+
+  const topNodeTL = listNodeTL;
 
   const viewNodeTL = topNodeTL.sync(topNode =>
     patch(viewNodeTL.now, topNode, document.body)
   );
+
+  const mdcTL = viewNodeTL.sync(() => {
+
+    Array.from(document
+      .querySelectorAll(".mdc-text-field"))
+      .map(textField =>
+        (window as any).mdc.textField
+          .MDCTextField.attachTo(textField));
+
+    Array.from(document
+      .querySelectorAll(".mdc-text-field"))
+      .map(textField =>
+        (window as any).mdc.ripple
+          .MDCRipple.attachTo(textField));
+
+
+    Array.from(document
+      .querySelectorAll(".mdc-text-field-icon"))
+      .map(textFieldIcon =>
+        (window as any).mdc.textField.icon
+          .MDCTextFieldIcon.attachTo(textFieldIcon));
+
+    Array.from(document
+      .querySelectorAll(".mdc-list"))
+      .map(list =>
+        (window as any).mdc.list
+          .MDCList.attachTo(list));
+
+  });
+
 
 };
 

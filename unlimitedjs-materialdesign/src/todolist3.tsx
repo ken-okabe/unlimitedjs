@@ -224,6 +224,13 @@ const main = () => {
           .MDCTextField.attachTo(textField));
 
     Array.from(document
+      .querySelectorAll(".mdc-text-field"))
+      .map(textField =>
+        (window as any).mdc.ripple
+          .MDCRipple.attachTo(textField));
+
+
+    Array.from(document
       .querySelectorAll(".mdc-text-field-icon"))
       .map(textFieldIcon =>
         (window as any).mdc.textField.icon
