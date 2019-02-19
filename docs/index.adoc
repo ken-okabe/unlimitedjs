@@ -34,6 +34,8 @@ Production-ready with a minimal JavaScript framework for building UI with no lim
 https://github.com/stken2050/unlimitedjs[unlimitedjs (timeline-monad + superfine) Quick Start template project]
 ==== 
 
+unlimitejs works with https://material.io/develop/web/[Material Design Components(MDC) for web] in the standarized way without the need for a wrapper/adapter/libraly such as https://github.com/material-components/material-components-web-react[MDC React] or https://github.com/stasson/vue-mdc-adapter[/vue-mdc-adapter]
+
 
 ++++
 <iframe height="624" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC hello" src="//codepen.io/stken2050/embed/vbjzBP/?height=624&theme-id=36003&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
@@ -42,7 +44,12 @@ https://github.com/stken2050/unlimitedjs[unlimitedjs (timeline-monad + superfine
 </iframe>
 ++++
 
+---
+
+
 ToDo-list app with Add/Delete/Edit functionalities.
+
+
 
 ++++
 <iframe height="493" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC ToDo" src="//codepen.io/stken2050/embed/jddGQP/?height=493&theme-id=36003&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
