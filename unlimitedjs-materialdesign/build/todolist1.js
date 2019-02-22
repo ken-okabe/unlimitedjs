@@ -74,4 +74,4 @@ const main = () => {
             listNode))))(inputNodeTL)(listNodeTL);
     const viewNodeTL = topNodeTL.sync(topNode => patch(viewNodeTL.now, topNode, document.body));
 };
-export { main };
+main();

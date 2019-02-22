@@ -195,4 +195,4 @@ const main = () => {
 
 };
 
-export { main };
+main();

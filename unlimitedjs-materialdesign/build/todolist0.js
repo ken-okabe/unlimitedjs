@@ -7,4 +7,4 @@ const main = () => {
     const viewNodeTL = topNodeTL.sync(topNode => patch(viewNodeTL.now, topNode, document.body));
     listTL.now = ["foo", "bar"];
 };
-export { main };
+main();

@@ -105,4 +105,4 @@ const main = () => {
             .MDCList.attachTo(list));
     });
 };
-export { main };
+main();
