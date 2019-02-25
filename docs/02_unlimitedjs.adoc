@@ -4,7 +4,7 @@ ifndef::imagesdir[:imagesdir: ./img/]
 ifndef::source-highlighter[:source-highlighter: highlightjs]
 ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
 
-**unlimitedjs = https://github.com/jorgebucaran/superfine[superfine] + https://github.com/stken2050/timeline-monad[timeline_monad]**
+**unlimitedjs = https://github.com/jorgebucaran/superfine[superfine] + https://github.com/stken2050/timeline-monad[timeline-monad]**
 
 
 == Zero lines of code
@@ -42,6 +42,21 @@ State management of Virtual DOM should be not specific to a Vitrual DOM library 
 We've learned enough. "state" is complicated and hard to use.
 
 It's time to use Functional Reactive Programming(FRP) instead.
+
+== Data binding is simple, easy and versatile in FRP scheme
+
+Data-binding in unlimitedjs has no rules/restrictions and is generic in JavaScript, which means the programmers can do the following:
+
+- Value -> Value
+
+- VirtualDOM node  -> VirtualDOM node 
+
+- Value -> VirtualDOM node
+
+- VirtualDOM node  -> Value
+
+
+In principle, https://en.wikipedia.org/wiki/React_(JavaScript_library)#JSX[JSX] treats VirtualDOM node as a https://en.wikipedia.org/wiki/First-class_citizen[first-class object] in JavaScript, and in an aspect of data-binding, simply the same principle is applied.
 
 == unlimitedjs is available now with stable status
 

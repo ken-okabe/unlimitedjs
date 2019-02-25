@@ -1,4 +1,4 @@
-= What is timeline-monad?
+= What is https://stken2050.github.io/timeline-monad/[timeline-monad]?
 ifndef::stem[:stem: latexmath]
 ifndef::imagesdir[:imagesdir: ./img/]
 ifndef::source-highlighter[:source-highlighter: highlightjs]
