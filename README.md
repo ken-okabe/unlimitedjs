@@ -2,7 +2,7 @@
 
 ![](https://stken2050.github.io/unlimitedjs/img/unlimitedjs-logo.png)
 
-A minimal JavaScript framework for building UI with no limitations, full flexibility and zero rules - just pure functional and reactive programming to compose virtual DOM
+**unlimitedjs** is a minimal JavaScript framework for building production-ready UI with no limitations, full flexibility and zero rules - just pure functional and reactive programming to compose virtual DOM in JSX/TSX
 
 ## unlimitedjs Quick Start
 

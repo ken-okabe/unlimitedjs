@@ -20,9 +20,7 @@ td >code {background-color: #aaaaaa};
 
 image::./unlimitedjs-logo.png[align="center"]
 
-
-Production-ready with a minimal JavaScript framework for building UI with no limitations, full flexibility and zero rules - just pure functional and reactive programming to compose virtual DOM
-
+**unlimitedjs** is a minimal JavaScript framework for building production-ready UI with no limitations, full flexibility and zero rules - just pure functional and reactive programming to compose virtual DOM in JSX/TSX
 
 ++++
 <iframe src="https://ghbtns.com/github-btn.html?user=stken2050&repo=unlimitedjs&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
