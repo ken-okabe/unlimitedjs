@@ -500,7 +500,7 @@ td >code {background-color: #aaaaaa};
 <td class="content">
 <div class="title">JSX(TSX) Code</div>
 <div class="paragraph">
-<p><a href="https://github.com/stken2050/unlimitedjs/blob/master/unlimitedjs-materialdesign/src/hello.tsx">source</a></p>
+<p><a href="https://github.com/stken2050/unlimitedjs/blob/master/unlimitedjs-materialdesign/src/login.tsx">source</a></p>
 </div>
 </td>
 </tr>
@@ -1926,9 +1926,6 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 <p><a href="https://material.io/design/" class="bare">https://material.io/design/</a></p>
 </div>
 <div class="paragraph">
-<p>MDC web is the successor to Material Design Lite, and in this article we are going to go through a basic set up of how to use MDC web.</p>
-</div>
-<div class="paragraph">
 <p>There are two ways to include MDC Web: either by adding a few lines of code and instantiating the JavaScript file or by using MDC Web as Node modules, bundling the Sass and JavaScript yourself using something like webpack.</p>
 </div>
 <div class="paragraph">
@@ -1936,8 +1933,83 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_hello_mdc">10.2. Hello MDC</h3>
+<h3 id="_hello_mdc_with_unlimitedjs">10.2. Hello MDC with unlimitedjs</h3>
+<iframe height="469" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC hello" src="//codepen.io/stken2050/embed/eXOgoO/?height=469&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/eXOgoO/'>unlimitedjs + MDC hello</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+<div class="listingblock">
+<div class="title">Hello.html</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
 
+    &lt;link rel="stylesheet" href="./node_modules/material-components-web/dist/material-components-web.min.css"&gt;
+
+    &lt;script src="./node_modules/material-components-web/dist/material-components-web.min.js"&gt;&lt;/script&gt;
+
+    &lt;script type="module" src="./unlimitedjs-materialdesign/build/hello.js"&gt;&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">hello.tsx</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
+import { h, patch } from "../../node_modules/superfine/src/index.js";
+
+const topNodeTL = T(self =&gt; {
+  const f = () =&gt; (self.now =
+    &lt;button class="mdc-button mdc-button--raised"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+      Press Me
+      &lt;/button&gt;
+  );
+  setTimeout(f, 0); <i class="conum" data-value="2"></i><b>(2)</b>
+});
+
+const viewNodeTL = topNodeTL.sync(topNode =&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+  patch(viewNodeTL.now, topNode, document.body)
+);
+
+const mdcTL = viewNodeTL.sync(() =&gt; { <i class="conum" data-value="4"></i><b>(4)</b>
+  Array.from(document
+    .querySelectorAll('.mdc-button')) <i class="conum" data-value="5"></i><b>(5)</b>
+    .map(button =&gt;
+      (window as any).mdc.ripple
+        .MDCRipple.attachTo(button));
+});</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>MDC button class specifiers</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Next tick: propagate the DOM value after all declarations</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Render pattern of unlimitedjs</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>mdcTL is a timeline that is synchronized to the viewNodeTL that is virtualDOM rendering timeline</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The standard manner to attach JavaScript to MDC, see <a href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-ripple">the document</a> and <a href="https://github.com/material-components/material-components-web/issues/3236">the issue</a></td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -1950,7 +2022,7 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-25 09:18:36 JST
+Last updated 2019-02-25 10:29:29 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">

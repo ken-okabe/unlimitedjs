@@ -11,11 +11,72 @@ Material Design Components for the web (MDC Web) offers designers and developers
 
 https://material.io/design/
 
-MDC web is the successor to Material Design Lite, and in this article we are going to go through a basic set up of how to use MDC web.
-
 There are two ways to include MDC Web: either by adding a few lines of code and instantiating the JavaScript file or by using MDC Web as Node modules, bundling the Sass and JavaScript yourself using something like webpack.
 
 https://github.com/material-components/material-components-web/blob/master/docs/getting-started.md
 
-== Hello MDC
+== Hello MDC with unlimitedjs
+
+++++
+<iframe height="469" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC hello" src="//codepen.io/stken2050/embed/eXOgoO/?height=469&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/eXOgoO/'>unlimitedjs + MDC hello</a> by Ken OKABE
+  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+++++
+
+[source, html]
+.Hello.html
+----
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+
+    <link rel="stylesheet" href="./node_modules/material-components-web/dist/material-components-web.min.css">
+
+    <script src="./node_modules/material-components-web/dist/material-components-web.min.js"></script>
+
+    <script type="module" src="./unlimitedjs-materialdesign/build/hello.js"></script>
+
+</head>
+<body>
+</body>
+</html>
+----
+
+[source,js]
+.hello.tsx
+----
+import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
+import { h, patch } from "../../node_modules/superfine/src/index.js";
+
+const topNodeTL = T(self => {
+  const f = () => (self.now =
+    <button class="mdc-button mdc-button--raised"> <1>
+      Press Me
+      </button>
+  );
+  setTimeout(f, 0); <2>
+});
+
+const viewNodeTL = topNodeTL.sync(topNode => <3>
+  patch(viewNodeTL.now, topNode, document.body)
+);
+
+const mdcTL = viewNodeTL.sync(() => { <4>
+  Array.from(document
+    .querySelectorAll('.mdc-button')) <5>
+    .map(button =>
+      (window as any).mdc.ripple
+        .MDCRipple.attachTo(button));
+});
+----
+
+<1> MDC button class specifiers
+<2> Next tick: propagate the DOM value after all declarations
+<3> Render pattern of unlimitedjs
+<4> mdcTL is a timeline that is synchronized to the viewNodeTL that is virtualDOM rendering timeline 
+<5> The standard manner to attach JavaScript to MDC, see https://github.com/material-components/material-components-web/tree/master/packages/mdc-ripple[the document] and https://github.com/material-components/material-components-web/issues/3236[the issue]
+
+
  
