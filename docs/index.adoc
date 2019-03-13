@@ -32,7 +32,7 @@ image::./unlimitedjs-logo.png[align="center"]
 https://github.com/stken2050/unlimitedjs[unlimitedjs (timeline-monad + superfine) Quick Start template project]
 ==== 
 
-Unlike the other virtual DOM frameworks, **unlimitedjs** works directly with https://material.io/develop/web/[Material Design Components(MDC) for web] in the standarized manner without the need for a wrapper/adapter/component libraly such as https://github.com/material-components/material-components-web-react[MDC React] or https://github.com/stasson/vue-mdc-adapter[vue-mdc-adapter]
+Unlike the other virtual DOM frameworks, **unlimitedjs** works directly with https://material.io/develop/web/[Material Design Components(MDC) for web] in a standarized manner without the need for a wrapper/adapter/component library such as https://github.com/material-components/material-components-web-react[MDC React] or https://github.com/stasson/vue-mdc-adapter[vue-mdc-adapter]
 
 
 ++++

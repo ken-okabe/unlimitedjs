@@ -24,7 +24,7 @@ unlimitedjs consists of two independent existing libraries:
  Micro Functional Reactive Programming (FRP) Framework with Monad structure
 
 
-The both libraries are developed independently by different authors(https://github.com/jorgebucaran[Jorge Bucaran @jorgebucaran] and https://github.com/stken2050[Ken OKABE @stken2050]) for a generic purpose of different fields of programming - virtual DOM and FRP, and the both libraries do not rely on each others or any others(zero dependency).
+Both libraries are developed independently by different authors(https://github.com/jorgebucaran[Jorge Bucaran @jorgebucaran] and https://github.com/stken2050[Ken OKABE @stken2050]) for a general purpose of different fields of programming - virtual DOM and FRP, and both libraries do not rely on each other or any others(zero dependencies).
 
 == Zero rules
 They provide minimal APIs that are only necessary to describe the essential concepts of virtual DOM and FRP and do not add any rules for how to use them.
