@@ -32,7 +32,7 @@ import { h, patch } from "superfine";
 In unlimitedjs(timeline) framework, if a value is mutable, then it's a timeline.
 
 ++++
-<iframe height="345" style="width: 100%;" scrolling="no" title="Hello unlimitedjs" src="//codepen.io/stken2050/embed/yZpvQV/?height=345&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="345" style="width: 100%;" scrolling="no" title="Hello unlimitedjs" src="https://codepen.io/stken2050/embed/yZpvQV/?height=345&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/yZpvQV/'>Hello unlimitedjs</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -73,7 +73,7 @@ import { h, patch } from "superfine";
 <8> `setInterval` triggers `f` every 1 second
 
 ++++
-<iframe height="447" style="width: 100%;" scrolling="no" title="unlimitedjs clock" src="//codepen.io/stken2050/embed/WPdzrG/?height=447&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="447" style="width: 100%;" scrolling="no" title="unlimitedjs clock" src="https://codepen.io/stken2050/embed/WPdzrG/?height=447&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/WPdzrG/'>unlimitedjs clock</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>

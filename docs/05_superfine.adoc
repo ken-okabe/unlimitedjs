@@ -115,7 +115,7 @@ const lastNode = patch( <2>
 Although we need to import `{ h, patch }`, `h` will never appear in the code as long as we use JSX.
 
 ++++
-<iframe height="300" style="width: 100%;" scrolling="no" title="Hello superfine" src="//codepen.io/stken2050/embed/VgajBm/?height=300&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="300" style="width: 100%;" scrolling="no" title="Hello superfine" src="https://codepen.io/stken2050/embed/VgajBm/?height=300&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/VgajBm/'>Hello superfine</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>

@@ -30,7 +30,7 @@ Many FRP libraries call it __stream__ etc.. The problem of the naming: __stream_
 
 === Hello timeline
 ++++
-<iframe height="265" style="width: 100%;" scrolling="no" title="Hello Timeline" src="//codepen.io/stken2050/embed/ZwOaEr/?height=265&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="265" style="width: 100%;" scrolling="no" title="Hello Timeline" src="https://codepen.io/stken2050/embed/ZwOaEr/?height=265&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/ZwOaEr/'>Hello Timeline</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -72,7 +72,7 @@ setTimeout(()=>
 <5> later, the value of `timelineA` becomes `5`
 
 ++++
-<iframe height="447" style="width: 100%;" scrolling="no" title="Hello Timeline Sync" src="//codepen.io/stken2050/embed/mvpaER/?height=447&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="447" style="width: 100%;" scrolling="no" title="Hello Timeline Sync" src="https://codepen.io/stken2050/embed/mvpaER/?height=447&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/mvpaER/'>Hello Timeline Sync</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -80,7 +80,7 @@ setTimeout(()=>
 
 === Timer timeline
 ++++
-<iframe height="373" style="width: 100%;" scrolling="no" title="Hello Timeline timer" src="//codepen.io/stken2050/embed/daNXja/?height=373&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="373" style="width: 100%;" scrolling="no" title="Hello Timeline timer" src="https://codepen.io/stken2050/embed/daNXja/?height=373&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/daNXja/'>Hello Timeline timer</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -89,7 +89,7 @@ setTimeout(()=>
 === Canvas
 
 ++++
-<iframe height="550" style="width: 100%;" scrolling="no" title="unlimitedjs_canvas" src="//codepen.io/stken2050/embed/jdmeYK/?height=550&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="550" style="width: 100%;" scrolling="no" title="unlimitedjs_canvas" src="https://codepen.io/stken2050/embed/jdmeYK/?height=550&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/jdmeYK/'>unlimitedjs_canvas</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -131,7 +131,7 @@ const timeline = pointerTL.sync(pointer =>    <4>
 === Virtual DOM (Superfine)
 
 ++++
-<iframe height="654" style="width: 100%;" scrolling="no" title="unlimitedjs_vdom" src="//codepen.io/stken2050/embed/xMdyjx/?height=654&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="654" style="width: 100%;" scrolling="no" title="unlimitedjs_vdom" src="https://codepen.io/stken2050/embed/xMdyjx/?height=654&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/xMdyjx/'>unlimitedjs_vdom</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>

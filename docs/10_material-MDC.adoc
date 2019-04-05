@@ -18,7 +18,7 @@ https://github.com/material-components/material-components-web/blob/master/docs/
 == Hello MDC with unlimitedjs
 
 ++++
-<iframe height="469" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC hello" src="//codepen.io/stken2050/embed/eXOgoO/?height=469&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="469" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC hello" src="https://codepen.io/stken2050/embed/eXOgoO/?height=469&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/eXOgoO/'>unlimitedjs + MDC hello</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>

@@ -86,7 +86,7 @@ In unlimitedjs, we can refactor the code without extra APIs like this:
 ----
 
 ++++
-<iframe height="547" style="width: 100%;" scrolling="no" title="unlimitedjs refactor ReactHooks reducer" src="//codepen.io/stken2050/embed/JxLdWb/?height=547&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="547" style="width: 100%;" scrolling="no" title="unlimitedjs refactor ReactHooks reducer" src="https://codepen.io/stken2050/embed/JxLdWb/?height=547&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/JxLdWb/'>unlimitedjs refactor ReactHooks reducer</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>

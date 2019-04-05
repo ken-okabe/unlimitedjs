@@ -39,7 +39,7 @@ import { h, patch } from "superfine";
 <6> virtual DOM rendering
 
 ++++
-<iframe height="427" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained clock" src="//codepen.io/stken2050/embed/daJmRE/?height=427&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="427" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained clock" src="https://codepen.io/stken2050/embed/daJmRE/?height=427&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/daJmRE/'>unlimitedjs self-contained clock</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -77,7 +77,7 @@ import { h, patch } from "superfine";
 <2> `self` is the `clockNodeTL` itself and synchronized with `clockTL`
 
 ++++
-<iframe height="551" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained clock2" src="//codepen.io/stken2050/embed/bzaxzm/?height=551&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="551" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained clock2" src="https://codepen.io/stken2050/embed/bzaxzm/?height=551&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/bzaxzm/'>unlimitedjs self-contained clock2</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -121,7 +121,7 @@ import { h, patch } from "superfine";
 <6> virtual DOM rendering
 
 ++++
-<iframe height="636" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained counter" src="//codepen.io/stken2050/embed/MLrVPX/?height=636&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="636" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained counter" src="https://codepen.io/stken2050/embed/MLrVPX/?height=636&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/MLrVPX/'>unlimitedjs self-contained counter</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>

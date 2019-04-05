@@ -49,7 +49,7 @@ One of the functional way is to define "merge" __timeline__ like this:
 Here's how the `mergeTL` works:
 
 ++++
-<iframe height="638" style="width: 100%;" scrolling="no" title="mirge Timeline test" src="//codepen.io/stken2050/embed/damJZP/?height=638&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="638" style="width: 100%;" scrolling="no" title="mirge Timeline test" src="https://codepen.io/stken2050/embed/damJZP/?height=638&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/damJZP/'>mirge Timeline test</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -135,7 +135,7 @@ All of the global variables are __timeline__ of Node (virtualDOM) except the `me
 ==== 
 
 ++++
-<iframe height="312" style="width: 100%;" scrolling="no" title="unlimitedjs mirge timelines of clock &amp; counter node" src="//codepen.io/stken2050/embed/WPzMNK/?height=312&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="312" style="width: 100%;" scrolling="no" title="unlimitedjs mirge timelines of clock &amp; counter node" src="https://codepen.io/stken2050/embed/WPzMNK/?height=312&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/WPzMNK/'>unlimitedjs mirge timelines of clock &amp; counter node</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
