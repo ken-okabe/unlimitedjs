@@ -1,6 +1,6 @@
 {
   "name": "unlimitedjs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A minimal JavaScript framework for building UI with no limitations",
   "main": "index.js",
   "directories": {
@@ -33,13 +33,10 @@
   },
   "homepage": "https://github.com/stken2050/unlimitedjs#readme",
   "dependencies": {
-    "material-components-web": "*",
-    "superfine": "*",
     "timeline-monad": "*"
   },
   "devDependencies": {
     "esm": "*",
-    "tslint": "*",
     "typescript": "*"
   }
 }

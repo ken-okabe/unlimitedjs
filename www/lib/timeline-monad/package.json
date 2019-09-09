@@ -1,0 +1,72 @@
+{
+  "_from": "timeline-monad@*",
+  "_id": "timeline-monad@2.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-TIRorLd/7c0Jr7r3IBoKJZuOwfhmoEpTGBUUWM8auxf8edaBH/eLo9nI7znmWtibN9Zs6GmQMS2HIEQ4ta234w==",
+  "_location": "/timeline-monad",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "timeline-monad@*",
+    "name": "timeline-monad",
+    "escapedName": "timeline-monad",
+    "rawSpec": "*",
+    "saveSpec": null,
+    "fetchSpec": "*"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/timeline-monad/-/timeline-monad-2.0.0.tgz",
+  "_shasum": "97cffd73aa615c00749a882b1fa6fedf3fa6e81d",
+  "_spec": "timeline-monad@*",
+  "_where": "/home/ken/data/p/unlimitedjs",
+  "author": {
+    "name": "Ken Okabe",
+    "email": "stken2050@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/stken2050/timeline-monad/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Micro Functional Reactive Programming (FRP) Framework with Monad structure",
+  "devDependencies": {
+    "esm": "*",
+    "jest": "*",
+    "typescript": "*"
+  },
+  "files": [
+    "code/dist/",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/stken2050/timeline-monad#readme",
+  "keywords": [
+    "virtual",
+    "dom",
+    "ui",
+    "react",
+    "hooks",
+    "hyperapp",
+    "superfine",
+    "frp",
+    "functional",
+    "reactive",
+    "timeline",
+    "monad"
+  ],
+  "license": "MIT",
+  "module": "./code/dist/esm/timeline-monad.js",
+  "name": "timeline-monad",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stken2050/timeline-monad.git"
+  },
+  "scripts": {
+    "test": "jest --verbose=true"
+  },
+  "types": "./code/dist/esm/timeline-monad.d.ts",
+  "version": "2.0.0"
+}

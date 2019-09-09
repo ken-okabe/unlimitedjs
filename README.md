@@ -33,16 +33,29 @@ node -r esm ./timeline-monad-start/hello-all.js
 ###### Transpile JSX/TSX -> JS with [TypeScript](https://www.typescriptlang.org/) (installed to the project local as a dev-dependency)
 
 ```
-tsc -p ./unlimitedjs-start/
+tsc -p ./www/unlimitedjs-tutorial/
 ```
 
-###### Open the HTML File in Firefox locally
+```
+tsc -p ./www/unlimitedjs-materialdesign
+```
 
-**`unlimitedjs/unlimitedjs-start.html`**
+###### Start a mini web server
 
-**`unlimitedjs/unlimitedjs-start-cdn.html`**
+```
+node -r esm ./test-server.js
+```
 
-Firefox recommended since Chrome does not work with local ESM files for security restriction.
+Open WebBrowser with URLs
+
+**`http://localhost:19999/unlimitedjs-tutorial.html`**
+
+**`http://localhost:19999/unlimitedjs-canvas.html`**
+
+**`http://localhost:19999/unlimitedjs-materialdesign-hello.html`**
+
+**`http://localhost:19999/unlimitedjs-materialdesign-login.html`**
+
 
 ## Read more on [Docs & Tutorial]( https://stken2050.github.io/unlimitedjs/)
 
