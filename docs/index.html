@@ -487,8 +487,8 @@ td >code {background-color: #aaaaaa};
 <div class="paragraph">
 <p>Unlike the other virtual DOM frameworks, <strong>unlimitedjs</strong> works directly with <a href="https://material.io/develop/web/">Material Design Components(MDC) for web</a> in a standarized manner without the need for a wrapper/adapter/component library such as <a href="https://github.com/material-components/material-components-web-react">MDC React</a> or <a href="https://github.com/stasson/vue-mdc-adapter">vue-mdc-adapter</a></p>
 </div>
-<iframe height="776" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC hello" src="//codepen.io/stken2050/embed/vbjzBP/?height=776&theme-id=36003&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href='https://codepen.io/stken2050/pen/vbjzBP/'>unlimitedjs + MDC hello</a> by Ken OKABE
+<iframe height="776" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC login" src="https://codepen.io/stken2050/embed/vbjzBP/?height=382&theme-id=36003&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/vbjzBP/'>unlimitedjs + MDC login</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 <div class="admonitionblock tip">
@@ -782,7 +782,7 @@ Your browser does not support the video tag.
 </li>
 </ul>
 </div>
-<iframe height="386" style="width: 100%;" scrolling="no" title="React Hooks" src="//codepen.io/stken2050/embed/WPrmga/?height=386&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="386" style="width: 100%;" scrolling="no" title="React Hooks" src="https://codepen.io/stken2050/embed/WPrmga/?height=386&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/WPrmga/'>React Hooks</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -862,7 +862,7 @@ ReactDOM.render(&lt;Counter /&gt;, document.body);   <i class="conum" data-value
 </li>
 </ul>
 </div>
-<iframe height="472" style="width: 100%;" scrolling="no" title="unlimitedjs" src="//codepen.io/stken2050/embed/RvrOpJ/?height=472&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="472" style="width: 100%;" scrolling="no" title="unlimitedjs" src="https://codepen.io/stken2050/embed/RvrOpJ/?height=472&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/RvrOpJ/'>unlimitedjs</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -881,25 +881,25 @@ ReactDOM.render(&lt;Counter /&gt;, document.body);   <i class="conum" data-value
 <div class="listingblock">
 <div class="title">counter-unlimitedjs.jsx</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "timeline-monad";
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T, world } from "timeline-monad";
 import { h, patch } from "superfine";
 
-  const countTL = T(); <i class="conum" data-value="1"></i><b>(1)</b>
+  const countTL = T(self =&gt; self.now = 0); <i class="conum" data-value="1"></i><b>(1)</b>
 
-  const topNodeTL = countTL.sync(count =&gt;   <i class="conum" data-value="2"></i><b>(2)</b>
-    &lt;div&gt;    <i class="conum" data-value="3"></i><b>(3)</b>
+  const topNodeTL = countTL.sync( <i class="conum" data-value="2"></i><b>(2)</b>
+    count =&gt; (&lt;div&gt;  <i class="conum" data-value="3"></i><b>(3)</b>
       &lt;p&gt;You clicked {count} times&lt;/p&gt;
       &lt;button onclick={() =&gt; countTL.now = count + 1}&gt; <i class="conum" data-value="4"></i><b>(4)</b>
         Click me
-    　&lt;/button&gt;
-    &lt;/div&gt;
+    &lt;/button&gt;
+    &lt;/div&gt;)
   );
 
-  const viewNodeTL = topNodeTL.sync(   <i class="conum" data-value="5"></i><b>(5)</b>
-    topNode =&gt; patch(viewNodeTL.now, topNode, document.body)
+  const viewNodeTL = topNodeTL.sync( <i class="conum" data-value="5"></i><b>(5)</b>
+    node =&gt; patch(document.getElementById("app"), node)
   );
 
-  countTL.now = 0;   <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+  world.now = countTL; <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -926,7 +926,7 @@ import { h, patch } from "superfine";
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>Initial number of count <em>timeline</em> (<code>countTL</code> current "state")</td>
+<td>Initialize <code>countTL</code></td>
 </tr>
 </table>
 </div>
@@ -981,7 +981,7 @@ because it has a <a href="https://ncatlab.org/nlab/show/monad"><em>monad</em></a
 </div>
 <div class="sect3">
 <h4 id="_hello_timeline">4.1.1. Hello timeline</h4>
-<iframe height="265" style="width: 100%;" scrolling="no" title="Hello Timeline" src="//codepen.io/stken2050/embed/ZwOaEr/?height=265&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="265" style="width: 100%;" scrolling="no" title="Hello Timeline" src="https://codepen.io/stken2050/embed/ZwOaEr/?height=265&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/ZwOaEr/'>Hello Timeline</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -1042,21 +1042,21 @@ setTimeout(()=&gt;
 </tr>
 </table>
 </div>
-<iframe height="447" style="width: 100%;" scrolling="no" title="Hello Timeline Sync" src="//codepen.io/stken2050/embed/mvpaER/?height=447&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="447" style="width: 100%;" scrolling="no" title="Hello Timeline Sync" src="https://codepen.io/stken2050/embed/mvpaER/?height=447&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/mvpaER/'>Hello Timeline Sync</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 </div>
 <div class="sect3">
 <h4 id="_timer_timeline">4.1.3. Timer timeline</h4>
-<iframe height="373" style="width: 100%;" scrolling="no" title="Hello Timeline timer" src="//codepen.io/stken2050/embed/daNXja/?height=373&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="373" style="width: 100%;" scrolling="no" title="Hello Timeline timer" src="https://codepen.io/stken2050/embed/daNXja/?height=373&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/daNXja/'>Hello Timeline timer</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 </div>
 <div class="sect3">
 <h4 id="_canvas">4.1.4. Canvas</h4>
-<iframe height="550" style="width: 100%;" scrolling="no" title="unlimitedjs_canvas" src="//codepen.io/stken2050/embed/jdmeYK/?height=550&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="550" style="width: 100%;" scrolling="no" title="unlimitedjs_canvas" src="https://codepen.io/stken2050/embed/jdmeYK/?height=550&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/jdmeYK/'>unlimitedjs_canvas</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -1111,43 +1111,45 @@ const timeline = pointerTL.sync(pointer =&gt;    <i class="conum" data-value="4"
 </div>
 <div class="sect3">
 <h4 id="_virtual_dom_superfine">4.1.5. Virtual DOM (Superfine)</h4>
-<iframe height="654" style="width: 100%;" scrolling="no" title="unlimitedjs_vdom" src="//codepen.io/stken2050/embed/xMdyjx/?height=654&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="654" style="width: 100%;" scrolling="no" title="unlimitedjs_vdom" src="https://codepen.io/stken2050/embed/xMdyjx/?height=654&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/xMdyjx/'>unlimitedjs_vdom</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 <div class="listingblock">
 <div class="title">timeline virtualDOM</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
-import { h, patch } from "../../node_modules/superfine/src/index.js";
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T, world } from "https://unpkg.com/timeline-monad@2.0.0/code/dist/timeline-monad.js";
 
-const canvas = document.getElementById('vdom1'); <i class="conum" data-value="1"></i><b>(1)</b>
+const _canvas = document.getElementById('canvas1');
+const canvas = (_canvas == null)   <i class="conum" data-value="1"></i><b>(1)</b>
+  ? {} as HTMLCanvasElement
+  : _canvas as HTMLCanvasElement;
 
-const pointerTL = T(self =&gt; {    <i class="conum" data-value="2"></i><b>(2)</b>
+const pointerTL = T(self =&gt; {  <i class="conum" data-value="2"></i><b>(2)</b>
   canvas.onmousemove = e =&gt;
     self.now = { x: e.clientX, y: e.clientY };
 });
 
-const drawTL = T(self =&gt; {    <i class="conum" data-value="3"></i><b>(3)</b>
-  const topNodeTL = self.sync(pointer =&gt;
-    &lt;div style={{
-      "left": (pointer.x - 20) + "px",
-      "top": (pointer.y - 20) + "px",
-      "width": "20px",
-      "height": "20px",
-      "border-radius": "50%",
-      "background-color": "red",
-      "position": "relative"
-    }}&gt;&lt;/div&gt;
-  );
-  const viewNodeTL = topNodeTL.sync(topNode =&gt;
-    patch(viewNodeTL.now, topNode, canvas)
-  );
+const drawTL = T(self =&gt; {  <i class="conum" data-value="3"></i><b>(3)</b>
+  const _ctx = canvas.getContext('2d');
+  const ctx = (_ctx == null)
+    ? {} as CanvasRenderingContext2D
+    : _ctx;
+  const timeline = self.sync(pointer =&gt; {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(pointer.x - 10, pointer.y - 10, 10, 0, Math.PI * 2, true);
+    ctx.fillStyle = "red";
+    ctx.fill();
+  });
 });
 
-const timeline = pointerTL.sync(pointer =&gt;   <i class="conum" data-value="4"></i><b>(4)</b>
+const timeline = pointerTL.sync(pointer =&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
   drawTL.now = pointer
-);</code></pre>
+);
+
+world.now = pointerTL;
+world.now = drawTL;</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1251,31 +1253,7 @@ const helloNode = h("div", null, "Hello!");</code></pre>
 <div class="listingblock">
 <div class="title">patch</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">patch(oldNode, newNode, container);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><code>patch</code> function returns the next node.</p>
-</div>
-<div class="paragraph">
-<p>Here&#8217;s the detail of the API specification according to the TypeScript type definition file: <a href="https://github.com/jorgebucaran/superfine/blob/master/superfine.d.ts">superfine.d.ts</a>.</p>
-</div>
-<div class="listingblock">
-<div class="title">patch type definition</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">/**
- * Render a virtual DOM node into a DOM element container.
- *
- * @param {VNode} oldNode The last virtual DOM node.
- * @param {VNode} nextNode The next virtual DOM node.
- * @param {Element?} container A DOM element where the new virtual DOM will be rendered.
- * @returns {VNode} Returns nextNode.
- **/
-export function patch(
-  lastNode: VNode,
-  nextNode: VNode,
-  container: Element
-): VNode</code></pre>
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">patch(container, newNode);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1298,9 +1276,8 @@ export function patch(
 const helloNode = &lt;div&gt;Hello!&lt;/div&gt;;  <i class="conum" data-value="1"></i><b>(1)</b>
 
 const lastNode = patch( <i class="conum" data-value="2"></i><b>(2)</b>
-      undefined,  <i class="conum" data-value="3"></i><b>(3)</b>
-      helloNode,  <i class="conum" data-value="4"></i><b>(4)</b>
-      document.body <i class="conum" data-value="5"></i><b>(5)</b>
+      document.getElementById("app"),  <i class="conum" data-value="3"></i><b>(3)</b>
+      helloNode  <i class="conum" data-value="4"></i><b>(4)</b>
     );</code></pre>
 </div>
 </div>
@@ -1316,22 +1293,18 @@ const lastNode = patch( <i class="conum" data-value="2"></i><b>(2)</b>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>last (old) virtual DOM node</td>
+<td>Real DOM Container to render the virtual DOM</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
 <td>next (new) virtual DOM node</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Real DOM Container to render the virtual DOM</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
 <p>Although we need to import <code>{ h, patch }</code>, <code>h</code> will never appear in the code as long as we use JSX.</p>
 </div>
-<iframe height="300" style="width: 100%;" scrolling="no" title="Hello superfine" src="//codepen.io/stken2050/embed/VgajBm/?height=300&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="300" style="width: 100%;" scrolling="no" title="Hello superfine" src="https://codepen.io/stken2050/embed/VgajBm/?height=300&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/VgajBm/'>Hello superfine</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -1350,12 +1323,14 @@ const lastNode = patch( <i class="conum" data-value="2"></i><b>(2)</b>
 <div class="listingblock">
 <div class="title">Hello world of unlimitedjs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "timeline-monad";
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T, world } from "timeline-monad";
 import { h, patch } from "superfine";
 
   const topNodeTL = T(); <i class="conum" data-value="1"></i><b>(1)</b>
   const viewNodeTL = topNodeTL.sync( <i class="conum" data-value="2"></i><b>(2)</b>
-    topNode =&gt; patch(viewNodeTL.now, topNode, document.body) <i class="conum" data-value="3"></i><b>(3)</b>
+    topNode =&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+     patch(document.getElementById("app"), helloNode
+    );
   );
 
   const helloNode = &lt;div&gt;hello!&lt;/div&gt<i class="conum" data-value="4"></i><b>(4)</b>
@@ -1389,7 +1364,7 @@ import { h, patch } from "superfine";
 <div class="paragraph">
 <p>In unlimitedjs(timeline) framework, if a value is mutable, then it&#8217;s a timeline.</p>
 </div>
-<iframe height="345" style="width: 100%;" scrolling="no" title="Hello unlimitedjs" src="//codepen.io/stken2050/embed/yZpvQV/?height=345&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="345" style="width: 100%;" scrolling="no" title="Hello unlimitedjs" src="https://codepen.io/stken2050/embed/yZpvQV/?height=345&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/yZpvQV/'>Hello unlimitedjs</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -1404,59 +1379,66 @@ import { h, patch } from "superfine";
 <div class="listingblock">
 <div class="title">Clock</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "timeline-monad";
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T, world } from "timeline-monad";
 import { h, patch } from "superfine";
 
-  const topNodeTL = T(); <i class="conum" data-value="1"></i><b>(1)</b>
-  const viewNodeTL = topNodeTL.sync( <i class="conum" data-value="2"></i><b>(2)</b>
-    topNode =&gt; patch(viewNodeTL.now, topNode, document.body) <i class="conum" data-value="3"></i><b>(3)</b>
+  const newNodeTL = T(self =&gt;  <i class="conum" data-value="1"></i><b>(1)</b>
+    self.sync(node =&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+      patch(document.getElementById("app"), node) <i class="conum" data-value="3"></i><b>(3)</b>
+    )
   );
 
-  const f = () =&gt; { <i class="conum" data-value="4"></i><b>(4)</b>
-    const timeString = new Date().toLocaleTimeString(); <i class="conum" data-value="5"></i><b>(5)</b>
-    const clockNode = &lt;div&gt;{timeString}&lt;/div&gt<i class="conum" data-value="6"></i><b>(6)</b>
-    topNodeTL.now = clockNode; <i class="conum" data-value="7"></i><b>(7)</b>
+  world.now = newNodeTL;  <i class="conum" data-value="4"></i><b>(4)</b>
+
+  const f = () =&gt; {  <i class="conum" data-value="5"></i><b>(5)</b>
+    const timeString = new Date().toLocaleTimeString(); <i class="conum" data-value="6"></i><b>(6)</b>
+    const clockNode = &lt;div&gt;{timeString}&lt;/div&gt<i class="conum" data-value="7"></i><b>(7)</b>
+    newNodeTL.now = clockNode; <i class="conum" data-value="8"></i><b>(8)</b>
   };
-  setInterval(f, 1000); <i class="conum" data-value="8"></i><b>(8)</b></code></pre>
+  setInterval(f, 1000);  <i class="conum" data-value="9"></i><b>(9)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>same as Hello world</td>
+<td>self is <code>newNodeTL</code></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>same as Hello world</td>
+<td>define the behavior when self is updated</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>same as Hello world</td>
+<td>superfine patch work</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><code>setInterval</code> function : <code>f</code></td>
+<td>Initialize  <code>newNodeTL</code></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Obtain the current time strings</td>
+<td><code>setInterval</code> function : <code>f</code></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td><code>{timeString}</code> is a way to write variables inside of virtual DOM node in JSX</td>
+<td>Obtain the current time strings</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>Define the latest "state" on the topNode timeline, which means <strong>update</strong></td>
+<td><code>{timeString}</code> is a way to write variables inside of virtual DOM node in JSX</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Define the latest "state" on the topNode timeline, which means <strong>update</strong></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
 <td><code>setInterval</code> triggers <code>f</code> every 1 second</td>
 </tr>
 </table>
 </div>
-<iframe height="447" style="width: 100%;" scrolling="no" title="unlimitedjs clock" src="//codepen.io/stken2050/embed/WPdzrG/?height=447&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="447" style="width: 100%;" scrolling="no" title="unlimitedjs clock" src="https://codepen.io/stken2050/embed/WPdzrG/?height=447&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/WPdzrG/'>unlimitedjs clock</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -1475,115 +1457,45 @@ import { h, patch } from "superfine";
 <div class="listingblock">
 <div class="title">SelfContained Clock</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "timeline-monad";
-import { h, patch } from "superfine";
-
-  const clockTL = T((self) =&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
-    const f = () =&gt;     <i class="conum" data-value="2"></i><b>(2)</b>
-      self.now = new Date().toLocaleTimeString(); <i class="conum" data-value="3"></i><b>(3)</b>
-    setInterval(f, 1000);    <i class="conum" data-value="4"></i><b>(4)</b>
-  });
-
-  const clockNodeTL = clockTL.sync( <i class="conum" data-value="5"></i><b>(5)</b>
-    clock =&gt; (&lt;div&gt;{clock}&lt;/div&gt;)
-  );
-
-  const topNodeTL = clockNodeTL;
-
-  const viewNodeTL = topNodeTL.sync( <i class="conum" data-value="6"></i><b>(6)</b>
-    topNode =&gt; patch(viewNodeTL.now, topNode, document.body)
-  );</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>SelfContained Clock <em>timeline</em></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><code>setInterval</code> function : <code>f</code></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Obtain the current time strings</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><code>setInterval</code> triggers <code>f</code> every 1 second</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td><code>clockTL</code> is synchronized with the <code>clockNode</code> virtual DOM <em>timeline</em></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>virtual DOM rendering</td>
-</tr>
-</table>
-</div>
-<iframe height="427" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained clock" src="//codepen.io/stken2050/embed/daJmRE/?height=427&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href='https://codepen.io/stken2050/pen/daJmRE/'>unlimitedjs self-contained clock</a> by Ken OKABE
-  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
-<hr>
-<div class="paragraph">
-<p>In the above case, <code>clockTL</code> is a global <em>timeline</em>, and it&#8217;s also possible to define it as a local <em>timeline</em> as below.</p>
-</div>
-<div class="listingblock">
-<div class="title">SelfContained Counter2</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "timeline-monad";
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T, world } from "timeline-monad";
 import { h, patch } from "superfine";
 
   const clockNodeTL = T(self =&gt; {
-    const clockTL = T((self) =&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
+    const clockTL = T(self =&gt; {
       const f = () =&gt;
         self.now = new Date().toLocaleTimeString();
       setInterval(f, 1000);
     });
     const timeline = clockTL.sync(clock =&gt;
-      self.now = &lt;div&gt;{clock}&lt;/div&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+      self.now = &lt;div&gt;{clock}&lt;/div&gt;
     );
+
+    world.now = clockTL;
   });
 
   const topNodeTL = clockNodeTL;
 
   const viewNodeTL = topNodeTL.sync(
-    topNode =&gt; patch(viewNodeTL.now, topNode, document.body)
-  );</code></pre>
+    node =&gt; patch(document.getElementById("app"), node)
+  );
+
+  world.now = clockNodeTL;</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><code>clockTL</code> is a local <em>timeline</em> contained in the global <code>clockNodeTL</code></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><code>self</code> is the <code>clockNodeTL</code> itself and synchronized with <code>clockTL</code></td>
-</tr>
-</table>
-</div>
-<iframe height="551" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained clock2" src="//codepen.io/stken2050/embed/bzaxzm/?height=551&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href='https://codepen.io/stken2050/pen/bzaxzm/'>unlimitedjs self-contained clock2</a> by Ken OKABE
+<iframe height="427" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained clock" src="https://codepen.io/stken2050/embed/daJmRE/?height=427&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/stken2050/pen/daJmRE/'>unlimitedjs self-contained clock</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 <hr>
 <div class="listingblock">
 <div class="title">SelfContained Counter</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "timeline-monad";
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T, world } from "timeline-monad";
 import { h, patch } from "superfine";
 
-  const counterNodeTL = T(self =&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
-    const countTL = T(self =&gt; {  <i class="conum" data-value="2"></i><b>(2)</b>
-      const f = () =&gt; self.now = 0;  <i class="conum" data-value="3"></i><b>(3)</b>
-      setTimeout(f, 0); <i class="conum" data-value="4"></i><b>(4)</b>
-    });
-    const timeline = countTL.sync(count =&gt;  <i class="conum" data-value="5"></i><b>(5)</b>
+  const counterNodeTL = T(self =&gt; {
+    const countTL = T(self =&gt; self.now = 0);
+    const timeline = countTL.sync(count =&gt;
       self.now = (&lt;div&gt;
         &lt;p&gt;You clicked {count} times&lt;/p&gt;
         &lt;button onclick={() =&gt; countTL.now = count + 1}&gt;
@@ -1591,44 +1503,17 @@ import { h, patch } from "superfine";
         &lt;/button&gt;
       &lt;/div&gt;)
     );
+    world.now = countTL;
   });
-
   const topNodeTL = counterNodeTL;
+  const viewNodeTL = topNodeTL.sync(
+    node =&gt; patch(document.getElementById("app"), node)
+  );
 
-  const viewNodeTL = topNodeTL.sync(topNode =&gt; <i class="conum" data-value="6"></i><b>(6)</b>
-    patch(viewNodeTL.now, topNode, document.body)
-  );</code></pre>
+  world.now = counterNodeTL;</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>SelfContained CounterNode <em>timeline</em></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>SelfContained Count <em>timeline</em></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Initialize the count number</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>setTimeout next tick after the whole declarations</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td><code>countTL</code> is synchronized with the virtual DOM <em>timeline</em></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>virtual DOM rendering</td>
-</tr>
-</table>
-</div>
-<iframe height="636" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained counter" src="//codepen.io/stken2050/embed/MLrVPX/?height=636&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="636" style="width: 100%;" scrolling="no" title="unlimitedjs self-contained counter" src="https://codepen.io/stken2050/embed/MLrVPX/?height=636&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/MLrVPX/'>unlimitedjs self-contained counter</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -1693,14 +1578,14 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 <div class="listingblock">
 <div class="title">Refactor useReducer lazy in unlimitedjs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">  const btnTL = T();
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">  const countTL = T(self =&gt; self.now = 0);
 
-  const countTL = T(self =&gt; {
-    const timeline = btnTL.sync(btn =&gt;
-      self.now = (btn === 0)
+  const btnTL = T(self =&gt;
+    self.sync(btn =&gt;
+      countTL.now = (btn === 0)
         ? 0
-        : self.now + btn);
-  });
+        : countTL.now + btn)
+  );
 
   const topNodeTL = countTL.sync(count =&gt;
     &lt;div&gt;
@@ -1714,14 +1599,15 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
     &lt;/div&gt;
   );
 
-  const viewNodeTL = topNodeTL.sync(topNode =&gt;
-    patch(viewNodeTL.now, topNode, document.body)
+  const viewNodeTL = topNodeTL.sync(
+    node =&gt; patch(document.getElementById("app"), node)
   );
 
-  countTL.now = 0;</code></pre>
+  world.now = btnTL;
+  world.now = countTL;</code></pre>
 </div>
 </div>
-<iframe height="547" style="width: 100%;" scrolling="no" title="unlimitedjs refactor ReactHooks reducer" src="//codepen.io/stken2050/embed/JxLdWb/?height=547&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="547" style="width: 100%;" scrolling="no" title="unlimitedjs refactor ReactHooks reducer" src="https://codepen.io/stken2050/embed/JxLdWb/?height=547&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/JxLdWb/'>unlimitedjs refactor ReactHooks reducer</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -1737,85 +1623,22 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 <p>Unlike <a href="https://reactjs.org/docs/components-and-props.html">React.Component</a>, in unlimitedjs, a mutable virtualDOM node is abstracted simply as an <strong><em>timeline</em> of virtualDOM node</strong>.</p>
 </div>
 <div class="paragraph">
-<p>Suppose we have <em>timelines</em> of virtualDOM node as below:</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="title"><em>timeline</em> structure</div>
-<div class="ulist">
-<ul>
-<li>
-<p>viewNode (represents the realDOM)</p>
-</li>
-<li>
-<p>topNode</p>
-<div class="ulist">
-<ul>
-<li>
-<p>clockNode</p>
-</li>
-<li>
-<p>counterNode</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><strong><em>timeline</em> of virtual DOM is composed in various ways in functional programming scheme without any extra APIs and rules.</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>viewNode &#8592; topNode</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Although there&#8217;s no rule, but we already have a patterned code to describe to connect <code>viewNode</code> and <code>topNode</code> which means reactive rendering the virualDOM(<code>topNode</code>) to the realDOM(<code>viewNode</code>).</p>
-</div>
-<div class="listingblock">
-<div class="title">render the view</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">const viewNodeTL = topNodeTL.sync(topNode =&gt;
-    patch(viewNodeTL.now, topNode, document.body)
-);</code></pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>topNode &#8592; (clockNode + counterNode)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
 <p>One of the functional way is to define "merge" <em>timeline</em> like this:</p>
 </div>
 <div class="listingblock">
 <div class="title">merge <em>timeline</em></div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">  const mergeTL = TLs =&gt; T(self =&gt;
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">  const mergeTL = (TLs =&gt; T(self =&gt;
     TLs.map(TL =&gt; TL.sync(() =&gt;
       self.now = TLs.map(TL =&gt; TL.now)
     ))
-  );</code></pre>
+  ))([timelineA, timelineB]);</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Here&#8217;s how the <code>mergeTL</code> works:</p>
 </div>
-<iframe height="638" style="width: 100%;" scrolling="no" title="mirge Timeline test" src="//codepen.io/stken2050/embed/damJZP/?height=638&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="638" style="width: 100%;" scrolling="no" title="mirge Timeline test" src="https://codepen.io/stken2050/embed/damJZP/?height=638&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/damJZP/'>mirge Timeline test</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -1826,14 +1649,19 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 <div class="listingblock">
 <div class="title">topNode <em>timeline</em></div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">  const topNodeTL = T(self =&gt;
-    mergeTL([clockNodeTL, counterNodeTL])
-      .sync(([clockNode, counterNode]) =&gt;
-        self.now = &lt;div&gt;
-          &lt;h3&gt;{clockNode}&lt;/h3&gt;
-          {counterNode}
-        &lt;/div&gt;
-      )
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">  const mergeTL = (TLs =&gt; T(self =&gt;
+    TLs.map(TL =&gt; TL.sync(() =&gt;
+      self.now = TLs.map(TL =&gt; TL.now)
+    ))
+  ))([clockNodeTL, counterNodeTL]);
+
+  const topNodeTL = T(self =&gt;
+    mergeTL.sync(([clockNode, counterNode]) =&gt;
+      self.now = &lt;div&gt;
+        &lt;h3&gt;{clockNode}&lt;/h3&gt;
+        {counterNode}
+      &lt;/div&gt;
+    )
   );</code></pre>
 </div>
 </div>
@@ -1844,53 +1672,54 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 <div class="title">viewNode &#8592; topNode &#8592; (clockNode + counterNode)</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">  const clockNodeTL = T(self =&gt; {
-    const clockTL = T(
-      (self) =&gt; {
-        const f = () =&gt;
-          self.now = new Date().toLocaleTimeString();
-        setInterval(f, 1000);
-      }
-    );
+    const clockTL = T(self =&gt; {
+      const f = () =&gt;
+        self.now = new Date().toLocaleTimeString();
+      setInterval(f, 1000);
+    });
     const timeline = clockTL.sync(clock =&gt;
-      self.now = &lt;h3&gt;{clock}&lt;/h3&gt;
+      self.now = &lt;div&gt;{clock}&lt;/div&gt;
     );
+
+    world.now = clockTL;
   });
 
   const counterNodeTL = T(self =&gt; {
-    const countTL = T();
-    const buttonNode = &lt;button
-      onclick={() =&gt; countTL.now = countTL.now + 1}&gt;
-      Click me
-      &lt;/button&gt;;
+    const countTL = T(self =&gt; self.now = 0);
     const timeline = countTL.sync(count =&gt;
-      self.now = &lt;div&gt;
-        &lt;p&gt;You clicked {countTL.now} times&lt;/p&gt;
-        {buttonNode}
-      &lt;/div&gt;
+      self.now = (&lt;div&gt;
+        &lt;p&gt;You clicked {count} times&lt;/p&gt;
+        &lt;button onclick={() =&gt; countTL.now = count + 1}&gt;
+          Click me
+        &lt;/button&gt;
+      &lt;/div&gt;)
     );
-    const f = () =&gt; countTL.now = 0;
-    setTimeout(f, 0);
+    world.now = countTL;
   });
 
-  const mergeTL = TLs =&gt; T(self =&gt;
+  const mergeTL = (TLs =&gt; T(self =&gt;
     TLs.map(TL =&gt; TL.sync(() =&gt;
       self.now = TLs.map(TL =&gt; TL.now)
     ))
-  );
+  ))([clockNodeTL, counterNodeTL]);
 
   const topNodeTL = T(self =&gt;
-    mergeTL([clockNodeTL, counterNodeTL])
-      .sync(([clockNode, counterNode]) =&gt;
-        self.now = &lt;div&gt;
-          &lt;h3&gt;{clockNode}&lt;/h3&gt;
-          {counterNode}
-        &lt;/div&gt;
-      )
+    mergeTL.sync(([clockNode, counterNode]) =&gt;
+      self.now = &lt;div&gt;
+        &lt;h3&gt;{clockNode}&lt;/h3&gt;
+        {counterNode}
+      &lt;/div&gt;
+    )
   );
 
-  const viewNodeTL = topNodeTL.sync(topNode =&gt;
-    patch(viewNodeTL.now, topNode, document.body)
-  );</code></pre>
+  const viewNodeTL = topNodeTL.sync(
+    node =&gt; patch(document.getElementById("app"), node)
+  );
+
+  world.now = topNodeTL;
+  world.now = mergeTL;
+  world.now = clockNodeTL;
+  world.now = counterNodeTL;</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1908,7 +1737,7 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 </tr>
 </table>
 </div>
-<iframe height="312" style="width: 100%;" scrolling="no" title="unlimitedjs mirge timelines of clock &amp; counter node" src="//codepen.io/stken2050/embed/WPzMNK/?height=312&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="312" style="width: 100%;" scrolling="no" title="unlimitedjs mirge timelines of clock &amp; counter node" src="https://codepen.io/stken2050/embed/WPzMNK/?height=312&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/WPzMNK/'>unlimitedjs mirge timelines of clock &amp; counter node</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -1934,7 +1763,7 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 </div>
 <div class="sect2">
 <h3 id="_hello_mdc_with_unlimitedjs">10.2. Hello MDC with unlimitedjs</h3>
-<iframe height="469" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC hello" src="//codepen.io/stken2050/embed/eXOgoO/?height=469&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="469" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC hello" src="https://codepen.io/stken2050/embed/eXOgoO/?height=469&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/stken2050/pen/eXOgoO/'>unlimitedjs + MDC hello</a> by Ken OKABE
   (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
@@ -1943,47 +1772,50 @@ ReactDOM.render(&lt;Counter initialCount=0 /&gt;, document.body);</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
+
 &lt;head&gt;
     &lt;meta charset="UTF-8" /&gt;
-
-    &lt;link rel="stylesheet" href="./node_modules/material-components-web/dist/material-components-web.min.css"&gt;
-
-    &lt;script src="./node_modules/material-components-web/dist/material-components-web.min.js"&gt;&lt;/script&gt;
+    &lt;link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet"&gt;
+    &lt;script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"&gt;
 
     &lt;script type="module" src="./unlimitedjs-materialdesign/build/hello.js"&gt;&lt;/script&gt;
 
 &lt;/head&gt;
+
 &lt;body&gt;
+    &lt;div id="app"&gt;&lt;/div&gt;
 &lt;/body&gt;
+
 &lt;/html&gt;</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">hello.tsx</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
-import { h, patch } from "../../node_modules/superfine/src/index.js";
+<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T, world } from "../../lib/timeline-monad/code/dist/timeline-monad.js";
+import { h, patch } from "../../lib/superfine/src/index.js";
 
-const topNodeTL = T(self =&gt; {
-  const f = () =&gt; (self.now =
-    &lt;button class="mdc-button mdc-button--raised"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-      Press Me
-      &lt;/button&gt;
-  );
-  setTimeout(f, 0); <i class="conum" data-value="2"></i><b>(2)</b>
-});
-
-const viewNodeTL = topNodeTL.sync(topNode =&gt; <i class="conum" data-value="3"></i><b>(3)</b>
-  patch(viewNodeTL.now, topNode, document.body)
+const topNodeTL = T(self =&gt;
+  self.now =
+  &lt;button class="mdc-button mdc-button--raised"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    Press Me
+    &lt;/button&gt;
 );
 
-const mdcTL = viewNodeTL.sync(() =&gt; { <i class="conum" data-value="4"></i><b>(4)</b>
+const viewNodeTL = topNodeTL.sync(node =&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+  patch(document.getElementById("app"), node)
+);
+
+const mdcTL = viewNodeTL.sync(() =&gt; {  <i class="conum" data-value="3"></i><b>(3)</b>
   Array.from(document
-    .querySelectorAll('.mdc-button')) <i class="conum" data-value="5"></i><b>(5)</b>
+    .querySelectorAll('.mdc-button'))  <i class="conum" data-value="4"></i><b>(4)</b>
     .map(button =&gt;
       (window as any).mdc.ripple
         .MDCRipple.attachTo(button));
-});</code></pre>
+});
+
+world.now = topNodeTL; <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1994,19 +1826,19 @@ const mdcTL = viewNodeTL.sync(() =&gt; { <i class="conum" data-value="4"></i><b>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Next tick: propagate the DOM value after all declarations</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>Render pattern of unlimitedjs</td>
 </tr>
 <tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>mdcTL is a timeline that is synchronized to the viewNodeTL that is virtualDOM rendering timeline</td>
 </tr>
 <tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
 <td>The standard manner to attach JavaScript to MDC, see <a href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-ripple">the document</a> and <a href="https://github.com/material-components/material-components-web/issues/3236">the issue</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Initialize <code>topNodeTL</code></td>
 </tr>
 </table>
 </div>
@@ -2022,7 +1854,7 @@ const mdcTL = viewNodeTL.sync(() =&gt; { <i class="conum" data-value="4"></i><b>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-03-14 05:00:24 JST
+Last updated 2019-09-10 15:19:48 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">
