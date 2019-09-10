@@ -47,28 +47,8 @@ Unlike the other virtual DOM frameworks, **unlimitedjs** works directly with htt
 https://github.com/stken2050/unlimitedjs/blob/master/unlimitedjs-materialdesign/src/login.tsx[source]
 ==== 
 
-
----
-
-
-ToDo-list app with Add/Delete/Edit functionalities.
-
-
-
-++++
-<iframe height="493" style="width: 100%;" scrolling="no" title="unlimitedjs + MDC ToDo" src="//codepen.io/stken2050/embed/jddGQP/?height=493&theme-id=36003&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href='https://codepen.io/stken2050/pen/jddGQP/'>unlimitedjs + MDC ToDo</a> by Ken OKABE
-  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
-++++
-
-
-[TIP]
-.JSX(TSX) Code
-====
-https://github.com/stken2050/unlimitedjs/blob/master/unlimitedjs-materialdesign/src/todolist2.tsx[source]
-==== 
-
+ 
+ 
 ---
 
 See <<10_material-MDC.adoc#topcode>>
