@@ -57,14 +57,14 @@ In unlimitedjs, we can refactor the code without extra APIs like this:
 [source,js]
 .Refactor useReducer lazy in unlimitedjs
 ----
-  const btnTL = T();
+  const countTL = T(self => self.now = 0);
 
-  const countTL = T(self => {
-    const timeline = btnTL.sync(btn =>
-      self.now = (btn === 0)
+  const btnTL = T(self =>
+    self.sync(btn =>
+      countTL.now = (btn === 0)
         ? 0
-        : self.now + btn);
-  });
+        : countTL.now + btn)
+  );
 
   const topNodeTL = countTL.sync(count =>
     <div>
@@ -78,11 +78,12 @@ In unlimitedjs, we can refactor the code without extra APIs like this:
     </div>
   );
 
-  const viewNodeTL = topNodeTL.sync(topNode =>
-    patch(viewNodeTL.now, topNode, document.body)
+  const viewNodeTL = topNodeTL.sync(
+    node => patch(document.getElementById("app"), node)
   );
 
-  countTL.now = 0;
+  world.now = btnTL;
+  world.now = countTL;
 ----
 
 ++++

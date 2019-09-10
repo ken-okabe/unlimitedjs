@@ -140,36 +140,38 @@ const timeline = pointerTL.sync(pointer =>    <4>
 [source,js]
 .timeline virtualDOM
 ----
-import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
-import { h, patch } from "../../node_modules/superfine/src/index.js";
+import { T, world } from "https://unpkg.com/timeline-monad@2.0.0/code/dist/timeline-monad.js";　
 
-const canvas = document.getElementById('vdom1'); <1>
+const _canvas = document.getElementById('canvas1');
+const canvas = (_canvas == null)   <1>
+  ? {} as HTMLCanvasElement
+  : _canvas as HTMLCanvasElement;
 
-const pointerTL = T(self => {    <2>
+const pointerTL = T(self => {  <2>
   canvas.onmousemove = e =>
     self.now = { x: e.clientX, y: e.clientY };
 });
 
-const drawTL = T(self => {    <3>
-  const topNodeTL = self.sync(pointer =>
-    <div style={{
-      "left": (pointer.x - 20) + "px",
-      "top": (pointer.y - 20) + "px",
-      "width": "20px",
-      "height": "20px",
-      "border-radius": "50%",
-      "background-color": "red",
-      "position": "relative"
-    }}></div>
-  );
-  const viewNodeTL = topNodeTL.sync(topNode =>
-    patch(viewNodeTL.now, topNode, canvas)
-  );
+const drawTL = T(self => {  <3>
+  const _ctx = canvas.getContext('2d');
+  const ctx = (_ctx == null)
+    ? {} as CanvasRenderingContext2D
+    : _ctx;
+  const timeline = self.sync(pointer => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(pointer.x - 10, pointer.y - 10, 10, 0, Math.PI * 2, true);
+    ctx.fillStyle = "red";
+    ctx.fill();
+  });
 });
 
-const timeline = pointerTL.sync(pointer =>   <4>
+const timeline = pointerTL.sync(pointer =>  <4>
   drawTL.now = pointer
-); 
+);
+
+world.now = pointerTL;
+world.now = drawTL;
 ----
 
 <1> real DOM node (named as `canvas`)

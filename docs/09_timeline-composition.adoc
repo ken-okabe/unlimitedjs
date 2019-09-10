@@ -7,43 +7,18 @@ ifndef::highlightjs-theme:[:highlightjs-theme: solarized-dark]
 Everything mutable(as it seems in immutable universe) in unlimitedjs is __timeline__ including value and **virtualDOM node**.
 
 Unlike https://reactjs.org/docs/components-and-props.html[React.Component], in unlimitedjs, a mutable virtualDOM node is abstracted simply as an **__timeline__ of virtualDOM node**.
-
-Suppose we have __timelines__ of virtualDOM node as below:
-[TIP]
-.__timeline__ structure
-====
-* viewNode (represents the realDOM)
-* topNode
-** clockNode    
-** counterNode
-==== 
-
-**__timeline__ of virtual DOM is composed in various ways in functional programming scheme without any extra APIs and rules.**
-
-* viewNode <- topNode
-
-Although there's no rule, but we already have a patterned code to describe to connect `viewNode` and `topNode` which means reactive rendering the virualDOM(`topNode`) to the realDOM(`viewNode`). 
-
-[source,js]
-.render the view
-----
-const viewNodeTL = topNodeTL.sync(topNode =>
-    patch(viewNodeTL.now, topNode, document.body)
-);
-----
-
-* topNode <- (clockNode + counterNode)
+ 
 
 One of the functional way is to define "merge" __timeline__ like this:
 
 [source,js]
 .merge __timeline__
 ----
-  const mergeTL = TLs => T(self =>
+  const mergeTL = (TLs => T(self =>
     TLs.map(TL => TL.sync(() =>
       self.now = TLs.map(TL => TL.now)
     ))
-  );
+  ))([timelineA, timelineB]);
 ----
 
 Here's how the `mergeTL` works:
@@ -62,14 +37,19 @@ With `mergeTL`, topNode __timeline__ can be defined as follow:
 [source,js]
 .topNode __timeline__
 ----
+  const mergeTL = (TLs => T(self =>
+    TLs.map(TL => TL.sync(() =>
+      self.now = TLs.map(TL => TL.now)
+    ))
+  ))([clockNodeTL, counterNodeTL]);
+
   const topNodeTL = T(self =>
-    mergeTL([clockNodeTL, counterNodeTL])
-      .sync(([clockNode, counterNode]) =>
-        self.now = <div>
-          <h3>{clockNode}</h3>
-          {counterNode}
-        </div>
-      )
+    mergeTL.sync(([clockNode, counterNode]) =>
+      self.now = <div>
+        <h3>{clockNode}</h3>
+        {counterNode}
+      </div>
+    )
   );
 ----
 
@@ -79,53 +59,54 @@ The final code is:
 .viewNode <- topNode <- (clockNode + counterNode)
 ----
   const clockNodeTL = T(self => {
-    const clockTL = T(
-      (self) => {
-        const f = () =>
-          self.now = new Date().toLocaleTimeString();
-        setInterval(f, 1000);
-      }
-    );
+    const clockTL = T(self => {
+      const f = () =>
+        self.now = new Date().toLocaleTimeString();
+      setInterval(f, 1000);
+    });
     const timeline = clockTL.sync(clock =>
-      self.now = <h3>{clock}</h3>
+      self.now = <div>{clock}</div>
     );
+
+    world.now = clockTL;
   });
 
   const counterNodeTL = T(self => {
-    const countTL = T();
-    const buttonNode = <button
-      onclick={() => countTL.now = countTL.now + 1}>
-      Click me
-      </button>;
+    const countTL = T(self => self.now = 0);
     const timeline = countTL.sync(count =>
-      self.now = <div>
-        <p>You clicked {countTL.now} times</p>
-        {buttonNode}
-      </div>
+      self.now = (<div>
+        <p>You clicked {count} times</p>
+        <button onclick={() => countTL.now = count + 1}>
+          Click me
+        </button>
+      </div>)
     );
-    const f = () => countTL.now = 0;
-    setTimeout(f, 0);
+    world.now = countTL;
   });
 
-  const mergeTL = TLs => T(self =>
+  const mergeTL = (TLs => T(self =>
     TLs.map(TL => TL.sync(() =>
       self.now = TLs.map(TL => TL.now)
     ))
-  );
+  ))([clockNodeTL, counterNodeTL]);
 
   const topNodeTL = T(self =>
-    mergeTL([clockNodeTL, counterNodeTL])
-      .sync(([clockNode, counterNode]) =>
-        self.now = <div>
-          <h3>{clockNode}</h3>
-          {counterNode}
-        </div>
-      )
+    mergeTL.sync(([clockNode, counterNode]) =>
+      self.now = <div>
+        <h3>{clockNode}</h3>
+        {counterNode}
+      </div>
+    )
   );
 
-  const viewNodeTL = topNodeTL.sync(topNode =>
-    patch(viewNodeTL.now, topNode, document.body)
+  const viewNodeTL = topNodeTL.sync(
+    node => patch(document.getElementById("app"), node)
   );
+
+  world.now = topNodeTL;
+  world.now = mergeTL;
+  world.now = clockNodeTL;
+  world.now = counterNodeTL;
 ----
 
 [NOTE] 

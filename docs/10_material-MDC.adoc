@@ -29,54 +29,56 @@ https://github.com/material-components/material-components-web/blob/master/docs/
 ----
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
-
-    <link rel="stylesheet" href="./node_modules/material-components-web/dist/material-components-web.min.css">
-
-    <script src="./node_modules/material-components-web/dist/material-components-web.min.js"></script>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <script type="module" src="./unlimitedjs-materialdesign/build/hello.js"></script>
 
 </head>
+
 <body>
+    <div id="app"></div>
 </body>
+
 </html>
 ----
 
 [source,js]
 .hello.tsx
 ----
-import { T } from "../../node_modules/timeline-monad/dist/esm/timeline-monad.js";
-import { h, patch } from "../../node_modules/superfine/src/index.js";
+import { T, world } from "../../lib/timeline-monad/code/dist/timeline-monad.js";
+import { h, patch } from "../../lib/superfine/src/index.js";
 
-const topNodeTL = T(self => {
-  const f = () => (self.now =
-    <button class="mdc-button mdc-button--raised"> <1>
-      Press Me
-      </button>
-  );
-  setTimeout(f, 0); <2>
-});
-
-const viewNodeTL = topNodeTL.sync(topNode => <3>
-  patch(viewNodeTL.now, topNode, document.body)
+const topNodeTL = T(self =>
+  self.now =
+  <button class="mdc-button mdc-button--raised"> <1>
+    Press Me
+    </button>
 );
 
-const mdcTL = viewNodeTL.sync(() => { <4>
+const viewNodeTL = topNodeTL.sync(node => <2>
+  patch(document.getElementById("app"), node)
+);
+
+const mdcTL = viewNodeTL.sync(() => {  <3>
   Array.from(document
-    .querySelectorAll('.mdc-button')) <5>
+    .querySelectorAll('.mdc-button'))  <4>
     .map(button =>
       (window as any).mdc.ripple
         .MDCRipple.attachTo(button));
 });
+
+world.now = topNodeTL; <5>
 ----
 
 <1> MDC button class specifiers
-<2> Next tick: propagate the DOM value after all declarations
-<3> Render pattern of unlimitedjs
-<4> mdcTL is a timeline that is synchronized to the viewNodeTL that is virtualDOM rendering timeline 
-<5> The standard manner to attach JavaScript to MDC, see https://github.com/material-components/material-components-web/tree/master/packages/mdc-ripple[the document] and https://github.com/material-components/material-components-web/issues/3236[the issue]
+<2> Render pattern of unlimitedjs
+<3> mdcTL is a timeline that is synchronized to the viewNodeTL that is virtualDOM rendering timeline 
+<4> The standard manner to attach JavaScript to MDC, see https://github.com/material-components/material-components-web/tree/master/packages/mdc-ripple[the document] and https://github.com/material-components/material-components-web/issues/3236[the issue]
 
-
+<5> Initialize `topNodeTL`
  

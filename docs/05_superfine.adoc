@@ -57,30 +57,7 @@ const helloNode = h("div", null, "Hello!");
 [source,js]
 .patch
 ----
-patch(oldNode, newNode, container);
-----
-
-`patch` function returns the next node.
-
-Here's the detail of the API specification according to the TypeScript type definition file: https://github.com/jorgebucaran/superfine/blob/master/superfine.d.ts[superfine.d.ts].
-
-[source,js]
-.patch type definition
-----
-/**
- * Render a virtual DOM node into a DOM element container.
- *
- * @param {VNode} oldNode The last virtual DOM node.
- * @param {VNode} nextNode The next virtual DOM node.
- * @param {Element?} container A DOM element where the new virtual DOM will be rendered.
- * @returns {VNode} Returns nextNode.
- **/
-export function patch(
-  lastNode: VNode,
-  nextNode: VNode,
-  container: Element
-): VNode
-
+patch(container, newNode);
 ----
 
 **Providing `patch` functionality is another major role of superfine.**
@@ -100,17 +77,15 @@ import { h, patch } from "superfine";
 const helloNode = <div>Hello!</div>;  <1>
 
 const lastNode = patch( <2>
-      undefined,  <3>
-      helloNode,  <4> 
-      document.body <5>
+      document.getElementById("app"),  <3>
+      helloNode  <4> 
     );
 ----
 
 <1> virtual DOM node
 <2> The only API `patch` returns next "last" node.
-<3> last (old) virtual DOM node
+<3> Real DOM Container to render the virtual DOM
 <4> next (new) virtual DOM node
-<5> Real DOM Container to render the virtual DOM
 
 Although we need to import `{ h, patch }`, `h` will never appear in the code as long as we use JSX.
 

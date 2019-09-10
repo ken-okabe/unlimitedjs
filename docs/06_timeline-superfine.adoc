@@ -11,12 +11,14 @@ Although there are absolutely no rules or limitations, here is a very basic stru
 [source,js]
 .Hello world of unlimitedjs
 ----
-import { T } from "timeline-monad";
+import { T, world } from "timeline-monad";
 import { h, patch } from "superfine";
 
   const topNodeTL = T(); <1>
   const viewNodeTL = topNodeTL.sync( <2>
-    topNode => patch(viewNodeTL.now, topNode, document.body) <3>
+    topNode => <3> 
+     patch(document.getElementById("app"), helloNode  
+    );
   );
 
   const helloNode = <div>hello!</div>; <4>
@@ -47,30 +49,34 @@ No fancy rules, no restrictions. Just a plain JavaScript programming.
 [source,js]
 .Clock
 ----
-import { T } from "timeline-monad";
+import { T, world } from "timeline-monad";
 import { h, patch } from "superfine";
 
-  const topNodeTL = T(); <1>
-  const viewNodeTL = topNodeTL.sync( <2> 
-    topNode => patch(viewNodeTL.now, topNode, document.body) <3>
+  const newNodeTL = T(self =>  <1>
+    self.sync(node => <2>
+      patch(document.getElementById("app"), node) <3>
+    )
   );
 
-  const f = () => { <4>
-    const timeString = new Date().toLocaleTimeString(); <5>
-    const clockNode = <div>{timeString}</div>; <6>
-    topNodeTL.now = clockNode; <7>
+  world.now = newNodeTL;  <4>
+
+  const f = () => {  <5>
+    const timeString = new Date().toLocaleTimeString(); <6>
+    const clockNode = <div>{timeString}</div>; <7>
+    newNodeTL.now = clockNode; <8>
   };
-  setInterval(f, 1000); <8>
+  setInterval(f, 1000);  <9>
 ----
 
-<1> same as Hello world
-<2> same as Hello world
-<3> same as Hello world
-<4> `setInterval` function : `f`
-<5> Obtain the current time strings
-<6> `{timeString}` is a way to write variables inside of virtual DOM node in JSX
-<7> Define the latest "state" on the topNode timeline, which means **update**
-<8> `setInterval` triggers `f` every 1 second
+<1> self is `newNodeTL`
+<2> define the behavior when self is updated
+<3> superfine patch work
+<4> Initialize  `newNodeTL`
+<5> `setInterval` function : `f`
+<6> Obtain the current time strings
+<7> `{timeString}` is a way to write variables inside of virtual DOM node in JSX
+<8> Define the latest "state" on the topNode timeline, which means **update**
+<9> `setInterval` triggers `f` every 1 second
 
 ++++
 <iframe height="447" style="width: 100%;" scrolling="no" title="unlimitedjs clock" src="https://codepen.io/stken2050/embed/WPdzrG/?height=447&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">

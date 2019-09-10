@@ -74,25 +74,25 @@ The below is usage of global __timeline__. For local __timeline__, I will illust
 [source,js]
 .counter-unlimitedjs.jsx
 ----
-import { T } from "timeline-monad";
+import { T, world } from "timeline-monad";
 import { h, patch } from "superfine";
 
-  const countTL = T(); <1>
+  const countTL = T(self => self.now = 0); <1>
 
-  const topNodeTL = countTL.sync(count =>   <2>
-    <div>    <3>
+  const topNodeTL = countTL.sync( <2>
+    count => (<div>  <3>
       <p>You clicked {count} times</p>
       <button onclick={() => countTL.now = count + 1}> <4>
         Click me
-    　</button>
-    </div>
+    </button>
+    </div>)
   );
 
-  const viewNodeTL = topNodeTL.sync(   <5>
-    topNode => patch(viewNodeTL.now, topNode, document.body)
+  const viewNodeTL = topNodeTL.sync( <5>
+    node => patch(document.getElementById("app"), node)
   );
 
-  countTL.now = 0;   <6>
+  world.now = countTL; <6>
 ----
 
 <1> `countTL` is defined as a __timeline__ of the number of count
@@ -100,5 +100,5 @@ import { h, patch } from "superfine";
 <3>  returns virtual DOM
 <4>  Define the latest  __timeline__ of `count`
 <5>  `viewNodeTL` is defined as a synchronized __timeline__ with `topNodeTL` rendering virtual DOM (`topNode`)
-<6>  Initial number of count __timeline__ (`countTL` current "state")
+<6>  Initialize `countTL`
 
