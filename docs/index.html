@@ -1086,70 +1086,6 @@ const timeline = pointerTL.sync(pointer =&gt;    <i class="conum" data-value="4"
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_virtual_dom_superfine">4.1.5. Virtual DOM (Superfine)</h4>
-<iframe height="654" style="width: 100%;" scrolling="no" title="unlimitedjs_vdom" src="https://codepen.io/stken2050/embed/xMdyjx/?height=654&theme-id=36003&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href='https://codepen.io/stken2050/pen/xMdyjx/'>unlimitedjs_vdom</a> by Ken OKABE
-  (<a href='https://codepen.io/stken2050'>@stken2050</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
-<div class="listingblock">
-<div class="title">timeline virtualDOM</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-js hljs" data-lang="js">import { T, world } from "https://unpkg.com/timeline-monad@2.0.0/code/dist/timeline-monad.js";
-
-const _canvas = document.getElementById('canvas1');
-const canvas = (_canvas == null)   <i class="conum" data-value="1"></i><b>(1)</b>
-  ? {} as HTMLCanvasElement
-  : _canvas as HTMLCanvasElement;
-
-const pointerTL = T(self =&gt; {  <i class="conum" data-value="2"></i><b>(2)</b>
-  canvas.onmousemove = e =&gt;
-    self.now = { x: e.clientX, y: e.clientY };
-});
-
-const drawTL = T(self =&gt; {  <i class="conum" data-value="3"></i><b>(3)</b>
-  const _ctx = canvas.getContext('2d');
-  const ctx = (_ctx == null)
-    ? {} as CanvasRenderingContext2D
-    : _ctx;
-  const timeline = self.sync(pointer =&gt; {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath();
-    ctx.arc(pointer.x - 10, pointer.y - 10, 10, 0, Math.PI * 2, true);
-    ctx.fillStyle = "red";
-    ctx.fill();
-  });
-});
-
-const timeline = pointerTL.sync(pointer =&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
-  drawTL.now = pointer
-);
-
-world.now = pointerTL;
-world.now = drawTL;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>real DOM node (named as <code>canvas</code>)</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>INPUT: <em>timeline</em> of mouse pointer coordinate : <em>same code of <strong>timeline Canvas</strong></em></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>OUTPUT: <em>timeline</em> of virtualDOM drawing(rendering)</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>INPUT(pointerTL) is synchronized with OUTPUT(drawTL)  : <em>same code of <strong>timeline Canvas</strong></em></td>
-</tr>
-</table>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_read_more_on_timeline_monad_docs_tutorial">4.2. Read more on <a href="https://stken2050.github.io/timeline-monad/">timeline-monad Docs &amp; Tutorial</a></h3>
@@ -1831,7 +1767,7 @@ world.now = topNodeTL; <i class="conum" data-value="5"></i><b>(5)</b></code></pr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-09-10 16:19:53 JST
+Last updated 2019-09-10 16:24:39 JST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">
