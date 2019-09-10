@@ -44,7 +44,7 @@ Unlike the other virtual DOM frameworks, **unlimitedjs** works directly with htt
 [TIP]
 .JSX(TSX) Code
 ====
-https://github.com/stken2050/unlimitedjs/blob/master/unlimitedjs-materialdesign/src/login.tsx[source]
+https://github.com/stken2050/unlimitedjs/blob/master/www/unlimitedjs-materialdesign/src/login.tsx[source]
 ==== 
 
  
